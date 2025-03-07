@@ -95,8 +95,8 @@ const Insights = () => {
 
   const filters = [
     { id: 'balanced', label: 'Balanced', color: 'blue-400' },
-    { id: 'risky', label: '', color: 'orange-400' },
-    { id: 'safe', label: '', color: 'green-400' },
+    { id: 'degen', label: 'Degen', color: 'orange-400' },
+    { id: 'saver', label: 'Saver', color: 'green-400' },
   ];
 
   const insights = [
@@ -181,18 +181,41 @@ const Insights = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <div className="flex gap-2">
+                {/* Filter chips */}
                 <FilterChip 
                   label="Balanced" 
                   color="blue" 
                   isActive={activeFilter === 'balanced'} 
                   onClick={() => setActiveFilter('balanced')} 
                 />
-                <div className="w-6 h-6 rounded-full bg-orange-400 cursor-pointer" 
-                  onClick={() => setActiveFilter('risky')} 
-                />
-                <div className="w-6 h-6 rounded-full bg-green-400 cursor-pointer" 
-                  onClick={() => setActiveFilter('safe')} 
-                />
+                {/* Orange chip that shows "Degen" when clicked */}
+                {activeFilter === 'degen' ? (
+                  <FilterChip 
+                    label="Degen" 
+                    color="orange" 
+                    isActive={true} 
+                    onClick={() => setActiveFilter('degen')} 
+                  />
+                ) : (
+                  <button 
+                    className="w-6 h-6 rounded-full bg-orange-400 cursor-pointer" 
+                    onClick={() => setActiveFilter('degen')} 
+                  />
+                )}
+                {/* Green chip that shows "Saver" when clicked */}
+                {activeFilter === 'saver' ? (
+                  <FilterChip 
+                    label="Saver" 
+                    color="green" 
+                    isActive={true} 
+                    onClick={() => setActiveFilter('saver')} 
+                  />
+                ) : (
+                  <button 
+                    className="w-6 h-6 rounded-full bg-green-400 cursor-pointer" 
+                    onClick={() => setActiveFilter('saver')} 
+                  />
+                )}
               </div>
             </div>
           </div>
