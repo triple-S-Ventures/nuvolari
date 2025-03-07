@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -156,6 +157,19 @@ const Insights = () => {
         return 'bg-green-400/20';
       default:
         return 'bg-secondary/30';
+    }
+  };
+
+  const getActiveFilterBlurColor = () => {
+    switch (activeFilter) {
+      case 'balanced':
+        return 'from-blue-400/30 to-blue-400/5';
+      case 'degen':
+        return 'from-orange-400/30 to-orange-400/5';
+      case 'saver':
+        return 'from-green-400/30 to-green-400/5';
+      default:
+        return 'from-primary/20 to-primary/5';
     }
   };
 
@@ -335,32 +349,46 @@ const Insights = () => {
             
             <AnimatePresence>
               {isSearchFocused && (
-                <motion.div 
-                  className={cn(
-                    "absolute w-full backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden",
-                    getActiveFilterColor().replace('/20', '/80')
-                  )}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="py-2">
-                    <div className="px-4 py-2 text-xs text-muted-foreground">
-                      Suggested
+                <>
+                  {/* Color-coordinated blur background effect */}
+                  <motion.div 
+                    className={cn(
+                      "absolute -inset-6 -z-10 rounded-xl bg-gradient-to-b",
+                      getActiveFilterBlurColor()
+                    )}
+                    initial={{ opacity: 0, filter: "blur(5px)" }}
+                    animate={{ opacity: 1, filter: "blur(15px)" }}
+                    exit={{ opacity: 0, filter: "blur(5px)" }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  
+                  <motion.div 
+                    className={cn(
+                      "absolute w-full backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden",
+                      getActiveFilterColor().replace('/20', '/80')
+                    )}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="py-2">
+                      <div className="px-4 py-2 text-xs text-muted-foreground">
+                        Suggested
+                      </div>
+                      <div className="max-h-[calc(100vh-250px)] overflow-y-auto">
+                        {searchSuggestions.map((suggestion) => (
+                          <SearchSuggestion
+                            key={suggestion.id}
+                            icon={suggestion.icon}
+                            label={suggestion.label}
+                            onClick={() => handleSearchSuggestionClick(suggestion.id)}
+                          />
+                        ))}
+                      </div>
                     </div>
-                    <div className="max-h-[calc(100vh-250px)] overflow-y-auto">
-                      {searchSuggestions.map((suggestion) => (
-                        <SearchSuggestion
-                          key={suggestion.id}
-                          icon={suggestion.icon}
-                          label={suggestion.label}
-                          onClick={() => handleSearchSuggestionClick(suggestion.id)}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </>
               )}
             </AnimatePresence>
           </div>

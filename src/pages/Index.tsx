@@ -80,8 +80,8 @@ const Index = () => {
             </div>
             
             <div className="md:col-span-7 space-y-6">
-              {/* Suggested Insights - Moved higher in the layout */}
-              <div className="glass-card rounded-2xl p-4">
+              {/* Suggested Insights - Increased height by 60% */}
+              <div className="glass-card rounded-2xl p-4" style={{ height: "calc(100% * 0.6)" }}>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center">
                     <Lightbulb size={18} className="mr-2 text-foreground/60" />
@@ -89,7 +89,9 @@ const Index = () => {
                   </div>
                   <span className="text-sm text-muted-foreground">2/4</span>
                 </div>
-                <InsightsCarousel insights={insightsData} />
+                <div className="h-full overflow-hidden">
+                  <InsightsCarousel insights={insightsData} />
+                </div>
               </div>
               
               {/* Portfolio Mood and Add Widget side by side */}
