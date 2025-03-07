@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -106,8 +107,7 @@ const Index = () => {
                         style={{ 
                           animationDelay: '1.2s',
                           transformOrigin: 'center',
-                          width: '70%',
-                          margin: '0 auto'
+                          width: '100%' // Changed from 70% to 100% to align with the container
                         }}
                         onMouseEnter={() => setIsWidgetHovered(true)}
                         onMouseLeave={() => setIsWidgetHovered(false)}
