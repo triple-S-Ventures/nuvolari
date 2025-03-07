@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -75,6 +76,7 @@ const Insights = () => {
   const [activeFilter, setActiveFilter] = useState('balanced');
   
   useEffect(() => {
+    // Simulate loading
     const timer = setTimeout(() => {
       setIsLoading(false);
       toast.success("Insights loaded successfully");
@@ -136,6 +138,7 @@ const Insights = () => {
     },
   ];
 
+  // Filter insights based on active category and search query
   const filteredInsights = insights.filter(insight => {
     const matchesCategory = activeCategory === 'favorites' || insight.category === activeCategory;
     const matchesSearch = searchQuery.trim() === '' || 
@@ -160,13 +163,14 @@ const Insights = () => {
           <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
         </div>
       ) : (
-        <main className="flex-1 pt-16 pb-16 px-4 max-w-4xl mx-auto w-full flex flex-col items-center">
-          <div className="mb-6 text-center w-full">
+        <main className="flex-1 pt-16 pb-16 px-4 max-w-4xl mx-auto w-full">
+          <div className="mb-6 text-center">
             <h1 className="text-4xl font-bold mb-2">Insights</h1>
             <p className="text-muted-foreground">Get insights or search your on-chain task</p>
           </div>
           
-          <div className="relative mb-8 w-full max-w-xl mx-auto">
+          {/* Search bar with filter chips */}
+          <div className="relative mb-8">
             <div className="bg-secondary/30 backdrop-blur-sm rounded-full overflow-hidden flex items-center px-4 py-3 focus-within:ring-1 focus-within:ring-primary/30">
               <Search className="h-5 w-5 text-muted-foreground mr-3" />
               <input
@@ -177,12 +181,14 @@ const Insights = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <div className="flex gap-2">
+                {/* Filter chips */}
                 <FilterChip 
                   label="Balanced" 
                   color="blue" 
                   isActive={activeFilter === 'balanced'} 
                   onClick={() => setActiveFilter('balanced')} 
                 />
+                {/* Orange chip that shows "Degen" when clicked */}
                 {activeFilter === 'degen' ? (
                   <FilterChip 
                     label="Degen" 
@@ -196,6 +202,7 @@ const Insights = () => {
                     onClick={() => setActiveFilter('degen')} 
                   />
                 )}
+                {/* Green chip that shows "Saver" when clicked */}
                 {activeFilter === 'saver' ? (
                   <FilterChip 
                     label="Saver" 
@@ -213,7 +220,8 @@ const Insights = () => {
             </div>
           </div>
           
-          <div className="flex flex-wrap gap-3 mb-6 justify-center w-full">
+          {/* Category filters */}
+          <div className="flex flex-wrap gap-3 mb-6">
             {categories.map((category) => (
               <CategoryFilter
                 key={category.id}
@@ -225,7 +233,8 @@ const Insights = () => {
             ))}
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
+          {/* Insights grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredInsights.map((insight) => (
               <InsightCard
                 key={insight.id}
@@ -239,6 +248,7 @@ const Insights = () => {
       
       <Footer />
       
+      {/* Background gradient effects */}
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
     </motion.div>
   );
