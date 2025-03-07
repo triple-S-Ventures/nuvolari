@@ -20,7 +20,8 @@ import {
   Info,
   BarChart3,
   TrendingUp,
-  ArrowUpRight
+  ArrowUpRight,
+  ChevronRight
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import InsightCard from '@/components/InsightCard';
@@ -96,7 +97,7 @@ const SearchSuggestion = ({
         </div>
         <span className="text-foreground text-sm font-medium">{label}</span>
       </div>
-      <ArrowUpRight size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+      <ChevronRight size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
     </button>
   );
 };
@@ -296,7 +297,7 @@ const Insights = () => {
             <AnimatePresence>
               {isSearchFocused && (
                 <motion.div 
-                  className="absolute w-full bg-secondary/95 backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden"
+                  className="absolute w-full bg-secondary/80 backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
