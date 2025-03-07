@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type MoodType = 'balanced' | 'degen' | 'saver';
 
@@ -44,68 +45,102 @@ const PortfolioMood = () => {
       
       <div className="flex items-center justify-center gap-2">
         {/* Left small chip (if not active) */}
-        {activeMood !== 'degen' && (
-          <button 
-            className={cn(
-              "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
-              "bg-orange-400/20 text-orange-400"
-            )}
-            onClick={() => handleMoodChange('degen')}
-          >
-            Degen
-          </button>
-        )}
-        
-        {activeMood !== 'balanced' && activeMood === 'degen' && (
-          <button 
-            className={cn(
-              "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
-              "bg-blue-400/20 text-blue-400"
-            )}
-            onClick={() => handleMoodChange('balanced')}
-          >
-            Balanced
-          </button>
-        )}
+        <AnimatePresence mode="wait">
+          {activeMood !== 'degen' && (
+            <motion.button 
+              key="degen-small"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.3 }}
+              className={cn(
+                "py-1 px-3 rounded-full text-xs font-medium",
+                "bg-orange-400/20 text-orange-400 hover:bg-orange-400/30"
+              )}
+              onClick={() => handleMoodChange('degen')}
+            >
+              Degen
+            </motion.button>
+          )}
+          
+          {activeMood !== 'balanced' && activeMood === 'degen' && (
+            <motion.button 
+              key="balanced-small-left"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.3 }}
+              className={cn(
+                "py-1 px-3 rounded-full text-xs font-medium",
+                "bg-blue-400/20 text-blue-400 hover:bg-blue-400/30"
+              )}
+              onClick={() => handleMoodChange('balanced')}
+            >
+              Balanced
+            </motion.button>
+          )}
+        </AnimatePresence>
         
         {/* Center active mood chip */}
-        <button 
-          className={cn(
-            "py-2 px-8 rounded-full text-sm font-medium transition-all duration-300",
-            getChipColorClass(activeMood, true),
-            "transform scale-110"
-          )}
-          onClick={() => handleMoodChange(activeMood)}
-        >
-          {activeMood === 'balanced' && "Balanced"}
-          {activeMood === 'degen' && "Degen"}
-          {activeMood === 'saver' && "Saver"}
-        </button>
+        <AnimatePresence mode="wait">
+          <motion.button 
+            key={`active-${activeMood}`}
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1.1 }}
+            exit={{ scale: 0.9 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 20 
+            }}
+            className={cn(
+              "py-2 px-8 rounded-full text-sm font-medium",
+              getChipColorClass(activeMood, true)
+            )}
+            onClick={() => handleMoodChange(activeMood)}
+          >
+            {activeMood === 'balanced' && "Balanced"}
+            {activeMood === 'degen' && "Degen"}
+            {activeMood === 'saver' && "Saver"}
+          </motion.button>
+        </AnimatePresence>
         
         {/* Right small chip (if not active) */}
-        {activeMood !== 'balanced' && activeMood === 'saver' && (
-          <button 
-            className={cn(
-              "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
-              "bg-blue-400/20 text-blue-400"
-            )}
-            onClick={() => handleMoodChange('balanced')}
-          >
-            Balanced
-          </button>
-        )}
-        
-        {activeMood !== 'saver' && (
-          <button 
-            className={cn(
-              "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
-              "bg-green-400/20 text-green-400"
-            )}
-            onClick={() => handleMoodChange('saver')}
-          >
-            Saver
-          </button>
-        )}
+        <AnimatePresence mode="wait">
+          {activeMood !== 'balanced' && activeMood === 'saver' && (
+            <motion.button 
+              key="balanced-small-right"
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.3 }}
+              className={cn(
+                "py-1 px-3 rounded-full text-xs font-medium",
+                "bg-blue-400/20 text-blue-400 hover:bg-blue-400/30"
+              )}
+              onClick={() => handleMoodChange('balanced')}
+            >
+              Balanced
+            </motion.button>
+          )}
+          
+          {activeMood !== 'saver' && (
+            <motion.button 
+              key="saver-small"
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.3 }}
+              className={cn(
+                "py-1 px-3 rounded-full text-xs font-medium",
+                "bg-green-400/20 text-green-400 hover:bg-green-400/30"
+              )}
+              onClick={() => handleMoodChange('saver')}
+            >
+              Saver
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
