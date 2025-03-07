@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Eye, BarChartHorizontal, FileText, Menu } from 'lucide-react';
+import { Eye, BarChartHorizontal, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -48,7 +48,7 @@ const Navbar = () => {
       "fixed top-0 left-0 right-0 z-50 flex justify-center py-3 px-4 transition-all duration-300",
       isScrolled ? "bg-background/80 backdrop-blur-lg shadow-md" : "bg-transparent"
     )}>
-      <div className="flex items-center justify-between max-w-4xl w-full">
+      <div className="flex items-center justify-center max-w-4xl w-full">
         <div className="flex items-center">
           <button className="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary/50 backdrop-blur-sm text-primary hover:bg-secondary/70 transition-all duration-300 mr-6 animate-fade-in">
             <div className="w-7 h-7 text-primary">
@@ -103,10 +103,6 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        
-        <button className="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary/50 backdrop-blur-sm text-foreground hover:bg-secondary/70 transition-all duration-300 animate-fade-in">
-          <Menu size={20} />
-        </button>
       </div>
     </nav>
   );
