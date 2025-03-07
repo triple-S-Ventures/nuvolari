@@ -1,8 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import MoodScore from '@/components/MoodScore';
 import Navbar from '@/components/Navbar';
 import PortfolioBalance from '@/components/PortfolioBalance';
@@ -83,15 +81,7 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Navigation Arrow */}
-          <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50">
-            <Link 
-              to="/details"
-              className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-glow-md hover:shadow-glow-lg transition-all duration-300"
-            >
-              <ArrowRight size={24} />
-            </Link>
-          </div>
+          {/* Navigation Arrow removed as requested */}
         </main>
       )}
       

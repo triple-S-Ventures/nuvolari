@@ -49,7 +49,7 @@ const Navbar = () => {
       isScrolled ? "bg-background/80 backdrop-blur-lg shadow-md" : "bg-transparent"
     )}>
       <div className="flex items-center justify-center max-w-4xl w-full">
-        <div className="flex items-center">
+        <div className="flex items-center justify-center w-full">
           <button className="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary/50 backdrop-blur-sm text-primary hover:bg-secondary/70 transition-all duration-300 mr-6 animate-fade-in">
             <div className="w-7 h-7 text-primary">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +60,7 @@ const Navbar = () => {
             </div>
           </button>
           
-          <div className="bg-secondary rounded-full p-1 backdrop-blur-md animate-fade-in">
+          <div className="bg-secondary rounded-full p-1 backdrop-blur-md animate-fade-in mx-auto">
             <div className="flex items-center space-x-1">
               <button 
                 onClick={() => handleTabClick('mood')}
