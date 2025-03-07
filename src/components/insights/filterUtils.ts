@@ -1,4 +1,3 @@
-
 export const getActiveFilterColor = (activeFilter: string) => {
   switch (activeFilter) {
     case 'balanced':
@@ -25,7 +24,14 @@ export const getActiveFilterBlurColor = (activeFilter: string) => {
   }
 };
 
-export const insights = [
+type Insight = {
+  id: number;
+  title: string;
+  tokens: string[];
+  category: string;
+};
+
+export const insights: Insight[] = [
   {
     id: 1,
     title: 'Add $6.8K to the SOL/FART LP',
@@ -64,8 +70,8 @@ export const insights = [
   }
 ];
 
-export const filterInsights = (insights: typeof insights, activeCategory: string, searchQuery: string) => {
-  return insights.filter(insight => {
+export const filterInsights = (insightsArray: Insight[], activeCategory: string, searchQuery: string) => {
+  return insightsArray.filter(insight => {
     const matchesCategory = activeCategory === 'favorites' || insight.category === activeCategory;
     const matchesSearch = searchQuery.trim() === '' || 
       insight.title.toLowerCase().includes(searchQuery.toLowerCase()) || 

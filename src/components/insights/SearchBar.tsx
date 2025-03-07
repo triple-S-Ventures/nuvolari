@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from "sonner";
 import SearchSuggestions from './SearchSuggestions';
+import FilterButtons from './FilterButtons';
 
 type SearchBarProps = {
   searchQuery: string;
