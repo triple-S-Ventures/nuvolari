@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -25,6 +26,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import InsightCard from '@/components/InsightCard';
+import { Switch } from '@/components/ui/switch';
 
 const CategoryFilter = ({ 
   icon: Icon, 
@@ -144,6 +146,19 @@ const Insights = () => {
     { id: 'saver', label: 'Saver', color: 'green-400' },
   ];
 
+  const getActiveFilterColor = () => {
+    switch (activeFilter) {
+      case 'balanced':
+        return 'bg-blue-400/20';
+      case 'degen':
+        return 'bg-orange-400/20';
+      case 'saver':
+        return 'bg-green-400/20';
+      default:
+        return 'bg-secondary/30';
+    }
+  };
+
   const searchSuggestions = [
     { id: 'buy', label: 'Buy', icon: Plus },
     { id: 'swap', label: 'Swap', icon: ArrowRightLeft },
@@ -235,10 +250,11 @@ const Insights = () => {
           <div className="relative mb-8 z-20" ref={searchRef}>
             <div 
               className={cn(
-                "bg-secondary/30 backdrop-blur-sm rounded-full overflow-hidden flex items-center px-4 py-3 transition-all duration-300",
+                "backdrop-blur-sm rounded-full overflow-hidden flex items-center px-4 py-3 transition-all duration-300",
                 isSearchFocused 
                   ? "ring-1 ring-primary/30 rounded-t-xl rounded-b-none" 
-                  : "focus-within:ring-1 focus-within:ring-primary/30"
+                  : "focus-within:ring-1 focus-within:ring-primary/30",
+                isSearchFocused ? getActiveFilterColor() : "bg-secondary/30"
               )}
             >
               <Search className="h-5 w-5 text-muted-foreground mr-3" />
@@ -258,46 +274,72 @@ const Insights = () => {
                   <X size={16} />
                 </button>
               )}
-              <div className="flex gap-2">
-                <FilterChip 
-                  label="Balanced" 
-                  color="blue" 
-                  isActive={activeFilter === 'balanced'} 
-                  onClick={() => setActiveFilter('balanced')} 
-                />
-                {activeFilter === 'degen' ? (
-                  <FilterChip 
-                    label="Degen" 
-                    color="orange" 
-                    isActive={true} 
-                    onClick={() => setActiveFilter('degen')} 
-                  />
-                ) : (
-                  <button 
-                    className="w-6 h-6 rounded-full bg-orange-400 cursor-pointer" 
-                    onClick={() => setActiveFilter('degen')} 
-                  />
-                )}
-                {activeFilter === 'saver' ? (
-                  <FilterChip 
-                    label="Saver" 
-                    color="green" 
-                    isActive={true} 
-                    onClick={() => setActiveFilter('saver')} 
-                  />
-                ) : (
-                  <button 
-                    className="w-6 h-6 rounded-full bg-green-400 cursor-pointer" 
-                    onClick={() => setActiveFilter('saver')} 
-                  />
-                )}
+              <div className="flex gap-2 items-center">
+                <motion.div
+                  className={cn(
+                    "flex items-center px-3 py-1 rounded-full text-xs font-medium",
+                    activeFilter === 'balanced' ? "bg-blue-400 text-white" : "bg-blue-400/20 text-blue-400"
+                  )}
+                  layout
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  onClick={() => setActiveFilter('balanced')}
+                >
+                  {activeFilter === 'balanced' && "Balanced"}
+                </motion.div>
+                
+                <motion.div 
+                  className={cn(
+                    "flex items-center rounded-full cursor-pointer transition-all duration-300",
+                    activeFilter === 'degen' 
+                      ? "bg-orange-400 text-white px-3 py-1" 
+                      : "bg-orange-400 w-6 h-6"
+                  )}
+                  layout
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  onClick={() => setActiveFilter('degen')}
+                >
+                  {activeFilter === 'degen' && (
+                    <motion.span 
+                      initial={{ opacity: 0 }} 
+                      animate={{ opacity: 1 }} 
+                      className="text-xs font-medium"
+                    >
+                      Degen
+                    </motion.span>
+                  )}
+                </motion.div>
+                
+                <motion.div 
+                  className={cn(
+                    "flex items-center rounded-full cursor-pointer transition-all duration-300",
+                    activeFilter === 'saver' 
+                      ? "bg-green-400 text-white px-3 py-1" 
+                      : "bg-green-400 w-6 h-6"
+                  )}
+                  layout
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  onClick={() => setActiveFilter('saver')}
+                >
+                  {activeFilter === 'saver' && (
+                    <motion.span
+                      initial={{ opacity: 0 }} 
+                      animate={{ opacity: 1 }}
+                      className="text-xs font-medium"
+                    >
+                      Saver
+                    </motion.span>
+                  )}
+                </motion.div>
               </div>
             </div>
             
             <AnimatePresence>
               {isSearchFocused && (
                 <motion.div 
-                  className="absolute w-full bg-secondary/80 backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden"
+                  className={cn(
+                    "absolute w-full backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden",
+                    getActiveFilterColor().replace('/20', '/80')
+                  )}
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
