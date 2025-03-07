@@ -2,10 +2,13 @@
 import { useState, useEffect } from 'react';
 import { Eye, BarChartHorizontal, FileText, Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [activeTab, setActiveTab] = useState<'mood' | 'insights' | 'journal'>('mood');
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +18,30 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Update active tab based on current route
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setActiveTab('mood');
+    } else if (location.pathname === '/journal') {
+      setActiveTab('journal');
+    } else if (location.pathname === '/insights') {
+      setActiveTab('insights');
+    }
+  }, [location.pathname]);
+
+  const handleTabClick = (tab: 'mood' | 'insights' | 'journal') => {
+    setActiveTab(tab);
+    
+    // Navigate to the appropriate route
+    if (tab === 'mood') {
+      navigate('/');
+    } else if (tab === 'insights') {
+      navigate('/insights');
+    } else if (tab === 'journal') {
+      navigate('/journal');
+    }
+  };
 
   return (
     <nav className={cn(
@@ -36,7 +63,7 @@ const Navbar = () => {
           <div className="bg-secondary rounded-full p-1 backdrop-blur-md animate-fade-in">
             <div className="flex items-center space-x-1">
               <button 
-                onClick={() => setActiveTab('mood')}
+                onClick={() => handleTabClick('mood')}
                 className={cn(
                   "flex items-center px-4 py-2 rounded-full transition-all duration-300",
                   activeTab === 'mood' 
@@ -49,7 +76,7 @@ const Navbar = () => {
               </button>
               
               <button 
-                onClick={() => setActiveTab('insights')}
+                onClick={() => handleTabClick('insights')}
                 className={cn(
                   "flex items-center px-4 py-2 rounded-full transition-all duration-300",
                   activeTab === 'insights' 
@@ -62,7 +89,7 @@ const Navbar = () => {
               </button>
               
               <button 
-                onClick={() => setActiveTab('journal')}
+                onClick={() => handleTabClick('journal')}
                 className={cn(
                   "flex items-center px-4 py-2 rounded-full transition-all duration-300",
                   activeTab === 'journal' 
