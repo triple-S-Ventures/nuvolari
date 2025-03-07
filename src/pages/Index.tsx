@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import MoodScore from '@/components/MoodScore';
 import Navbar from '@/components/Navbar';
 import PortfolioBalance from '@/components/PortfolioBalance';
-import InsightCard from '@/components/InsightCard';
+import InsightsCarousel from '@/components/InsightCard';
 import PortfolioMood from '@/components/PortfolioMood';
 import Footer from '@/components/Footer';
 import { Plus } from 'lucide-react';
@@ -22,6 +22,30 @@ const Index = () => {
     
     return () => clearTimeout(timer);
   }, []);
+
+  // Sample insights data
+  const insightsData = [
+    {
+      title: "Add $6.8K to the SOL/FART LP",
+      tokens: ['SOL', 'FART']
+    },
+    {
+      title: "Consider taking profits on ETH",
+      tokens: ['ETH']
+    },
+    {
+      title: "Review LINK staking rewards",
+      tokens: ['LINK']
+    },
+    {
+      title: "Swap 18.6 ETH to USDC to optimize portfolio",
+      tokens: ['ETH', 'USDC']
+    },
+    {
+      title: "Reposition 25% of your BTC to SOL",
+      tokens: ['BTC', 'SOL']
+    }
+  ];
   
   return (
     <motion.div 
@@ -38,7 +62,7 @@ const Index = () => {
           <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
         </div>
       ) : (
-        <main className="flex-1 pt-24 pb-16 px-4 max-w-4xl mx-auto w-full">
+        <main className="flex-1 pt-24 pb-16 px-4 max-w-5xl mx-auto w-full">
           <div className="mb-8 text-center animate-fade-in">
             <h1 className="text-4xl font-bold mb-2">Mood</h1>
             <p className="text-muted-foreground">Reality check of your portfolio in one glance</p>
@@ -49,26 +73,12 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-8">
+            <div className="md:col-span-5">
               <PortfolioBalance />
             </div>
             
-            <div className="md:col-span-4 space-y-6">
-              <InsightCard 
-                title="Add $6.8K to the SOL/FART LP" 
-                tokens={['SOL', 'FART']} 
-              />
-              
-              {/* Add two more InsightCard components with different data */}
-              <InsightCard 
-                title="Consider taking profits on ETH" 
-                tokens={['ETH']} 
-              />
-              
-              <InsightCard 
-                title="Review LINK staking rewards" 
-                tokens={['LINK']} 
-              />
+            <div className="md:col-span-7 space-y-6">
+              <InsightsCarousel insights={insightsData} />
               
               <PortfolioMood />
               

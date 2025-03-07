@@ -1,14 +1,15 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import AssetItem from './AssetItem';
 import { Switch } from '@/components/ui/switch';
-import { Wallet } from 'lucide-react'; // Import the wallet icon
+import { Wallet } from 'lucide-react'; 
 
 const PortfolioBalance = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<'holdings' | 'defi' | 'nft'>('holdings');
   const [isPrivate, setIsPrivate] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,9 +19,22 @@ const PortfolioBalance = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const assets = [
+    { symbol: "FART", name: "Fartcoin", value: 175020, change: 12.24, changeValue: 19019.00, isPositive: true },
+    { symbol: "ETH", name: "Ethereum", value: 200116, change: 1.72, changeValue: 3340.00, isPositive: false },
+    { symbol: "SOL", name: "Solana", value: 107502, change: 7.03, changeValue: 26630.00, isPositive: true },
+    { symbol: "BTC", name: "Bitcoin", value: 100000, change: 3.51, changeValue: 3395.00, isPositive: true },
+    { symbol: "LINK", name: "Chainlink", value: 90000, change: 2.87, changeValue: 2523.00, isPositive: true },
+    { symbol: "UNI", name: "Uniswap", value: 65000, change: 5.12, changeValue: 3168.00, isPositive: true },
+    { symbol: "AAVE", name: "Aave", value: 78500, change: -3.24, changeValue: 2624.00, isPositive: false },
+    { symbol: "MOG", name: "Mogcoin", value: 55000, change: 25.75, changeValue: 11289.00, isPositive: true },
+    { symbol: "DOGE", name: "Dogecoin", value: 25000, change: -1.32, changeValue: 334.00, isPositive: false },
+    { symbol: "PEPE", name: "Pepe", value: 12000, change: 45.61, changeValue: 3762.00, isPositive: true },
+  ];
+
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform w-full", // Changed from w-4/5 mx-auto to w-full to align properly
+      "glass-card rounded-2xl p-6 transition-all duration-700 transform",
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <div className="flex items-center justify-between mb-6">
@@ -88,57 +102,22 @@ const PortfolioBalance = () => {
           </button>
         </div>
         
-        <div className="space-y-4">
-          <AssetItem 
-            symbol="FART" 
-            name="Fartcoin" 
-            value={175020} 
-            change={12.24} 
-            changeValue={19019.00} 
-            isPositive={true}
-            delay={0.1}
-          />
-          
-          <AssetItem 
-            symbol="ETH" 
-            name="Ethereum" 
-            value={200116} 
-            change={1.72} 
-            changeValue={3340.00} 
-            isPositive={false}
-            delay={0.2}
-          />
-          
-          <AssetItem 
-            symbol="SOL" 
-            name="Solana" 
-            value={107502} 
-            change={7.03} 
-            changeValue={26630.00} 
-            isPositive={true}
-            delay={0.3}
-          />
-          
-          {/* Added new assets as requested */}
-          <AssetItem 
-            symbol="BTC" 
-            name="Bitcoin" 
-            value={100000} 
-            change={3.51} 
-            changeValue={3395.00} 
-            isPositive={true}
-            delay={0.4}
-          />
-          
-          <AssetItem 
-            symbol="LINK" 
-            name="Chainlink" 
-            value={90000} 
-            change={2.87} 
-            changeValue={2523.00} 
-            isPositive={true}
-            delay={0.5}
-          />
+        <div 
+          ref={containerRef}
+          className="space-y-4 max-h-[250px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent"
+        >
+          {assets.map((asset, index) => (
+            <AssetItem 
+              key={index}
+              symbol={asset.symbol} 
+              name={asset.name} 
+              value={asset.value} 
+              change={asset.change} 
+              changeValue={asset.changeValue} 
+              isPositive={asset.isPositive}
+              delay={0.1 + (index * 0.05)}
+            />
+          ))}
         </div>
       </div>
     </div>
