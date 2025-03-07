@@ -43,7 +43,32 @@ const PortfolioMood = () => {
       </div>
       
       <div className="flex items-center justify-center gap-2">
-        {/* Main active mood chip */}
+        {/* Left small chip (if not active) */}
+        {activeMood !== 'degen' && (
+          <button 
+            className={cn(
+              "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
+              "bg-orange-400/20 text-orange-400"
+            )}
+            onClick={() => handleMoodChange('degen')}
+          >
+            Degen
+          </button>
+        )}
+        
+        {activeMood !== 'balanced' && activeMood === 'degen' && (
+          <button 
+            className={cn(
+              "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
+              "bg-blue-400/20 text-blue-400"
+            )}
+            onClick={() => handleMoodChange('balanced')}
+          >
+            Balanced
+          </button>
+        )}
+        
+        {/* Center active mood chip */}
         <button 
           className={cn(
             "py-2 px-8 rounded-full text-sm font-medium transition-all duration-300",
@@ -57,44 +82,30 @@ const PortfolioMood = () => {
           {activeMood === 'saver' && "Saver"}
         </button>
         
-        {/* Smaller mood chips */}
-        <div className="flex gap-2">
-          {activeMood !== 'degen' && (
-            <button 
-              className={cn(
-                "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
-                "bg-orange-400/20 text-orange-400"
-              )}
-              onClick={() => handleMoodChange('degen')}
-            >
-              Degen
-            </button>
-          )}
-          
-          {activeMood !== 'balanced' && (
-            <button 
-              className={cn(
-                "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
-                "bg-blue-400/20 text-blue-400"
-              )}
-              onClick={() => handleMoodChange('balanced')}
-            >
-              Balanced
-            </button>
-          )}
-          
-          {activeMood !== 'saver' && (
-            <button 
-              className={cn(
-                "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
-                "bg-green-400/20 text-green-400"
-              )}
-              onClick={() => handleMoodChange('saver')}
-            >
-              Saver
-            </button>
-          )}
-        </div>
+        {/* Right small chip (if not active) */}
+        {activeMood !== 'balanced' && activeMood === 'saver' && (
+          <button 
+            className={cn(
+              "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
+              "bg-blue-400/20 text-blue-400"
+            )}
+            onClick={() => handleMoodChange('balanced')}
+          >
+            Balanced
+          </button>
+        )}
+        
+        {activeMood !== 'saver' && (
+          <button 
+            className={cn(
+              "py-1 px-3 rounded-full text-xs font-medium transition-all duration-300",
+              "bg-green-400/20 text-green-400"
+            )}
+            onClick={() => handleMoodChange('saver')}
+          >
+            Saver
+          </button>
+        )}
       </div>
     </div>
   );
