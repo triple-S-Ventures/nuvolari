@@ -3,7 +3,7 @@ import { useRef, useEffect } from 'react';
 import AssetItem from '../AssetItem';
 import { cn } from '@/lib/utils';
 
-interface Asset {
+export interface Asset {
   symbol: string;
   name: string;
   value: number;
@@ -14,13 +14,16 @@ interface Asset {
 
 interface PortfolioAssetListProps {
   assets: Asset[];
-  onScrollToBottom: () => void;
+  onScrollToBottom?: () => void;
+  inDialog?: boolean;
 }
 
-const PortfolioAssetList = ({ assets, onScrollToBottom }: PortfolioAssetListProps) => {
+const PortfolioAssetList = ({ assets, onScrollToBottom, inDialog = false }: PortfolioAssetListProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
+    if (!onScrollToBottom) return;
+    
     const handleScroll = () => {
       if (!containerRef.current) return;
       

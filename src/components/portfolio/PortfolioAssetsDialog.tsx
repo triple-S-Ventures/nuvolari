@@ -2,8 +2,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 import PortfolioTabs from "./PortfolioTabs";
-import PortfolioAssetList from "./PortfolioAssetList";
-import { Asset } from "./PortfolioAssetList";
+import PortfolioAssetList, { Asset } from "./PortfolioAssetList";
 
 type TabType = 'holdings' | 'defi' | 'nft';
 
