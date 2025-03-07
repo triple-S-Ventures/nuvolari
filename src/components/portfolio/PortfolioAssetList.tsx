@@ -16,13 +16,19 @@ interface PortfolioAssetListProps {
   assets: Asset[];
   onScrollToBottom?: () => void;
   inDialog?: boolean;
+  disableScroll?: boolean;
 }
 
-const PortfolioAssetList = ({ assets, onScrollToBottom, inDialog = false }: PortfolioAssetListProps) => {
+const PortfolioAssetList = ({ 
+  assets, 
+  onScrollToBottom, 
+  inDialog = false,
+  disableScroll = false
+}: PortfolioAssetListProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!onScrollToBottom) return;
+    if (!onScrollToBottom || disableScroll) return;
     
     const handleScroll = () => {
       if (!containerRef.current) return;
@@ -45,13 +51,15 @@ const PortfolioAssetList = ({ assets, onScrollToBottom, inDialog = false }: Port
         currentRef.removeEventListener('scroll', handleScroll);
       }
     };
-  }, [onScrollToBottom]);
+  }, [onScrollToBottom, disableScroll]);
   
   return (
     <div 
       ref={containerRef}
       className={cn(
-        "max-h-[280px] overflow-y-auto pr-3 -mr-3 scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent"
+        "pr-1 -mr-1",
+        !disableScroll && "max-h-[280px] overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent",
+        inDialog && disableScroll && "h-full w-full space-y-1"
       )}
     >
       {assets.map((asset, index) => (
