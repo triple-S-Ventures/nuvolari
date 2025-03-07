@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -17,7 +16,6 @@ const Index = () => {
   const [isWidgetHovered, setIsWidgetHovered] = useState(false);
   
   useEffect(() => {
-    // Simulate loading
     const timer = setTimeout(() => {
       setIsLoading(false);
       toast.success("Portfolio data loaded successfully");
@@ -26,7 +24,6 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Sample insights data
   const insightsData = [
     {
       title: "Add $6.8K to the SOL/FART LP",
@@ -76,14 +73,12 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            {/* Portfolio Balance */}
             <div className="md:col-span-5">
               <PortfolioBalance />
             </div>
             
             <div className="md:col-span-7 space-y-6">
-              {/* Suggested Insights - Reduced height by 20% */}
-              <div className="glass-card rounded-2xl p-4" style={{ height: "calc(100% * 0.48)" }}>
+              <div className="glass-card rounded-2xl p-4" style={{ height: "calc(100% * 0.38)" }}>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center">
                     <Lightbulb size={18} className="mr-2 text-foreground/60" />
@@ -95,7 +90,6 @@ const Index = () => {
                 </div>
               </div>
               
-              {/* Portfolio Mood and Add Widget side by side */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-1">
                   <PortfolioMood />
@@ -112,8 +106,8 @@ const Index = () => {
                         style={{ 
                           animationDelay: '1.2s',
                           transformOrigin: 'center',
-                          width: '70%', // Reduce width by 30%
-                          margin: '0 auto' // Center the component
+                          width: '70%',
+                          margin: '0 auto'
                         }}
                         onMouseEnter={() => setIsWidgetHovered(true)}
                         onMouseLeave={() => setIsWidgetHovered(false)}
@@ -144,7 +138,6 @@ const Index = () => {
       
       <Footer />
       
-      {/* Background gradient effects */}
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
     </motion.div>
   );

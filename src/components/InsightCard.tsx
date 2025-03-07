@@ -86,16 +86,16 @@ const InsightsCarousel = ({ insights }: InsightsCarouselProps) => {
       )}
     >
       <div className="relative w-full flex-grow">
-        <div className="glass-card rounded-xl p-4 mb-4 h-full">
+        <div className="glass-card rounded-xl p-3 mb-3 h-[80%]">
           {/* Token icons */}
-          <div className="flex -space-x-2 mb-3">
+          <div className="flex -space-x-2 mb-2">
             {insights[currentIndex].tokens.map((token, index) => (
               <TokenIcon key={index} symbol={token} />
             ))}
           </div>
           
           {/* Insight title */}
-          <h3 className="text-lg font-medium text-foreground">
+          <h3 className="text-base font-medium text-foreground">
             {insights[currentIndex].title}
           </h3>
         </div>
