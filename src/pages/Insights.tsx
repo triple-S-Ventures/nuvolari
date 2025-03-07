@@ -163,13 +163,13 @@ const Insights = () => {
   const getActiveFilterBlurColor = () => {
     switch (activeFilter) {
       case 'balanced':
-        return 'from-blue-400/15 to-blue-400/5'; // Reduced opacity by 50%
+        return 'from-blue-400/8 to-blue-400/3'; // Reduced opacity by 75%
       case 'degen':
-        return 'from-orange-400/15 to-orange-400/5'; // Reduced opacity by 50%
+        return 'from-orange-400/8 to-orange-400/3'; // Reduced opacity by 75%
       case 'saver':
-        return 'from-green-400/15 to-green-400/5'; // Reduced opacity by 50%
+        return 'from-green-400/8 to-green-400/3'; // Reduced opacity by 75%
       default:
-        return 'from-primary/10 to-primary/5'; // Reduced opacity by 50%
+        return 'from-primary/5 to-primary/3'; // Reduced opacity by 75%
     }
   };
 
@@ -288,7 +288,7 @@ const Insights = () => {
                   <X size={16} />
                 </button>
               )}
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center pr-2">
                 <motion.div
                   className={cn(
                     "flex items-center px-3 py-1 rounded-full text-xs font-medium",
@@ -338,7 +338,7 @@ const Insights = () => {
                     <motion.span
                       initial={{ opacity: 0 }} 
                       animate={{ opacity: 1 }}
-                      className="text-xs font-medium px-1" // Added padding to fix mobile cropping
+                      className="text-xs font-medium px-1"
                     >
                       Saver
                     </motion.span>
@@ -350,11 +350,12 @@ const Insights = () => {
             <AnimatePresence>
               {isSearchFocused && (
                 <>
-                  {/* Reduced blur effect by 50% and apply to whole dropdown component */}
+                  {/* Apply blur effect to entire dropdown with border */}
                   <motion.div 
                     className={cn(
-                      "absolute -inset-6 -z-10 rounded-xl bg-gradient-to-b",
-                      getActiveFilterBlurColor()
+                      "absolute -inset-0.5 -z-10 rounded-xl bg-gradient-to-b",
+                      getActiveFilterBlurColor(),
+                      getActiveFilterColor().replace('/20', '/10') // Apply colored border
                     )}
                     initial={{ opacity: 0, filter: "blur(5px)" }}
                     animate={{ opacity: 1, filter: "blur(15px)" }}

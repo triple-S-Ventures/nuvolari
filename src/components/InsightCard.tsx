@@ -81,12 +81,12 @@ const InsightsCarousel = ({ insights }: InsightsCarouselProps) => {
   return (
     <div 
       className={cn(
-        "w-full overflow-hidden transition-all duration-500 relative h-full flex flex-col", // Added h-full and flex-col to properly size the carousel
+        "w-full overflow-hidden transition-all duration-500 relative h-full flex flex-col",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       )}
     >
-      <div className="relative w-full flex-grow"> {/* Added flex-grow to fill available space */}
-        <div className="glass-card rounded-xl p-4 mb-4 h-full"> {/* Added h-full */}
+      <div className="relative w-full flex-grow">
+        <div className="glass-card rounded-xl p-4 mb-4 h-full">
           {/* Token icons */}
           <div className="flex -space-x-2 mb-3">
             {insights[currentIndex].tokens.map((token, index) => (
@@ -126,7 +126,7 @@ const InsightsCarousel = ({ insights }: InsightsCarouselProps) => {
 
       {/* Dots indicators */}
       {insights.length > 1 && (
-        <div className="flex justify-center space-x-1 pb-1 mt-auto"> {/* Added mt-auto to push this to the bottom */}
+        <div className="flex justify-center space-x-1 pb-1 mt-auto">
           {insights.map((_, index) => (
             <button
               key={index}

@@ -82,14 +82,13 @@ const Index = () => {
             </div>
             
             <div className="md:col-span-7 space-y-6">
-              {/* Suggested Insights - Increased height by 60% */}
-              <div className="glass-card rounded-2xl p-4" style={{ height: "calc(100% * 0.6)" }}>
+              {/* Suggested Insights - Reduced height by 20% */}
+              <div className="glass-card rounded-2xl p-4" style={{ height: "calc(100% * 0.48)" }}>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center">
                     <Lightbulb size={18} className="mr-2 text-foreground/60" />
                     <span className="text-sm font-medium text-foreground/80">Suggested Insights</span>
                   </div>
-                  {/* Removed the "2/4" text as requested */}
                 </div>
                 <div className="h-full overflow-hidden">
                   <InsightsCarousel insights={insightsData} />
@@ -107,24 +106,29 @@ const Index = () => {
                     <TooltipTrigger asChild>
                       <div 
                         className={cn(
-                          "glass-card rounded-2xl p-6 flex items-center justify-center h-full animate-fade-in-up transform scale-70", // Added scale-70 to reduce size by 30%
+                          "glass-card rounded-2xl p-6 flex items-center justify-center h-full animate-fade-in-up",
                           isWidgetHovered ? "blur-sm" : ""
                         )}
                         style={{ 
                           animationDelay: '1.2s',
-                          transformOrigin: 'center' 
+                          transformOrigin: 'center',
+                          width: '70%', // Reduce width by 30%
+                          margin: '0 auto' // Center the component
                         }}
                         onMouseEnter={() => setIsWidgetHovered(true)}
                         onMouseLeave={() => setIsWidgetHovered(false)}
                       >
-                        {isWidgetHovered ? (
-                          <span className="text-sm font-medium text-foreground">Coming Soon</span>
-                        ) : (
-                          <button className="flex items-center justify-center w-full py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group">
-                            <Plus size={28} className="mr-2 text-primary group-hover:scale-110 transition-transform" />
-                            Add Widget
-                          </button>
-                        )}
+                        <div className="relative w-full h-full flex items-center justify-center">
+                          {isWidgetHovered && (
+                            <span className="text-sm font-medium text-foreground absolute z-10">Coming Soon</span>
+                          )}
+                          <div className={cn(isWidgetHovered ? "opacity-30" : "opacity-100", "transition-opacity")}>
+                            <button className="flex items-center justify-center w-full py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group">
+                              <Plus size={28} className="mr-2 text-primary group-hover:scale-110 transition-transform" />
+                              Add Widget
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </TooltipTrigger>
                     <TooltipContent>

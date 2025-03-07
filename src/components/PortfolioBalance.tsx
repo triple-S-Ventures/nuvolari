@@ -176,44 +176,7 @@ const PortfolioBalance = () => {
           ref={containerRef}
           className="space-y-4 max-h-[250px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent"
         >
-          {activeTab === 'holdings' && assets.map((asset, index) => (
-            <AssetItem 
-              key={index}
-              symbol={asset.symbol} 
-              name={asset.name} 
-              value={asset.value} 
-              change={asset.change} 
-              changeValue={asset.changeValue} 
-              isPositive={asset.isPositive}
-              delay={0.1 + (index * 0.05)}
-            />
-          ))}
-          
-          {activeTab === 'defi' && defiAssets.map((asset, index) => (
-            <AssetItem 
-              key={index}
-              symbol={asset.symbol} 
-              name={asset.name} 
-              value={asset.value} 
-              change={asset.change} 
-              changeValue={asset.changeValue} 
-              isPositive={asset.isPositive}
-              delay={0.1 + (index * 0.05)}
-            />
-          ))}
-          
-          {activeTab === 'nft' && nftAssets.map((asset, index) => (
-            <AssetItem 
-              key={index}
-              symbol={asset.symbol} 
-              name={asset.name} 
-              value={asset.value} 
-              change={asset.change} 
-              changeValue={asset.changeValue} 
-              isPositive={asset.isPositive}
-              delay={0.1 + (index * 0.05)}
-            />
-          ))}
+          {renderTabContent(activeTab)}
         </div>
       </div>
       
