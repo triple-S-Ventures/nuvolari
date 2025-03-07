@@ -15,7 +15,7 @@ const PortfolioMood = () => {
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform",
+      "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full",
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <div className="flex items-center mb-6">
@@ -38,33 +38,8 @@ const PortfolioMood = () => {
         <span className="text-sm font-medium text-foreground/80">Portfolio mood</span>
       </div>
       
-      <div className="flex items-center justify-between flex-wrap">
-        <div className="flex items-center flex-wrap">
-          <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 mb-2 sm:mb-0">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-purple-400">
-              <rect width="24" height="24" rx="12" fill="currentColor" fillOpacity="0.08"/>
-              <path d="M9 11L12 8L15 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M9 15L12 12L15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          
-          <div className="ml-6 w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20 mb-2 sm:mb-0">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-green-400">
-              <rect width="24" height="24" rx="12" fill="currentColor" fillOpacity="0.08"/>
-              <path d="M8 12H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M12 16L12 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </div>
-          
-          <div className="ml-6 w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 mb-2 sm:mb-0">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-blue-400">
-              <rect width="24" height="24" rx="12" fill="currentColor" fillOpacity="0.08"/>
-              <path d="M10 8L14 12L10 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-        </div>
-        
-        <button className="py-1 px-4 rounded-full bg-primary/90 text-white text-sm font-medium hover:bg-primary transition-colors mt-2 sm:mt-0">
+      <div className="flex items-center justify-center flex-wrap">
+        <button className="py-2 px-8 rounded-full bg-primary/90 text-white text-sm font-medium hover:bg-primary transition-colors">
           Balanced
         </button>
       </div>

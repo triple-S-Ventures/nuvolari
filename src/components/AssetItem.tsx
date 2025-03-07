@@ -88,24 +88,24 @@ const AssetItem = ({
 
   return (
     <div className={cn(
-      "flex items-center py-3 border-b border-white/5 transition-all duration-700 transform",
+      "flex items-center py-2 border-b border-white/5 transition-all duration-700 transform",
       isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
     )}>
       <div className="flex items-center">
-        <div className="mr-3 rounded-full bg-secondary/70 w-10 h-10 flex items-center justify-center">
+        <div className="mr-2 rounded-full bg-secondary/70 w-8 h-8 flex items-center justify-center">
           {getCryptoIcon(symbol)}
         </div>
         
         <div>
           <div className="flex items-center">
-            <span className="font-medium">{symbol}</span>
+            <span className="font-medium text-sm">{symbol}</span>
           </div>
           <span className="text-xs text-muted-foreground">{name}</span>
         </div>
       </div>
       
       <div className="ml-auto text-right">
-        <div className="font-medium">{formatCurrency(value)} $</div>
+        <div className="font-medium text-sm">{formatCurrency(value)} $</div>
         <div className={cn(
           "text-xs",
           isPositive ? "text-crypto-positive" : "text-crypto-negative"

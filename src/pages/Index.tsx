@@ -87,21 +87,25 @@ const Index = () => {
                 <InsightsCarousel insights={insightsData} />
               </div>
               
-              <PortfolioMood />
-              
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="glass-card rounded-2xl p-6 flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
-                    <button className="flex items-center justify-center w-full py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group">
-                      <Plus size={18} className="mr-2 text-primary group-hover:scale-110 transition-transform" />
-                      Add Widget
-                    </button>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Coming soon</p>
-                </TooltipContent>
-              </Tooltip>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <PortfolioMood />
+                
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="glass-card rounded-2xl p-6 flex items-center justify-center h-full animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
+                        <button className="flex items-center justify-center w-full py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group">
+                          <Plus size={28} className="mr-2 text-primary group-hover:scale-110 transition-transform" />
+                          Add Widget
+                        </button>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Coming soon</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             </div>
           </div>
         </main>
