@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -25,8 +24,9 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import InsightCard from '@/components/InsightCard';
 import { Switch } from '@/components/ui/switch';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import InsightsCarousel from '@/components/InsightCard';
 
 const CategoryFilter = ({ 
   icon: Icon, 
@@ -379,10 +379,12 @@ const Insights = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredInsights.map((insight) => (
-              <InsightCard
+              <InsightsCarousel
                 key={insight.id}
-                title={insight.title}
-                tokens={insight.tokens}
+                insights={[{
+                  title: insight.title,
+                  tokens: insight.tokens
+                }]}
               />
             ))}
           </div>

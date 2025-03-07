@@ -7,8 +7,9 @@ import PortfolioBalance from '@/components/PortfolioBalance';
 import InsightsCarousel from '@/components/InsightCard';
 import PortfolioMood from '@/components/PortfolioMood';
 import Footer from '@/components/Footer';
-import { Plus } from 'lucide-react';
+import { Plus, Lightbulb } from 'lucide-react';
 import { toast } from "sonner";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -78,20 +79,31 @@ const Index = () => {
             </div>
             
             <div className="md:col-span-7 space-y-6">
-              <InsightsCarousel insights={insightsData} />
+              <div className="glass-card rounded-2xl p-4">
+                <div className="flex items-center mb-2">
+                  <Lightbulb size={18} className="mr-2 text-foreground/60" />
+                  <span className="text-sm font-medium text-foreground/80">Suggested Insights</span>
+                </div>
+                <InsightsCarousel insights={insightsData} />
+              </div>
               
               <PortfolioMood />
               
-              <div className="glass-card rounded-2xl p-6 flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
-                <button className="flex items-center justify-center w-full py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group">
-                  <Plus size={18} className="mr-2 text-primary group-hover:scale-110 transition-transform" />
-                  Add Widget
-                </button>
-              </div>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="glass-card rounded-2xl p-6 flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
+                    <button className="flex items-center justify-center w-full py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group">
+                      <Plus size={18} className="mr-2 text-primary group-hover:scale-110 transition-transform" />
+                      Add Widget
+                    </button>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Coming soon</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
-          
-          {/* Navigation Arrow removed as requested */}
         </main>
       )}
       
