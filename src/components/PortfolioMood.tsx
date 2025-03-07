@@ -36,14 +36,14 @@ const PortfolioMood = () => {
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full w-[130%]", // Added w-[130%] to make it 30% wider
+      "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full w-[90%]", // Reduced width to 90% (30% less than 130%)
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <div className="flex items-center mb-6">
         <span className="text-sm font-medium text-foreground/80">Portfolio mood</span>
       </div>
       
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center justify-center gap-2 overflow-visible">
         {/* Left small chip (if not active) */}
         <AnimatePresence mode="wait">
           {activeMood !== 'degen' && (

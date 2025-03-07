@@ -1,69 +1,66 @@
 
-import { cn } from "@/lib/utils";
-import AssetItem from "../AssetItem";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
+import AssetItem from '../AssetItem';
+import { cn } from '@/lib/utils';
 
-export type Asset = {
+interface Asset {
   symbol: string;
   name: string;
   value: number;
   change: number;
   changeValue: number;
   isPositive: boolean;
-};
+}
 
 interface PortfolioAssetListProps {
   assets: Asset[];
-  inDialog?: boolean;
-  onScrollToBottom?: () => void;
+  onScrollToBottom: () => void;
 }
 
-const PortfolioAssetList = ({ 
-  assets, 
-  inDialog = false,
-  onScrollToBottom 
-}: PortfolioAssetListProps) => {
+const PortfolioAssetList = ({ assets, onScrollToBottom }: PortfolioAssetListProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!onScrollToBottom) return;
-    
-    const container = containerRef.current;
-    if (!container) return;
-
     const handleScroll = () => {
-      // Check if scrolled to bottom (with a small threshold)
-      const isBottom = 
-        container.scrollHeight - container.scrollTop <= container.clientHeight + 10;
+      if (!containerRef.current) return;
       
-      if (isBottom && assets.length > 8) {
+      const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+      const threshold = 20; // 20px from bottom
+      
+      if (scrollHeight - scrollTop - clientHeight < threshold) {
         onScrollToBottom();
       }
     };
-
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [assets.length, onScrollToBottom]);
-
+    
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      currentRef.addEventListener('scroll', handleScroll);
+    }
+    
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [onScrollToBottom]);
+  
   return (
     <div 
       ref={containerRef}
       className={cn(
-        inDialog ? "max-h-[60vh]" : "max-h-[250px]", 
-        "space-y-4 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent"
+        "max-h-[280px] overflow-y-auto pr-3 -mr-3 scrollbar-thin scrollbar-thumb-secondary scrollbar-track-transparent"
       )}
     >
       {assets.map((asset, index) => (
-        <AssetItem 
-          key={index}
-          symbol={asset.symbol} 
-          name={asset.name} 
-          value={asset.value} 
-          change={asset.change} 
-          changeValue={asset.changeValue} 
+        <AssetItem
+          key={`${asset.symbol}-${index}`}
+          symbol={asset.symbol}
+          name={asset.name}
+          value={asset.value}
+          change={asset.change}
+          changeValue={asset.changeValue}
           isPositive={asset.isPositive}
-          delay={inDialog ? 0.1 + (index * 0.05) : 0.1 + (index * 0.05)}
-          animationDirection={inDialog ? "top" : undefined}
+          delay={index * 0.1}
         />
       ))}
     </div>

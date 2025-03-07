@@ -95,7 +95,8 @@ const SearchSuggestion = ({
       className="w-full flex items-center justify-between px-4 py-3 hover:bg-secondary/50 transition-colors rounded-md group"
     >
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center text-primary">
+        {/* Updated background color to #AC87CF and icon color to white */}
+        <div className="w-8 h-8 rounded-md bg-[#AC87CF] flex items-center justify-center text-white">
           <Icon size={18} />
         </div>
         <span className="text-foreground text-sm font-medium">{label}</span>
@@ -163,13 +164,13 @@ const Insights = () => {
   const getActiveFilterBlurColor = () => {
     switch (activeFilter) {
       case 'balanced':
-        return 'from-blue-400/8 to-blue-400/3'; // Reduced opacity by 75%
+        return 'from-blue-400/8 to-blue-400/3';
       case 'degen':
-        return 'from-orange-400/8 to-orange-400/3'; // Reduced opacity by 75%
+        return 'from-orange-400/8 to-orange-400/3';
       case 'saver':
-        return 'from-green-400/8 to-green-400/3'; // Reduced opacity by 75%
+        return 'from-green-400/8 to-green-400/3';
       default:
-        return 'from-primary/5 to-primary/3'; // Reduced opacity by 75%
+        return 'from-primary/5 to-primary/3';
     }
   };
 
@@ -288,7 +289,7 @@ const Insights = () => {
                   <X size={16} />
                 </button>
               )}
-              <div className="flex gap-2 items-center pr-2">
+              <div className="flex gap-2 items-center pr-2 overflow-visible">
                 <motion.div
                   className={cn(
                     "flex items-center px-3 py-1 rounded-full text-xs font-medium",
@@ -350,12 +351,12 @@ const Insights = () => {
             <AnimatePresence>
               {isSearchFocused && (
                 <>
-                  {/* Apply blur effect to entire dropdown with border */}
+                  {/* Apply blur effect to entire dropdown with border - updated to apply to entire dropdown */}
                   <motion.div 
                     className={cn(
-                      "absolute -inset-0.5 -z-10 rounded-xl bg-gradient-to-b",
+                      "absolute -inset-[4px] rounded-xl bg-gradient-to-b z-10",
                       getActiveFilterBlurColor(),
-                      getActiveFilterColor().replace('/20', '/10') // Apply colored border
+                      "backdrop-blur-lg border border-white/10"
                     )}
                     initial={{ opacity: 0, filter: "blur(5px)" }}
                     animate={{ opacity: 1, filter: "blur(15px)" }}
@@ -365,7 +366,7 @@ const Insights = () => {
                   
                   <motion.div 
                     className={cn(
-                      "absolute w-full backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden",
+                      "absolute w-full backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden z-20",
                       getActiveFilterColor().replace('/20', '/80')
                     )}
                     initial={{ opacity: 0, y: -10 }}
@@ -394,7 +395,7 @@ const Insights = () => {
             </AnimatePresence>
           </div>
           
-          {/* Fixed horizontal scrolling for filter categories on mobile */}
+          {/* Fixed horizontal scrolling for filter categories on mobile - added more padding */}
           <div className="overflow-x-auto scrollbar-none pb-2 -mx-2 px-2 mb-6">
             <div className="flex space-x-3 min-w-max">
               {categories.map((category) => (
