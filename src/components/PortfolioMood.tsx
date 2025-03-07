@@ -2,8 +2,11 @@
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
+type MoodType = 'balanced' | 'degen' | 'saver';
+
 const PortfolioMood = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [activeMood, setActiveMood] = useState<MoodType>('balanced');
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -13,34 +16,48 @@ const PortfolioMood = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleMoodChange = (mood: MoodType) => {
+    setActiveMood(mood);
+    // This could be expanded to store the mood in localStorage or context
+    // to ensure it persists across page navigation
+  };
+
   return (
     <div className={cn(
       "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full",
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <div className="flex items-center mb-6">
-        <svg 
-          width="20" 
-          height="20" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round" 
-          className="mr-2 text-foreground/60"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-          <line x1="9" y1="9" x2="9.01" y2="9"></line>
-          <line x1="15" y1="9" x2="15.01" y2="9"></line>
-        </svg>
         <span className="text-sm font-medium text-foreground/80">Portfolio mood</span>
       </div>
       
-      <div className="flex items-center justify-center flex-wrap">
-        <button className="py-2 px-8 rounded-full bg-primary/90 text-white text-sm font-medium hover:bg-primary transition-colors">
+      <div className="flex items-center justify-center gap-2 flex-wrap">
+        <button 
+          className={cn(
+            "py-2 px-6 rounded-full text-sm font-medium transition-colors",
+            activeMood === 'balanced' ? "bg-blue-400 text-white" : "bg-blue-400/20 text-blue-400"
+          )}
+          onClick={() => handleMoodChange('balanced')}
+        >
           Balanced
+        </button>
+        <button 
+          className={cn(
+            "py-2 px-6 rounded-full text-sm font-medium transition-colors",
+            activeMood === 'degen' ? "bg-orange-400 text-white" : "bg-orange-400/20 text-orange-400"
+          )}
+          onClick={() => handleMoodChange('degen')}
+        >
+          Degen
+        </button>
+        <button 
+          className={cn(
+            "py-2 px-6 rounded-full text-sm font-medium transition-colors",
+            activeMood === 'saver' ? "bg-green-400 text-white" : "bg-green-400/20 text-green-400"
+          )}
+          onClick={() => handleMoodChange('saver')}
+        >
+          Saver
         </button>
       </div>
     </div>
