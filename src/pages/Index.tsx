@@ -74,21 +74,29 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            {/* Portfolio Balance */}
             <div className="md:col-span-5">
               <PortfolioBalance />
             </div>
             
             <div className="md:col-span-7 space-y-6">
+              {/* Suggested Insights - Moved higher in the layout */}
               <div className="glass-card rounded-2xl p-4">
-                <div className="flex items-center mb-2">
-                  <Lightbulb size={18} className="mr-2 text-foreground/60" />
-                  <span className="text-sm font-medium text-foreground/80">Suggested Insights</span>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center">
+                    <Lightbulb size={18} className="mr-2 text-foreground/60" />
+                    <span className="text-sm font-medium text-foreground/80">Suggested Insights</span>
+                  </div>
+                  <span className="text-sm text-muted-foreground">2/4</span>
                 </div>
                 <InsightsCarousel insights={insightsData} />
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <PortfolioMood />
+              {/* Portfolio Mood and Add Widget side by side */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="md:col-span-1">
+                  <PortfolioMood />
+                </div>
                 
                 <TooltipProvider>
                   <Tooltip>
