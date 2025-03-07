@@ -1,5 +1,8 @@
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import MoodScore from '@/components/MoodScore';
 import Navbar from '@/components/Navbar';
 import PortfolioBalance from '@/components/PortfolioBalance';
@@ -23,7 +26,13 @@ const Index = () => {
   }, []);
   
   return (
-    <div className="min-h-screen flex flex-col bg-background overflow-x-hidden">
+    <motion.div 
+      className="min-h-screen flex flex-col bg-background overflow-x-hidden"
+      initial={{ opacity: 0, x: -300 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -300 }}
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+    >
       <Navbar />
       
       {isLoading ? (
@@ -59,6 +68,16 @@ const Index = () => {
               </div>
             </div>
           </div>
+          
+          {/* Navigation Arrow */}
+          <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50">
+            <Link 
+              to="/details"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-glow-md hover:shadow-glow-lg transition-all duration-300"
+            >
+              <ArrowRight size={24} />
+            </Link>
+          </div>
         </main>
       )}
       
@@ -66,7 +85,7 @@ const Index = () => {
       
       {/* Background gradient effects */}
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
-    </div>
+    </motion.div>
   );
 };
 
