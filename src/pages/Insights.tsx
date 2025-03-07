@@ -163,7 +163,7 @@ const Insights = () => {
           <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
         </div>
       ) : (
-        <main className="flex-1 pt-16 pb-16 px-4 max-w-4xl mx-auto w-full">
+        <main className="flex-1 pt-28 pb-16 px-4 max-w-4xl mx-auto w-full">
           <div className="mb-6 text-center">
             <h1 className="text-4xl font-bold mb-2">Insights</h1>
             <p className="text-muted-foreground">Get insights or search your on-chain task</p>
