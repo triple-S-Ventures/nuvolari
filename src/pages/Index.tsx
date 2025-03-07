@@ -63,7 +63,7 @@ const Index = () => {
           <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
         </div>
       ) : (
-        <main className="flex-1 pt-24 pb-16 px-4 max-w-5xl mx-auto w-full">
+        <main className="flex-1 pt-24 pb-16 px-6 max-w-5xl mx-auto w-full"> {/* Changed px-4 to px-6 */}
           <div className="mb-8 text-center animate-fade-in">
             <h1 className="text-4xl font-bold mb-2">Mood</h1>
             <p className="text-muted-foreground">Reality check of your portfolio in one glance</p>

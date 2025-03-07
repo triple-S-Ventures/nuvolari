@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -44,7 +43,7 @@ const CategoryFilter = ({
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all",
+        "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all flex-shrink-0",
         isActive 
           ? "bg-secondary text-foreground" 
           : "bg-secondary/30 text-muted-foreground hover:bg-secondary/50"
@@ -255,7 +254,7 @@ const Insights = () => {
           <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
         </div>
       ) : (
-        <main className="flex-1 pt-28 pb-16 px-4 max-w-4xl mx-auto w-full">
+        <main className="flex-1 pt-28 pb-16 px-6 max-w-4xl mx-auto w-full">
           <div className="mb-6 text-center">
             <h1 className="text-4xl font-bold mb-2">Insights</h1>
             <p className="text-muted-foreground">Get insights or search your on-chain task</p>
@@ -350,7 +349,6 @@ const Insights = () => {
             <AnimatePresence>
               {isSearchFocused && (
                 <>
-                  {/* Color-coordinated blur background effect */}
                   <motion.div 
                     className={cn(
                       "absolute -inset-6 -z-10 rounded-xl bg-gradient-to-b",
@@ -393,16 +391,18 @@ const Insights = () => {
             </AnimatePresence>
           </div>
           
-          <div className="flex flex-wrap gap-3 mb-6">
-            {categories.map((category) => (
-              <CategoryFilter
-                key={category.id}
-                icon={category.icon}
-                label={category.label}
-                isActive={activeCategory === category.id}
-                onClick={() => setActiveCategory(category.id)}
-              />
-            ))}
+          <div className="overflow-x-auto scrollbar-none pb-2 -mx-2 px-2 mb-6">
+            <div className="flex space-x-3 min-w-max">
+              {categories.map((category) => (
+                <CategoryFilter
+                  key={category.id}
+                  icon={category.icon}
+                  label={category.label}
+                  isActive={activeCategory === category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                />
+              ))}
+            </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

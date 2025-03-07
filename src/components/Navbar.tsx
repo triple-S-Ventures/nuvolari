@@ -45,7 +45,7 @@ const Navbar = () => {
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 flex justify-center py-3 px-4 transition-all duration-300",
+      "fixed top-0 left-0 right-0 z-50 flex justify-center py-3 px-6 transition-all duration-300", // Changed px-4 to px-6
       isScrolled ? "bg-background/80 backdrop-blur-lg shadow-md" : "bg-transparent"
     )}>
       <div className="flex items-center justify-center max-w-4xl w-full">
@@ -65,7 +65,7 @@ const Navbar = () => {
               <button 
                 onClick={() => handleTabClick('mood')}
                 className={cn(
-                  "flex items-center px-4 py-2 rounded-full transition-all duration-300",
+                  "flex items-center px-3 py-2 rounded-full transition-all duration-300", // Changed px-4 to px-3 for mobile
                   activeTab === 'mood' 
                     ? "bg-card text-foreground shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"
@@ -78,7 +78,7 @@ const Navbar = () => {
               <button 
                 onClick={() => handleTabClick('insights')}
                 className={cn(
-                  "flex items-center px-4 py-2 rounded-full transition-all duration-300",
+                  "flex items-center px-3 py-2 rounded-full transition-all duration-300", // Changed px-4 to px-3 for mobile
                   activeTab === 'insights' 
                     ? "bg-card text-foreground shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"
@@ -91,7 +91,7 @@ const Navbar = () => {
               <button 
                 onClick={() => handleTabClick('journal')}
                 className={cn(
-                  "flex items-center px-4 py-2 rounded-full transition-all duration-300",
+                  "flex items-center px-3 py-2 rounded-full transition-all duration-300", // Changed px-4 to px-3 for mobile
                   activeTab === 'journal' 
                     ? "bg-card text-foreground shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"
