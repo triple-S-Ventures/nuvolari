@@ -56,7 +56,11 @@ const Index = () => {
             </div>
             
             <div className="md:col-span-4 space-y-6">
-              <InsightCard />
+              {/* Fixed InsightCard by providing required props */}
+              <InsightCard 
+                title="Add $6.8K to the SOL/FART LP" 
+                tokens={['SOL', 'FART']} 
+              />
               
               <PortfolioMood />
               
