@@ -34,6 +34,20 @@ const PortfolioMood = () => {
     }
   };
 
+  // Get mood score values for the visualization
+  const getMoodValues = () => {
+    switch (activeMood) {
+      case 'balanced':
+        return { score: 79.3, position: 'top' };
+      case 'degen':
+        return { score: 36.8, position: 'left' };
+      case 'saver':
+        return { score: 64.1, position: 'right' };
+    }
+  };
+
+  const moodValues = getMoodValues();
+
   return (
     <div className={cn(
       "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full",
@@ -47,26 +61,59 @@ const PortfolioMood = () => {
       <div className="relative w-full h-48 mb-6 flex items-center justify-center">
         <div className="relative w-40 h-40">
           {/* Concentric circles */}
-          <div className="absolute inset-0 rounded-full bg-purple-200/30 animate-pulse-subtle" />
-          <div className="absolute inset-[10%] rounded-full bg-purple-200/40" />
-          <div className="absolute inset-[20%] rounded-full bg-purple-200/50" />
-          <div className="absolute inset-[30%] rounded-full bg-purple-200/60" />
-          <div className="absolute inset-[40%] rounded-full bg-purple-200/70" />
+          <div className="absolute inset-0 rounded-full border border-purple-500/20 animate-pulse-subtle" />
+          <div className="absolute inset-[10%] rounded-full border border-purple-500/30" />
+          <div className="absolute inset-[20%] rounded-full border border-purple-500/40" />
+          <div className="absolute inset-[30%] rounded-full border border-purple-500/50" />
+          <div className="absolute inset-[40%] rounded-full border border-purple-500/60" />
           
           {/* Triangle overlay */}
           <div className="absolute inset-0 flex items-center justify-center">
+            {/* Main triangle */}
             <div 
-              className="w-32 h-32 triangle-path bg-purple-500/40"
+              className="w-32 h-32 triangle-path"
               style={{
-                background: `linear-gradient(to bottom, rgba(124, 58, 237, 0.5), rgba(139, 92, 246, 0.5))`,
-                boxShadow: '0 0 15px rgba(124, 58, 237, 0.3)'
+                background: 'transparent',
+                border: '1px solid rgba(255, 255, 255, 0.7)'
               }}
             />
             
-            {/* Triangle vertices with darker gradients */}
-            <div className="absolute top-[calc(50%-80px)] left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-b from-purple-600 to-purple-800" />
-            <div className="absolute bottom-[calc(50%-20px)] left-[calc(50%-40px)] w-4 h-4 rounded-full bg-gradient-to-b from-purple-600 to-purple-800" />
-            <div className="absolute bottom-[calc(50%-20px)] right-[calc(50%-40px)] w-4 h-4 rounded-full bg-gradient-to-b from-purple-600 to-purple-800" />
+            {/* Inner triangle */}
+            <div 
+              className="absolute w-24 h-24 triangle-path"
+              style={{
+                background: 'transparent',
+                border: '1px solid rgba(255, 255, 255, 0.4)'
+              }}
+            />
+            
+            {/* Triangle vertices with labels and scores */}
+            <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 flex flex-col items-center">
+              <div className={`w-2 h-2 rounded-full ${activeMood === 'balanced' ? 'bg-white' : 'bg-purple-500/60'}`} />
+              {activeMood === 'balanced' && (
+                <div className="mt-1 text-xs text-white">
+                  Balanced ({moodValues.score})
+                </div>
+              )}
+            </div>
+            
+            <div className="absolute bottom-0 left-[calc(50%-55px)] flex flex-col items-center">
+              <div className={`w-2 h-2 rounded-full ${activeMood === 'degen' ? 'bg-white' : 'bg-purple-500/60'}`} />
+              {activeMood === 'degen' && (
+                <div className="mt-1 text-xs text-white">
+                  Degen ({moodValues.score})
+                </div>
+              )}
+            </div>
+            
+            <div className="absolute bottom-0 right-[calc(50%-55px)] flex flex-col items-center">
+              <div className={`w-2 h-2 rounded-full ${activeMood === 'saver' ? 'bg-white' : 'bg-purple-500/60'}`} />
+              {activeMood === 'saver' && (
+                <div className="mt-1 text-xs text-white">
+                  Saver ({moodValues.score})
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
