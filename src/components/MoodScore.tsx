@@ -14,8 +14,16 @@ const MoodScore = () => {
   }, []);
 
   return (
-    <div className="relative w-full overflow-hidden bg-purple-glow rounded-2xl glass-card p-6 animate-scale-in">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div 
+      className="relative w-full overflow-hidden rounded-2xl glass-card p-6 animate-scale-in"
+      style={{
+        backgroundImage: `url('/lovable-uploads/98bf0b3c-cd64-4d40-afdb-0fb0a1ad36f5.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="absolute inset-0 bg-black/10 backdrop-blur-[2px]"></div>
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className={cn(
           "transition-all duration-700 transform",
           isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
@@ -28,10 +36,10 @@ const MoodScore = () => {
                 <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="currentColor" />
               </svg>
             </div>
-            <span className="text-sm font-medium text-foreground/80">Nuvolari Score</span>
+            <span className="text-sm font-medium text-foreground/90">Nuvolari Score</span>
             
             <div className="ml-auto">
-              <button className="px-3 py-1 text-xs font-medium rounded-full bg-secondary/80 text-foreground/70 hover:bg-secondary/100 transition-all">
+              <button className="px-3 py-1 text-xs font-medium rounded-full bg-white/20 backdrop-blur-md text-foreground/90 hover:bg-white/30 transition-all">
                 Week
               </button>
             </div>
@@ -45,10 +53,10 @@ const MoodScore = () => {
               )}>
                 468
               </h1>
-              <span className="ml-2 text-lg text-muted-foreground">pts</span>
+              <span className="ml-2 text-lg text-white/80">pts</span>
             </div>
             
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-2 text-sm text-white/80">
               Based on your chain history
             </p>
           </div>
@@ -59,7 +67,7 @@ const MoodScore = () => {
           isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
         )}>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-32 h-32 rounded-full bg-purple-glow/30 backdrop-blur-sm flex items-center justify-center border border-white/10 animate-pulse-subtle shadow-glow-sm" />
+            <div className="w-32 h-32 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 animate-pulse-subtle shadow-glow-sm" />
           </div>
           
           <div className="absolute inset-0 flex items-center justify-center">
@@ -71,16 +79,16 @@ const MoodScore = () => {
               
               {/* Chart lines */}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-                <path d="M50,10 L10,90 L90,90 Z" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                <path d="M50,50 L50,10" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                <path d="M50,50 L10,90" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                <path d="M50,50 L90,90" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+                <path d="M50,10 L10,90 L90,90 Z" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+                <path d="M50,50 L50,10" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+                <path d="M50,50 L10,90" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
+                <path d="M50,50 L90,90" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" />
                 
                 {/* Active chart */}
                 <path 
                   d="M50,30 L30,75 L70,75 Z" 
-                  fill="rgba(149, 64, 234, 0.15)" 
-                  stroke="rgba(149, 64, 234, 0.5)" 
+                  fill="rgba(255, 255, 255, 0.15)" 
+                  stroke="rgba(255, 255, 255, 0.7)" 
                   strokeWidth="2" 
                   className={cn(
                     "transition-all duration-1000 delay-500",
@@ -91,16 +99,16 @@ const MoodScore = () => {
               
               {/* Labels */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 text-xs font-medium">
-                <span className="text-foreground/80">Balanced</span>
-                <span className="ml-1 text-primary/80">(79.3)</span>
+                <span className="text-white/90">Balanced</span>
+                <span className="ml-1 text-white/90">(79.3)</span>
               </div>
               <div className="absolute bottom-0 left-0 -translate-x-4 text-xs font-medium">
-                <span className="text-foreground/80">Degen</span>
-                <span className="ml-1 text-primary/80">(36.8)</span>
+                <span className="text-white/90">Degen</span>
+                <span className="ml-1 text-white/90">(36.8)</span>
               </div>
               <div className="absolute bottom-0 right-0 translate-x-2 text-xs font-medium">
-                <span className="text-foreground/80">Saver</span>
-                <span className="ml-1 text-primary/80">(61.1)</span>
+                <span className="text-white/90">Saver</span>
+                <span className="ml-1 text-white/90">(61.1)</span>
               </div>
             </div>
           </div>
