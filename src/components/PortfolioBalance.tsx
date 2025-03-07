@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import AssetItem from './AssetItem';
 import { Switch } from '@/components/ui/switch';
+import { Wallet } from 'lucide-react'; // Import the wallet icon
 
 const PortfolioBalance = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,12 +20,13 @@ const PortfolioBalance = () => {
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform",
+      "glass-card rounded-2xl p-6 transition-all duration-700 transform w-4/5 mx-auto", // Reduced width by 20%
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <span className="text-sm font-medium text-muted-foreground mr-2">Balance</span>
+          <Wallet className="w-5 h-5 text-primary mr-2" /> {/* Added wallet icon */}
+          <span className="text-base font-medium text-muted-foreground">Balance</span> {/* Increased size from text-sm to text-base */}
         </div>
         
         <div className="flex items-center">
@@ -115,6 +117,27 @@ const PortfolioBalance = () => {
             changeValue={26630.00} 
             isPositive={true}
             delay={0.3}
+          />
+          
+          {/* Added new assets as requested */}
+          <AssetItem 
+            symbol="BTC" 
+            name="Bitcoin" 
+            value={100000} 
+            change={3.51} 
+            changeValue={3395.00} 
+            isPositive={true}
+            delay={0.4}
+          />
+          
+          <AssetItem 
+            symbol="LINK" 
+            name="Chainlink" 
+            value={90000} 
+            change={2.87} 
+            changeValue={2523.00} 
+            isPositive={true}
+            delay={0.5}
           />
         </div>
       </div>
