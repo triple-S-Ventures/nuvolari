@@ -20,13 +20,13 @@ const PortfolioBalance = () => {
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform w-4/5 mx-auto", // Reduced width by 20%
+      "glass-card rounded-2xl p-6 transition-all duration-700 transform w-full", // Changed from w-4/5 mx-auto to w-full to align properly
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <Wallet className="w-5 h-5 text-primary mr-2" /> {/* Added wallet icon */}
-          <span className="text-base font-medium text-muted-foreground">Balance</span> {/* Increased size from text-sm to text-base */}
+          <Wallet className="w-5 h-5 text-primary mr-2" />
+          <span className="text-base font-medium text-muted-foreground">Balance</span>
         </div>
         
         <div className="flex items-center">

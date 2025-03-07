@@ -50,12 +50,12 @@ const Index = () => {
             <MoodScore />
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div className="md:col-span-8">
               <PortfolioBalance />
             </div>
             
-            <div className="md:col-span-1 space-y-6">
+            <div className="md:col-span-4 space-y-6">
               <InsightCard />
               
               <PortfolioMood />
