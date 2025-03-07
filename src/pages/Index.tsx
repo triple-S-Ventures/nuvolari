@@ -56,10 +56,20 @@ const Index = () => {
             </div>
             
             <div className="md:col-span-4 space-y-6">
-              {/* Fixed InsightCard by providing required props */}
               <InsightCard 
                 title="Add $6.8K to the SOL/FART LP" 
                 tokens={['SOL', 'FART']} 
+              />
+              
+              {/* Add two more InsightCard components with different data */}
+              <InsightCard 
+                title="Consider taking profits on ETH" 
+                tokens={['ETH']} 
+              />
+              
+              <InsightCard 
+                title="Review LINK staking rewards" 
+                tokens={['LINK']} 
               />
               
               <PortfolioMood />
