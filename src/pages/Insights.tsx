@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { Switch } from '@/components/ui/switch';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import InsightsCarousel from '@/components/InsightCard';
+
 const CategoryFilter = ({
   icon: Icon,
   label,
@@ -24,6 +25,7 @@ const CategoryFilter = ({
       <span>{label}</span>
     </button>;
 };
+
 const FilterChip = ({
   label,
   color,
@@ -39,6 +41,7 @@ const FilterChip = ({
       {label}
     </button>;
 };
+
 const SearchSuggestion = ({
   icon: Icon,
   label,
@@ -50,7 +53,6 @@ const SearchSuggestion = ({
 }) => {
   return <button onClick={onClick} className="w-full flex items-center justify-between px-4 py-3 hover:bg-secondary/50 transition-colors rounded-md group">
       <div className="flex items-center gap-3">
-        {/* Updated background color to #AC87CF and icon color to white */}
         <div className="w-8 h-8 rounded-md bg-[#AC87CF] flex items-center justify-center text-white">
           <Icon size={18} />
         </div>
@@ -59,6 +61,7 @@ const SearchSuggestion = ({
       <ChevronRight size={16} className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
     </button>;
 };
+
 const Insights = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -66,22 +69,27 @@ const Insights = () => {
   const [activeFilter, setActiveFilter] = useState('balanced');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
       toast.success("Insights loaded successfully");
     }, 1000);
+
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setIsSearchFocused(false);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
       clearTimeout(timer);
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   const categories = [{
     id: 'favorites',
     label: 'Favourites',
@@ -103,6 +111,7 @@ const Insights = () => {
     label: 'Swap',
     icon: ArrowRightLeft
   }];
+
   const filters = [{
     id: 'balanced',
     label: 'Balanced',
@@ -116,6 +125,7 @@ const Insights = () => {
     label: 'Saver',
     color: 'green-400'
   }];
+
   const getActiveFilterColor = () => {
     switch (activeFilter) {
       case 'balanced':
@@ -128,6 +138,7 @@ const Insights = () => {
         return 'bg-secondary/30';
     }
   };
+
   const getActiveFilterBlurColor = () => {
     switch (activeFilter) {
       case 'balanced':
@@ -140,6 +151,7 @@ const Insights = () => {
         return 'from-primary/5 to-primary/3';
     }
   };
+
   const searchSuggestions = [{
     id: 'buy',
     label: 'Buy',
@@ -181,11 +193,13 @@ const Insights = () => {
     label: 'Advanced strategy',
     icon: Plus
   }];
+
   const handleSearchSuggestionClick = (suggestionId: string) => {
     setSearchQuery(suggestionId);
     setIsSearchFocused(false);
     toast.info(`Selected action: ${suggestionId}`);
   };
+
   const insights = [{
     id: 1,
     title: 'Add $6.8K to the SOL/FART LP',
@@ -217,11 +231,13 @@ const Insights = () => {
     tokens: ['SWAP'],
     category: 'swap'
   }];
+
   const filteredInsights = insights.filter(insight => {
     const matchesCategory = activeCategory === 'favorites' || insight.category === activeCategory;
     const matchesSearch = searchQuery.trim() === '' || insight.title.toLowerCase().includes(searchQuery.toLowerCase()) || insight.tokens.some(token => token.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
+
   return <motion.div className="min-h-screen flex flex-col bg-background overflow-x-hidden relative" initial={{
     opacity: 0
   }} animate={{
@@ -248,7 +264,7 @@ const Insights = () => {
               {searchQuery && <button onClick={() => setSearchQuery('')} className="text-muted-foreground hover:text-foreground p-1">
                   <X size={16} />
                 </button>}
-              <div className="flex gap-2 items-center pr-2 overflow-visible">
+              <div className="flex gap-3 items-center pl-0 overflow-visible">
                 <motion.div className={cn("flex items-center px-3 py-1 rounded-full text-xs font-medium", activeFilter === 'balanced' ? "bg-blue-400 text-white" : "bg-blue-400/20 text-blue-400")} layout transition={{
               type: "spring",
               stiffness: 500,
@@ -289,7 +305,6 @@ const Insights = () => {
             
             <AnimatePresence>
               {isSearchFocused && <>
-                  {/* Apply blur effect to entire dropdown with border - updated to apply to entire dropdown */}
                   <motion.div initial={{
               opacity: 0,
               filter: "blur(5px)"
@@ -328,7 +343,6 @@ const Insights = () => {
             </AnimatePresence>
           </div>
           
-          {/* Fixed horizontal scrolling for filter categories on mobile - added more padding */}
           <div className="overflow-x-auto scrollbar-none pb-2 -mx-2 px-2 mb-6">
             <div className="flex space-x-3 min-w-max">
               {categories.map(category => <CategoryFilter key={category.id} icon={category.icon} label={category.label} isActive={activeCategory === category.id} onClick={() => setActiveCategory(category.id)} />)}
@@ -360,4 +374,5 @@ const Insights = () => {
       </AnimatePresence>
     </motion.div>;
 };
+
 export default Insights;
