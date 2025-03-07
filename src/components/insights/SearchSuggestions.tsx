@@ -1,5 +1,6 @@
 
 import { ChevronRight, Plus, ArrowRightLeft, RefreshCw, Wallet, DollarSign, ClipboardList, Info, BarChart3, TrendingUp } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 type SearchSuggestionProps = {
   icon: React.ElementType;
@@ -43,7 +44,7 @@ const SearchSuggestions = ({ onSuggestionClick }: SearchSuggestionsProps) => {
   ];
 
   return (
-    <div className="py-2">
+    <div className="py-2 backdrop-blur-md bg-secondary/60">
       <div className="px-4 py-2 text-xs text-muted-foreground">
         Suggested
       </div>
