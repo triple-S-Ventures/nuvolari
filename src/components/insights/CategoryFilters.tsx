@@ -38,7 +38,7 @@ type CategoryFiltersProps = {
 const CategoryFilters = ({ activeCategory, setActiveCategory }: CategoryFiltersProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   
-  // Scroll active category into view
+  // Scroll active category into view whenever it changes
   useEffect(() => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
