@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import MoodScore from '@/components/MoodScore';
 import Navbar from '@/components/Navbar';
 import PortfolioBalance from '@/components/PortfolioBalance';

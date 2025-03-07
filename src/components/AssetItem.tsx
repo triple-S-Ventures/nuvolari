@@ -10,6 +10,7 @@ interface AssetItemProps {
   changeValue: number;
   isPositive: boolean;
   delay?: number;
+  animationDirection?: string;
 }
 
 const AssetItem = ({ 
@@ -19,7 +20,8 @@ const AssetItem = ({
   change, 
   changeValue, 
   isPositive,
-  delay = 0 
+  delay = 0,
+  animationDirection
 }: AssetItemProps) => {
   const [isVisible, setIsVisible] = useState(false);
   
@@ -89,7 +91,8 @@ const AssetItem = ({
   return (
     <div className={cn(
       "flex items-center py-2 border-b border-white/5 transition-all duration-700 transform",
-      isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+      isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8",
+      animationDirection === "top" && isVisible ? "translate-y-0" : animationDirection === "top" ? "translate-y-8" : ""
     )}>
       <div className="flex items-center">
         <div className="mr-2 rounded-full bg-secondary/70 w-8 h-8 flex items-center justify-center">
