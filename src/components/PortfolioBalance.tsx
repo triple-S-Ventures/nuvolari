@@ -94,7 +94,8 @@ const PortfolioBalance = () => {
             change={asset.change} 
             changeValue={asset.changeValue} 
             isPositive={asset.isPositive}
-            delay={inDialog ? 0 : 0.1 + (index * 0.05)}
+            delay={inDialog ? 0.1 + (index * 0.05) : 0.1 + (index * 0.05)}
+            animationDirection={inDialog ? "top" : undefined}
           />
         ))}
       </div>

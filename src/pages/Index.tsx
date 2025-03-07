@@ -13,6 +13,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isWidgetHovered, setIsWidgetHovered] = useState(false);
   
   useEffect(() => {
     // Simulate loading
@@ -63,7 +64,7 @@ const Index = () => {
           <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
         </div>
       ) : (
-        <main className="flex-1 pt-24 pb-16 px-6 max-w-5xl mx-auto w-full"> {/* Changed px-4 to px-6 */}
+        <main className="flex-1 pt-24 pb-16 px-6 max-w-5xl mx-auto w-full">
           <div className="mb-8 text-center animate-fade-in">
             <h1 className="text-4xl font-bold mb-2">Mood</h1>
             <p className="text-muted-foreground">Reality check of your portfolio in one glance</p>
@@ -87,7 +88,7 @@ const Index = () => {
                     <Lightbulb size={18} className="mr-2 text-foreground/60" />
                     <span className="text-sm font-medium text-foreground/80">Suggested Insights</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">2/4</span>
+                  {/* Removed the "2/4" text as requested */}
                 </div>
                 <div className="h-full overflow-hidden">
                   <InsightsCarousel insights={insightsData} />
@@ -103,11 +104,26 @@ const Index = () => {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="glass-card rounded-2xl p-6 flex items-center justify-center h-full animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
-                        <button className="flex items-center justify-center w-full py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group">
-                          <Plus size={28} className="mr-2 text-primary group-hover:scale-110 transition-transform" />
-                          Add Widget
-                        </button>
+                      <div 
+                        className={cn(
+                          "glass-card rounded-2xl p-6 flex items-center justify-center h-full animate-fade-in-up transform scale-70", // Added scale-70 to reduce size by 30%
+                          isWidgetHovered ? "blur-sm" : ""
+                        )}
+                        style={{ 
+                          animationDelay: '1.2s',
+                          transformOrigin: 'center' 
+                        }}
+                        onMouseEnter={() => setIsWidgetHovered(true)}
+                        onMouseLeave={() => setIsWidgetHovered(false)}
+                      >
+                        {isWidgetHovered ? (
+                          <span className="text-sm font-medium text-foreground">Coming Soon</span>
+                        ) : (
+                          <button className="flex items-center justify-center w-full py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group">
+                            <Plus size={28} className="mr-2 text-primary group-hover:scale-110 transition-transform" />
+                            Add Widget
+                          </button>
+                        )}
                       </div>
                     </TooltipTrigger>
                     <TooltipContent>

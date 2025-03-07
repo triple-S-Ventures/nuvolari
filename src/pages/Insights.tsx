@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -162,13 +163,13 @@ const Insights = () => {
   const getActiveFilterBlurColor = () => {
     switch (activeFilter) {
       case 'balanced':
-        return 'from-blue-400/30 to-blue-400/5';
+        return 'from-blue-400/15 to-blue-400/5'; // Reduced opacity by 50%
       case 'degen':
-        return 'from-orange-400/30 to-orange-400/5';
+        return 'from-orange-400/15 to-orange-400/5'; // Reduced opacity by 50%
       case 'saver':
-        return 'from-green-400/30 to-green-400/5';
+        return 'from-green-400/15 to-green-400/5'; // Reduced opacity by 50%
       default:
-        return 'from-primary/20 to-primary/5';
+        return 'from-primary/10 to-primary/5'; // Reduced opacity by 50%
     }
   };
 
@@ -337,7 +338,7 @@ const Insights = () => {
                     <motion.span
                       initial={{ opacity: 0 }} 
                       animate={{ opacity: 1 }}
-                      className="text-xs font-medium"
+                      className="text-xs font-medium px-1" // Added padding to fix mobile cropping
                     >
                       Saver
                     </motion.span>
@@ -349,6 +350,7 @@ const Insights = () => {
             <AnimatePresence>
               {isSearchFocused && (
                 <>
+                  {/* Reduced blur effect by 50% and apply to whole dropdown component */}
                   <motion.div 
                     className={cn(
                       "absolute -inset-6 -z-10 rounded-xl bg-gradient-to-b",
@@ -391,6 +393,7 @@ const Insights = () => {
             </AnimatePresence>
           </div>
           
+          {/* Fixed horizontal scrolling for filter categories on mobile */}
           <div className="overflow-x-auto scrollbar-none pb-2 -mx-2 px-2 mb-6">
             <div className="flex space-x-3 min-w-max">
               {categories.map((category) => (

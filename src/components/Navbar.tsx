@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const [activeTab, setActiveTab] = useState<'mood' | 'insights' | 'journal'>('mood');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isJournalHovered, setIsJournalHovered] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -45,7 +46,7 @@ const Navbar = () => {
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 flex justify-center py-3 px-6 transition-all duration-300", // Changed px-4 to px-6
+      "fixed top-0 left-0 right-0 z-50 flex justify-center py-3 px-6 transition-all duration-300", 
       isScrolled ? "bg-background/80 backdrop-blur-lg shadow-md" : "bg-transparent"
     )}>
       <div className="flex items-center justify-center max-w-4xl w-full">
@@ -65,7 +66,7 @@ const Navbar = () => {
               <button 
                 onClick={() => handleTabClick('mood')}
                 className={cn(
-                  "flex items-center px-3 py-2 rounded-full transition-all duration-300", // Changed px-4 to px-3 for mobile
+                  "flex items-center px-3 py-2 rounded-full transition-all duration-300",
                   activeTab === 'mood' 
                     ? "bg-card text-foreground shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"
@@ -78,7 +79,7 @@ const Navbar = () => {
               <button 
                 onClick={() => handleTabClick('insights')}
                 className={cn(
-                  "flex items-center px-3 py-2 rounded-full transition-all duration-300", // Changed px-4 to px-3 for mobile
+                  "flex items-center px-3 py-2 rounded-full transition-all duration-300",
                   activeTab === 'insights' 
                     ? "bg-card text-foreground shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"
@@ -90,15 +91,17 @@ const Navbar = () => {
               
               <button 
                 onClick={() => handleTabClick('journal')}
+                onMouseEnter={() => setIsJournalHovered(true)}
+                onMouseLeave={() => setIsJournalHovered(false)}
                 className={cn(
-                  "flex items-center px-3 py-2 rounded-full transition-all duration-300", // Changed px-4 to px-3 for mobile
+                  "flex items-center px-3 py-2 rounded-full transition-all duration-300",
                   activeTab === 'journal' 
                     ? "bg-card text-foreground shadow-sm" 
                     : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <FileText size={16} className="mr-2" />
-                <span className="text-sm font-medium">Journal</span>
+                <span className="text-sm font-medium">{isJournalHovered ? "Coming Soon" : "Journal"}</span>
               </button>
             </div>
           </div>

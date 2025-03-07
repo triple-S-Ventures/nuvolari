@@ -36,7 +36,7 @@ const PortfolioMood = () => {
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full",
+      "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full w-[130%]", // Added w-[130%] to make it 30% wider
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <div className="flex items-center mb-6">
