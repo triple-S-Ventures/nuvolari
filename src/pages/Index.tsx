@@ -84,7 +84,7 @@ const Index = () => {
                     <span className="text-sm font-medium text-foreground/80">Suggested Insights</span>
                   </div>
                 </div>
-                <div className="h-full overflow-hidden">
+                <div className="h-full overflow-visible">
                   <InsightsCarousel insights={insightsData} />
                 </div>
               </div>
