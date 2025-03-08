@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -9,23 +8,35 @@ type FilterButtonsProps = {
 
 const FilterButtons = ({ activeFilter, setActiveFilter }: FilterButtonsProps) => {
   return (
-    <div className="flex gap-3 items-center pl-0 overflow-visible">
+    <div className="flex gap-2 items-center pl-2 overflow-visible">
       <motion.div 
         className={cn(
-          "flex items-center px-3 py-1 rounded-full text-xs font-medium", 
-          activeFilter === 'balanced' ? "bg-blue-400 text-white" : "bg-blue-400/20 text-blue-400"
+          "flex items-center justify-center rounded-full cursor-pointer transition-all duration-300", 
+          activeFilter === 'balanced' 
+            ? "bg-blue-400 text-white px-3 py-1" 
+            : "bg-blue-400 w-6 h-6"
         )} 
         layout 
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
         onClick={() => setActiveFilter('balanced')}
       >
-        {activeFilter === 'balanced' && "Balanced"}
+        {activeFilter === 'balanced' && (
+          <motion.span 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            className="text-xs font-medium"
+          >
+            Balanced
+          </motion.span>
+        )}
       </motion.div>
       
       <motion.div 
         className={cn(
-          "flex items-center rounded-full cursor-pointer transition-all duration-300", 
-          activeFilter === 'degen' ? "bg-orange-400 text-white px-3 py-1" : "bg-orange-400 w-6 h-6"
+          "flex items-center justify-center rounded-full cursor-pointer transition-all duration-300", 
+          activeFilter === 'degen' 
+            ? "bg-orange-400 text-white px-3 py-1" 
+            : "bg-orange-400 w-6 h-6"
         )} 
         layout 
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -44,8 +55,10 @@ const FilterButtons = ({ activeFilter, setActiveFilter }: FilterButtonsProps) =>
       
       <motion.div 
         className={cn(
-          "flex items-center rounded-full cursor-pointer transition-all duration-300", 
-          activeFilter === 'saver' ? "bg-green-400 text-white px-3 py-1" : "bg-green-400 w-6 h-6"
+          "flex items-center justify-center rounded-full cursor-pointer transition-all duration-300", 
+          activeFilter === 'saver' 
+            ? "bg-green-400 text-white px-3 py-1" 
+            : "bg-green-400 w-6 h-6"
         )} 
         layout 
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -55,7 +68,7 @@ const FilterButtons = ({ activeFilter, setActiveFilter }: FilterButtonsProps) =>
           <motion.span 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
-            className="text-xs font-medium px-1"
+            className="text-xs font-medium"
           >
             Saver
           </motion.span>

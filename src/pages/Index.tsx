@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -14,7 +13,6 @@ import { useWallet } from '@/contexts/WalletContext';
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [currentInsightIndex, setCurrentInsightIndex] = useState(0);
   const { isConnected, currentWallet } = useWallet();
   
   useEffect(() => {
@@ -68,11 +66,11 @@ const Index = () => {
   
   return (
     <motion.div 
-      className="min-h-screen flex flex-col bg-background overflow-x-hidden"
-      initial={{ opacity: 0, x: -300 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -300 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      className="min-h-screen flex flex-col overflow-x-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
     >
       <Navbar />
       
@@ -104,23 +102,10 @@ const Index = () => {
                     <span className="text-sm font-medium text-foreground/80">Suggested Insights</span>
                   </div>
                 </div>
-                <div className="h-full overflow-visible">
+                <div className="h-[calc(100%-2rem)] overflow-hidden">
                   <InsightsCarousel 
                     insights={getPersonalizedInsights()}
                   />
-                </div>
-                
-                {/* Pagination dots moved here */}
-                <div className="flex justify-center mt-2 space-x-2">
-                  {getPersonalizedInsights().map((_, index) => (
-                    <div 
-                      key={index}
-                      className={cn(
-                        "w-1.5 h-1.5 rounded-full transition-all",
-                        currentInsightIndex === index ? "bg-gray-400 w-3" : "bg-gray-500/30"
-                      )}
-                    />
-                  ))}
                 </div>
               </div>
               
@@ -153,8 +138,6 @@ const Index = () => {
       )}
       
       <Footer />
-      
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
     </motion.div>
   );
 };

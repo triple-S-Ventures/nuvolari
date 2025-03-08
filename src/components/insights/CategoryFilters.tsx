@@ -1,4 +1,3 @@
-
 import { Star, Percent, RefreshCw, Landmark, ArrowRightLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useEffect, useRef } from 'react';
@@ -20,8 +19,8 @@ export const CategoryFilter = ({
     <button 
       onClick={onClick} 
       className={cn(
-        "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all flex-shrink-0", 
-        isActive ? "bg-secondary text-foreground" : "bg-secondary/30 text-muted-foreground hover:bg-secondary/50"
+        "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all", 
+        isActive ? "bg-card text-foreground shadow-sm" : "bg-transparent text-muted-foreground hover:text-foreground"
       )}
     >
       <Icon size={16} />
@@ -36,29 +35,6 @@ type CategoryFiltersProps = {
 };
 
 const CategoryFilters = ({ activeCategory, setActiveCategory }: CategoryFiltersProps) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  
-  // Scroll active category into view whenever it changes
-  useEffect(() => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const activeButton = container.querySelector(`[data-category="${activeCategory}"]`);
-      
-      if (activeButton) {
-        const containerRect = container.getBoundingClientRect();
-        const buttonRect = activeButton.getBoundingClientRect();
-        
-        // Calculate the scroll position to center the button
-        const scrollLeft = buttonRect.left + container.scrollLeft - containerRect.left - (containerRect.width / 2) + (buttonRect.width / 2);
-        
-        container.scrollTo({
-          left: scrollLeft,
-          behavior: 'smooth'
-        });
-      }
-    }
-  }, [activeCategory]);
-
   const categories = [
     { id: 'favorites', label: 'Favourites', icon: Star },
     { id: 'yield', label: 'Yield', icon: Percent },
@@ -68,13 +44,10 @@ const CategoryFilters = ({ activeCategory, setActiveCategory }: CategoryFiltersP
   ];
 
   return (
-    <div className="relative overflow-hidden pb-2 mb-6">
-      <div 
-        ref={scrollContainerRef}
-        className="flex space-x-3 overflow-x-auto scrollbar-none py-1 px-2 -mx-2 snap-x"
-      >
+    <div className="pb-2 mb-6">
+      <div className="flex justify-center flex-wrap gap-2 py-1">
         {categories.map(category => (
-          <div key={category.id} className="snap-start" data-category={category.id}>
+          <div key={category.id} data-category={category.id}>
             <CategoryFilter
               icon={category.icon}
               label={category.label}
@@ -84,8 +57,6 @@ const CategoryFilters = ({ activeCategory, setActiveCategory }: CategoryFiltersP
           </div>
         ))}
       </div>
-      <div className="absolute left-0 bottom-0 w-8 h-full pointer-events-none bg-gradient-to-r from-background to-transparent" />
-      <div className="absolute right-0 bottom-0 w-8 h-full pointer-events-none bg-gradient-to-l from-background to-transparent" />
     </div>
   );
 };

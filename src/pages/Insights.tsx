@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -31,7 +30,7 @@ const Insights = () => {
 
   return (
     <motion.div 
-      className="min-h-screen flex flex-col bg-background overflow-x-hidden relative" 
+      className="min-h-screen flex flex-col overflow-x-hidden relative" 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -45,8 +44,8 @@ const Insights = () => {
         </div>
       ) : (
         <main className="flex-1 pt-28 pb-16 flex flex-col items-center justify-start w-full">
-          <div className="w-full max-w-3xl mx-auto px-4">
-            <div className="mb-6 text-center">
+          <div className="w-full max-w-5xl mx-auto px-4">
+            <div className="mb-16 text-center">
               <h1 className="text-4xl font-bold mb-2">Insights</h1>
               <p className="text-muted-foreground">Get insights or search your on-chain task</p>
             </div>
@@ -65,7 +64,7 @@ const Insights = () => {
               setActiveCategory={setActiveCategory}
             />
             
-            <div className="mt-6 w-full">
+            <div className="mt-8 w-full">
               <InsightsList filteredInsights={filteredInsights} />
             </div>
           </div>
@@ -73,8 +72,6 @@ const Insights = () => {
       )}
       
       <Footer />
-      
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
       
       <AnimatePresence>
         {isSearchFocused && (
