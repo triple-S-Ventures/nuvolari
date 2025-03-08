@@ -12,7 +12,7 @@ const PortfolioBalanceHeader = ({ isPrivate, setIsPrivate }: PortfolioBalanceHea
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center">
         <Wallet className="w-5 h-5 text-foreground/60 mr-2" />
-        <span className="text-base font-medium text-muted-foreground">Balance</span>
+        <span className="text-sm font-medium text-foreground/80">Balance</span>
       </div>
       
       <div className="flex items-center">
