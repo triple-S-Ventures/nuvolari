@@ -1,12 +1,14 @@
 
 import { useState, useEffect } from 'react';
-import { Eye, BarChartHorizontal, FileText } from 'lucide-react';
+import { Eye, BarChartHorizontal, FileText, Wallet } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
+import ConnectWalletDialog from './wallet/ConnectWalletDialog';
 
 const Navbar = () => {
   const [activeTab, setActiveTab] = useState<'mood' | 'insights' | 'journal'>('mood');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -45,7 +47,7 @@ const Navbar = () => {
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 flex justify-center py-3 px-6 transition-all duration-300", 
+      "fixed top-0 left-0 right-0 z-50 flex justify-between py-3 px-6 transition-all duration-300", 
       isScrolled ? "bg-background/80 backdrop-blur-lg shadow-md" : "bg-transparent backdrop-blur-sm"
     )}>
       <div className="flex items-center justify-center max-w-4xl w-full">
@@ -104,6 +106,19 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      <button 
+        onClick={() => setIsWalletDialogOpen(true)}
+        className="flex items-center px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 animate-fade-in"
+      >
+        <Wallet size={16} className="mr-2" />
+        <span className="text-sm font-medium">Connect Wallet</span>
+      </button>
+
+      <ConnectWalletDialog 
+        open={isWalletDialogOpen} 
+        onOpenChange={setIsWalletDialogOpen} 
+      />
     </nav>
   );
 };

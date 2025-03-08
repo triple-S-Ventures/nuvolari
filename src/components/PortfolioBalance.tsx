@@ -5,13 +5,15 @@ import PortfolioBalanceHeader from './portfolio/PortfolioBalanceHeader';
 import PortfolioTabs from './portfolio/PortfolioTabs';
 import PortfolioAssetList from './portfolio/PortfolioAssetList';
 import PortfolioAssetsDialog from './portfolio/PortfolioAssetsDialog';
-import { holdingsAssets, defiAssets, nftAssets } from './portfolio/portfolioAssetData';
+import { useWallet } from '@/contexts/WalletContext';
+import { toast } from 'sonner';
 
 const PortfolioBalance = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<'holdings' | 'defi' | 'nft'>('holdings');
   const [isPrivate, setIsPrivate] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const { isConnected, currentWallet } = useWallet();
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -26,10 +28,18 @@ const PortfolioBalance = () => {
   };
 
   const getAssetsByTab = (tab: 'holdings' | 'defi' | 'nft') => {
+    if (!isConnected || !currentWallet) {
+      switch (tab) {
+        case 'holdings': return [];
+        case 'defi': return [];
+        case 'nft': return [];
+      }
+    }
+
     switch (tab) {
-      case 'holdings': return holdingsAssets;
-      case 'defi': return defiAssets;
-      case 'nft': return nftAssets;
+      case 'holdings': return currentWallet.assets;
+      case 'defi': return currentWallet.defiPositions;
+      case 'nft': return currentWallet.nfts;
     }
   };
 
@@ -48,27 +58,45 @@ const PortfolioBalance = () => {
           "text-4xl font-bold mb-6 transition-all duration-1000 delay-300",
           isVisible ? "opacity-100" : "opacity-0"
         )}>
-          $ 876.588,12
+          {isConnected && currentWallet 
+            ? `$ ${currentWallet.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+            : "$ 0.00"}
         </h2>
         
-        <PortfolioTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        <PortfolioAssetList 
-          assets={getAssetsByTab(activeTab)} 
-          onScrollToBottom={handleScrollToBottom}
-        />
+        {!isConnected ? (
+          <div className="text-center py-8">
+            <p className="text-muted-foreground mb-4">Connect your wallet to see your portfolio</p>
+            <button
+              onClick={() => toast.info("Click the Connect Wallet button in the top right corner")}
+              className="px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Connect Wallet
+            </button>
+          </div>
+        ) : (
+          <>
+            <PortfolioTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+            <PortfolioAssetList 
+              assets={getAssetsByTab(activeTab)} 
+              onScrollToBottom={handleScrollToBottom}
+            />
+          </>
+        )}
       </div>
       
-      <PortfolioAssetsDialog 
-        open={openDialog}
-        onOpenChange={setOpenDialog}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        assets={{
-          holdings: holdingsAssets,
-          defi: defiAssets,
-          nft: nftAssets
-        }}
-      />
+      {isConnected && (
+        <PortfolioAssetsDialog 
+          open={openDialog}
+          onOpenChange={setOpenDialog}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          assets={{
+            holdings: currentWallet?.assets || [],
+            defi: currentWallet?.defiPositions || [],
+            nft: currentWallet?.nfts || []
+          }}
+        />
+      )}
     </div>
   );
 };

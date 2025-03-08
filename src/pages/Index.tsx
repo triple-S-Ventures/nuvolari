@@ -10,19 +10,25 @@ import PortfolioMood from '@/components/PortfolioMood';
 import Footer from '@/components/Footer';
 import { Plus, Lightbulb } from 'lucide-react';
 import { toast } from "sonner";
+import { useWallet } from '@/contexts/WalletContext';
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentInsightIndex, setCurrentInsightIndex] = useState(0);
+  const { isConnected, currentWallet } = useWallet();
   
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      toast.success("Portfolio data loaded successfully");
+      if (isConnected && currentWallet) {
+        toast.success(`Welcome ${currentWallet.label} user!`);
+      } else {
+        toast.success("Portfolio data loaded successfully");
+      }
     }, 1000);
     
     return () => clearTimeout(timer);
-  }, []);
+  }, [isConnected, currentWallet]);
 
   const insightsData = [
     {
@@ -46,6 +52,19 @@ const Index = () => {
       tokens: ['BTC', 'SOL']
     }
   ];
+
+  // Get personalized insights based on wallet assets
+  const getPersonalizedInsights = () => {
+    if (!isConnected || !currentWallet) return insightsData;
+    
+    // Filter insights based on tokens in the wallet
+    const walletTokens = currentWallet.assets.map(asset => asset.symbol);
+    const relevantInsights = insightsData.filter(insight => 
+      insight.tokens.some(token => walletTokens.includes(token))
+    );
+    
+    return relevantInsights.length > 0 ? relevantInsights : insightsData;
+  };
   
   return (
     <motion.div 
@@ -87,13 +106,13 @@ const Index = () => {
                 </div>
                 <div className="h-full overflow-visible">
                   <InsightsCarousel 
-                    insights={insightsData}
+                    insights={getPersonalizedInsights()}
                   />
                 </div>
                 
                 {/* Pagination dots moved here */}
                 <div className="flex justify-center mt-2 space-x-2">
-                  {insightsData.map((_, index) => (
+                  {getPersonalizedInsights().map((_, index) => (
                     <div 
                       key={index}
                       className={cn(
