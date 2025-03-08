@@ -49,9 +49,8 @@ const SearchBar = ({
   return (
     <div className="relative mb-8 z-20" ref={searchRef}>
       <div className={cn(
-        "backdrop-blur-sm rounded-full overflow-hidden flex items-center px-4 py-3 transition-all duration-300", 
-        isSearchFocused ? "ring-1 ring-primary/30 rounded-t-xl rounded-b-none" : "focus-within:ring-1 focus-within:ring-primary/30", 
-        isSearchFocused ? getActiveFilterColor() : "bg-secondary/30"
+        "backdrop-blur-sm rounded-full overflow-hidden flex items-center px-4 py-3 transition-all duration-300 border border-white/10", 
+        isSearchFocused ? "ring-1 ring-primary/30 rounded-t-xl rounded-b-none" : "focus-within:ring-1 focus-within:ring-primary/30"
       )}>
         <Search className="h-5 w-5 text-muted-foreground mr-3" />
         <input 
@@ -82,7 +81,7 @@ const SearchBar = ({
             />
             
             <motion.div 
-              className={cn("absolute w-full backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden z-20", getActiveFilterColor().replace('/20', '/80'))} 
+              className="absolute w-full backdrop-blur-md rounded-b-xl shadow-lg overflow-hidden z-20 border border-white/10" 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}

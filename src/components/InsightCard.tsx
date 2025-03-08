@@ -83,7 +83,7 @@ const InsightsCarousel = ({
         <div className="relative flex items-center w-full h-[85%] overflow-visible">
           {/* Previous slide (partially visible) */}
           <div className="absolute left-[-15%] w-[30%] h-full opacity-50 scale-95">
-            <div className="glass-card rounded-xl p-3 h-full">
+            <div className="border border-white/5 rounded-xl p-3 h-full">
               <div className="flex items-center mb-2">
                 {insights[getSlideIndex(-1)].tokens.length > 0 && <TokenIcon symbol={insights[getSlideIndex(-1)].tokens[0]} />}
                 
@@ -103,7 +103,7 @@ const InsightsCarousel = ({
           
           {/* Current slide (center, fully visible) */}
           <div className="w-full h-full z-10">
-            <div className="glass-card rounded-xl p-3 h-full transform transition-all duration-300">
+            <div className="border border-white/10 rounded-xl p-3 h-full transform transition-all duration-300">
               <div className="flex items-center mb-2">
                 {insights[currentIndex].tokens.length > 0 && <TokenIcon symbol={insights[currentIndex].tokens[0]} />}
                 
@@ -127,7 +127,7 @@ const InsightsCarousel = ({
           
           {/* Next slide (partially visible) */}
           <div className="absolute right-[-15%] w-[30%] h-full opacity-50 scale-95">
-            <div className="glass-card rounded-xl p-3 h-full">
+            <div className="border border-white/5 rounded-xl p-3 h-full">
               <div className="flex items-center mb-2">
                 {insights[getSlideIndex(1)].tokens.length > 0 && <TokenIcon symbol={insights[getSlideIndex(1)].tokens[0]} />}
                 
@@ -149,13 +149,13 @@ const InsightsCarousel = ({
         {/* Navigation controls */}
         {insights.length > 1 && <>
             <div className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
-              <button onClick={prevSlide} className="w-6 h-6 rounded-full bg-background/50 hover:bg-background/80 text-foreground flex items-center justify-center">
+              <button onClick={prevSlide} className="w-6 h-6 rounded-full border border-white/10 hover:border-white/20 text-foreground flex items-center justify-center">
                 <ChevronLeft size={16} />
               </button>
             </div>
             
             <div className="absolute right-2 top-1/2 -translate-y-1/2 z-10">
-              <button onClick={nextSlide} className="w-6 h-6 rounded-full bg-background/50 hover:bg-background/80 text-foreground flex items-center justify-center">
+              <button onClick={nextSlide} className="w-6 h-6 rounded-full border border-white/10 hover:border-white/20 text-foreground flex items-center justify-center">
                 <ChevronRight size={16} />
               </button>
             </div>

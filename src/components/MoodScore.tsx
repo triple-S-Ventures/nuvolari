@@ -15,20 +15,20 @@ const MoodScore = () => {
 
   return (
     <div 
-      className="relative w-full overflow-hidden rounded-2xl glass-card p-6 animate-scale-in"
+      className="relative w-full overflow-hidden rounded-2xl border border-white/10 p-6 animate-scale-in"
       style={{
         backgroundImage: `url('/lovable-uploads/98bf0b3c-cd64-4d40-afdb-0fb0a1ad36f5.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      <div className="absolute inset-0 bg-black/10 backdrop-blur-[2px]"></div>
+      <div className="absolute inset-0 backdrop-blur-[2px]"></div>
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className={cn(
           "transition-all duration-700 transform",
           isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
         )}>
-          <div className="bg-[#D6BCFA]/40 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+          <div className="border border-white/10 rounded-xl p-4">
             <div className="flex items-center mb-4">
               <div className="w-5 h-5 mr-2 text-primary">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@ const MoodScore = () => {
               <span className="text-sm font-medium text-foreground/90">Nuvolari Score</span>
               
               <div className="ml-auto">
-                <button className="px-3 py-1 text-xs font-medium rounded-full bg-white/20 backdrop-blur-md text-foreground/90 hover:bg-white/30 transition-all">
+                <button className="px-3 py-1 text-xs font-medium rounded-full border border-white/10 text-foreground/90 hover:border-white/20 transition-all">
                   Week
                 </button>
               </div>
@@ -69,7 +69,7 @@ const MoodScore = () => {
           isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
         )}>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-32 h-32 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20 animate-pulse-subtle shadow-glow-sm" />
+            <div className="w-32 h-32 rounded-full border border-white/20 flex items-center justify-center animate-pulse-subtle" />
           </div>
           
           <div className="absolute inset-0 flex items-center justify-center">

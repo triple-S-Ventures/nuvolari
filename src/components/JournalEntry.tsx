@@ -47,7 +47,7 @@ const JournalEntry = ({ entry, onClick }: EntryProps) => {
   return (
     <div 
       onClick={onClick}
-      className="glass-card rounded-xl p-4 flex items-center justify-between hover:shadow-card-hover transition-all duration-300 cursor-pointer"
+      className="border border-white/10 rounded-xl p-4 flex items-center justify-between hover:shadow-card-hover transition-all duration-300 cursor-pointer"
     >
       <div className="flex items-center gap-3">
         <div className="flex items-center">
@@ -70,7 +70,7 @@ const JournalEntry = ({ entry, onClick }: EntryProps) => {
       
       <div className="flex items-center gap-2">
         {entry.executed && (
-          <span className="bg-primary/20 text-primary text-xs font-medium px-2 py-0.5 rounded-full flex items-center">
+          <span className="bg-primary/10 border border-primary/20 text-primary text-xs font-medium px-2 py-0.5 rounded-full flex items-center">
             Executed
             <Check className="h-3 w-3 ml-1" />
           </span>

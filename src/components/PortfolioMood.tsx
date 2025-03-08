@@ -26,17 +26,17 @@ const PortfolioMood = () => {
   const getChipColorClass = (mood: MoodType, isActive: boolean) => {
     switch (mood) {
       case 'balanced':
-        return isActive ? "bg-blue-400 text-white" : "bg-blue-400/20 text-blue-400";
+        return isActive ? "bg-blue-400 text-white" : "bg-transparent border border-blue-400/20 text-blue-400";
       case 'degen':
-        return isActive ? "bg-orange-400 text-white" : "bg-orange-400/20 text-orange-400";
+        return isActive ? "bg-orange-400 text-white" : "bg-transparent border border-orange-400/20 text-orange-400";
       case 'saver':
-        return isActive ? "bg-green-400 text-white" : "bg-green-400/20 text-green-400";
+        return isActive ? "bg-green-400 text-white" : "bg-transparent border border-green-400/20 text-green-400";
     }
   };
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full w-full", // Changed from w-[126%] to w-full
+      "border border-white/10 rounded-2xl p-6 transition-all duration-700 transform h-full w-full",
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <div className="flex items-center mb-6">
@@ -54,8 +54,8 @@ const PortfolioMood = () => {
               exit={{ opacity: 0, x: -10 }}
               transition={{ duration: 0.3 }}
               className={cn(
-                "py-1 px-3 rounded-full text-xs font-medium",
-                "bg-orange-400/20 text-orange-400 hover:bg-orange-400/30"
+                "py-1 px-3 rounded-full text-xs font-medium border",
+                "border-orange-400/20 text-orange-400 hover:border-orange-400/40"
               )}
               onClick={() => handleMoodChange('degen')}
             >
@@ -71,8 +71,8 @@ const PortfolioMood = () => {
               exit={{ opacity: 0, x: -10 }}
               transition={{ duration: 0.3 }}
               className={cn(
-                "py-1 px-3 rounded-full text-xs font-medium",
-                "bg-blue-400/20 text-blue-400 hover:bg-blue-400/30"
+                "py-1 px-3 rounded-full text-xs font-medium border",
+                "border-blue-400/20 text-blue-400 hover:border-blue-400/40"
               )}
               onClick={() => handleMoodChange('balanced')}
             >
@@ -94,7 +94,7 @@ const PortfolioMood = () => {
               damping: 20 
             }}
             className={cn(
-              "py-2 px-4 sm:px-8 rounded-full text-sm font-medium", // Added responsive padding
+              "py-2 px-4 sm:px-8 rounded-full text-sm font-medium", 
               getChipColorClass(activeMood, true)
             )}
             onClick={() => handleMoodChange(activeMood)}
@@ -115,8 +115,8 @@ const PortfolioMood = () => {
               exit={{ opacity: 0, x: 10 }}
               transition={{ duration: 0.3 }}
               className={cn(
-                "py-1 px-3 rounded-full text-xs font-medium",
-                "bg-blue-400/20 text-blue-400 hover:bg-blue-400/30"
+                "py-1 px-3 rounded-full text-xs font-medium border",
+                "border-blue-400/20 text-blue-400 hover:border-blue-400/40"
               )}
               onClick={() => handleMoodChange('balanced')}
             >
@@ -132,8 +132,8 @@ const PortfolioMood = () => {
               exit={{ opacity: 0, x: 10 }}
               transition={{ duration: 0.3 }}
               className={cn(
-                "py-1 px-3 rounded-full text-xs font-medium",
-                "bg-green-400/20 text-green-400 hover:bg-green-400/30"
+                "py-1 px-3 rounded-full text-xs font-medium border",
+                "border-green-400/20 text-green-400 hover:border-green-400/40"
               )}
               onClick={() => handleMoodChange('saver')}
             >
