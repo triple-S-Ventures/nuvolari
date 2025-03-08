@@ -145,27 +145,30 @@ const InsightsCarousel = ({
             </div>
           </div>
         </div>
-
-        {/* Navigation controls */}
-        {insights.length > 1 && <>
-            <div className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
-              <button onClick={prevSlide} className="w-6 h-6 rounded-full bg-background/50 hover:bg-background/80 text-foreground flex items-center justify-center">
-                <ChevronLeft size={16} />
-              </button>
-            </div>
-            
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 z-10">
-              <button onClick={nextSlide} className="w-6 h-6 rounded-full bg-background/50 hover:bg-background/80 text-foreground flex items-center justify-center">
-                <ChevronRight size={16} />
-              </button>
-            </div>
-          </>}
       </div>
 
-      {/* Position indicator (2/4 style) */}
-      <div className="flex justify-between items-center px-2 pt-2">
+      {/* Position indicator and navigation buttons now at the bottom center */}
+      <div className="flex flex-col items-center justify-center pt-2">
+        {/* Navigation controls - Now at the bottom center */}
+        {insights.length > 1 && (
+          <div className="flex items-center justify-center space-x-2 mb-1.5">
+            <button 
+              onClick={prevSlide} 
+              className="w-6 h-6 rounded-full bg-background/50 hover:bg-background/80 text-foreground flex items-center justify-center"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button 
+              onClick={nextSlide} 
+              className="w-6 h-6 rounded-full bg-background/50 hover:bg-background/80 text-foreground flex items-center justify-center"
+            >
+              <ChevronRight size={16} />
+            </button>
+          </div>
+        )}
+        
         {/* Dots indicators */}
-        <div className="flex justify-center space-x-1 mt-auto">
+        <div className="flex justify-center space-x-1">
           {insights.map((_, index) => (
             <button 
               key={index} 
@@ -179,7 +182,7 @@ const InsightsCarousel = ({
         </div>
         
         {/* Position counter */}
-        <div className="text-sm text-muted-foreground">
+        <div className="text-sm text-muted-foreground mt-1">
           {currentIndex + 1}/{insights.length}
         </div>
       </div>
