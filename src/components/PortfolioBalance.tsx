@@ -35,7 +35,7 @@ const PortfolioBalance = () => {
 
   return (
     <div className={cn(
-      "border border-white/10 rounded-2xl p-6 transition-all duration-700 transform",
+      "glass-card rounded-2xl p-6 transition-all duration-700 transform",
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <PortfolioBalanceHeader isPrivate={isPrivate} setIsPrivate={setIsPrivate} />
