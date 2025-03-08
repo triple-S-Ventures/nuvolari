@@ -1,11 +1,10 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
+    --background: 260 14% 20%;
     --foreground: 0 0% 98%;
 
     --card: 240 10% 7%;
@@ -45,7 +44,6 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  /* Apply default dark theme */
   body {
     @apply bg-background text-foreground antialiased overflow-x-hidden;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
