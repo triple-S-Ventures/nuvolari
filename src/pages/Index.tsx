@@ -79,7 +79,7 @@ const Index = () => {
             
             <div className="md:col-span-7 space-y-6">
               <div className="glass-card rounded-2xl p-4" style={{ height: "calc(100% * 0.38 * 1.6)" }}>
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">
                     <Lightbulb size={18} className="mr-2 text-foreground/60" />
                     <span className="text-sm font-medium text-foreground/80">Suggested Insights</span>
