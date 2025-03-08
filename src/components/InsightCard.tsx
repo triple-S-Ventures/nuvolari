@@ -47,10 +47,12 @@ type InsightData = {
 
 type InsightsCarouselProps = {
   insights: InsightData[];
+  onChangeIndex?: (index: number) => void;
 };
 
 const InsightsCarousel = ({
-  insights
+  insights,
+  onChangeIndex
 }: InsightsCarouselProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -62,6 +64,13 @@ const InsightsCarousel = ({
     }, 300);
     return () => clearTimeout(timer);
   }, []);
+
+  // Notify parent component when index changes
+  useEffect(() => {
+    if (onChangeIndex) {
+      onChangeIndex(currentIndex);
+    }
+  }, [currentIndex, onChangeIndex]);
 
   const handleNext = () => {
     if (isAnimating || insights.length <= 1) return;

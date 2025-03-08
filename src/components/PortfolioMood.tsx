@@ -37,10 +37,10 @@ const PortfolioMood = () => {
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full w-full", 
+      "glass-card rounded-2xl p-4 transition-all duration-700 transform h-full w-full", 
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
-      <div className="flex items-center mb-6">
+      <div className="flex items-center mb-4">
         <Gauge size={18} className="mr-2 text-foreground/60" />
         <span className="text-sm font-medium text-foreground/80">Portfolio mood</span>
       </div>
@@ -96,7 +96,7 @@ const PortfolioMood = () => {
               damping: 20 
             }}
             className={cn(
-              "py-2 px-4 sm:px-8 rounded-full text-sm font-medium", 
+              "py-2 px-4 sm:px-6 rounded-full text-sm font-medium", 
               getChipColorClass(activeMood, true)
             )}
             onClick={() => handleMoodChange(activeMood)}

@@ -45,7 +45,7 @@ const PortfolioBalance = () => {
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform",
+      "glass-card rounded-2xl p-4 transition-all duration-700 transform h-full",
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <PortfolioBalanceHeader isPrivate={isPrivate} setIsPrivate={setIsPrivate} />
@@ -55,7 +55,7 @@ const PortfolioBalance = () => {
         isPrivate ? "blur-md select-none" : ""
       )}>
         <h2 className={cn(
-          "text-4xl font-bold mb-6 transition-all duration-1000 delay-300",
+          "text-4xl font-bold mb-4 transition-all duration-1000 delay-300",
           isVisible ? "opacity-100" : "opacity-0"
         )}>
           {isConnected && currentWallet 
