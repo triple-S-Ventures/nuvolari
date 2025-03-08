@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Gauge } from 'lucide-react';
 
 type MoodType = 'balanced' | 'degen' | 'saver';
 
@@ -36,10 +37,11 @@ const PortfolioMood = () => {
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full w-full", // Changed from w-[126%] to w-full
+      "glass-card rounded-2xl p-6 transition-all duration-700 transform h-full w-full", 
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <div className="flex items-center mb-6">
+        <Gauge size={18} className="mr-2 text-foreground/60" />
         <span className="text-sm font-medium text-foreground/80">Portfolio mood</span>
       </div>
       
@@ -94,7 +96,7 @@ const PortfolioMood = () => {
               damping: 20 
             }}
             className={cn(
-              "py-2 px-4 sm:px-8 rounded-full text-sm font-medium", // Added responsive padding
+              "py-2 px-4 sm:px-8 rounded-full text-sm font-medium", 
               getChipColorClass(activeMood, true)
             )}
             onClick={() => handleMoodChange(activeMood)}
