@@ -20,7 +20,7 @@ const TokenIcon = ({
       case 'MOG':
         return 'bg-purple-500';
       case 'BAL':
-        return 'bg-blue-500';
+        return 'bg-purple-500';
       case 'UNI':
         return 'bg-pink-500';
       case 'SWAP':
@@ -33,7 +33,7 @@ const TokenIcon = ({
   };
 
   return (
-    <div className={cn("w-8 h-8 rounded-full flex items-center justify-center text-white font-medium text-xs", getBackgroundColor())}>
+    <div className={cn("w-6 h-6 rounded-full flex items-center justify-center text-white font-medium text-xs", getBackgroundColor())}>
       {symbol.substring(0, 1)}
     </div>
   );
@@ -67,7 +67,7 @@ const InsightsCarousel = ({
   return (
     <div className={cn("transition-all duration-500 h-full flex flex-col",
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8")}>
-      <div className="w-full h-full bg-black/40 backdrop-blur-md rounded-xl p-4 flex flex-col">
+      <div className="w-full h-full bg-black/50 backdrop-blur-md rounded-2xl p-4 flex flex-col hover:bg-black/60 transition-colors">
         <div className="flex items-center mb-3 gap-2">
           {insight.tokens.map((token, index) => (
             <div key={index} className="flex items-center">
@@ -79,7 +79,7 @@ const InsightsCarousel = ({
           ))}
         </div>
         
-        <h3 className="font-medium text-white text-lg mt-auto">
+        <h3 className="font-medium text-white text-base mt-auto">
           {insight.title}
         </h3>
       </div>

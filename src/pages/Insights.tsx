@@ -44,28 +44,30 @@ const Insights = () => {
           <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
         </div>
       ) : (
-        <main className="flex-1 pt-28 pb-16 px-6 max-w-7xl mx-auto w-full">
-          <div className="mb-6 text-center">
-            <h1 className="text-4xl font-bold mb-2">Insights</h1>
-            <p className="text-muted-foreground">Get insights or search your on-chain task</p>
-          </div>
-          
-          <SearchBar 
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            activeFilter={activeFilter}
-            setActiveFilter={setActiveFilter}
-            getActiveFilterColor={() => getActiveFilterColor(activeFilter)}
-            getActiveFilterBlurColor={() => getActiveFilterBlurColor(activeFilter)}
-          />
-          
-          <CategoryFilters 
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-          />
-          
-          <div className="mt-6">
-            <InsightsList filteredInsights={filteredInsights} />
+        <main className="flex-1 pt-28 pb-16 flex flex-col items-center justify-start w-full">
+          <div className="w-full max-w-3xl mx-auto px-4">
+            <div className="mb-6 text-center">
+              <h1 className="text-4xl font-bold mb-2">Insights</h1>
+              <p className="text-muted-foreground">Get insights or search your on-chain task</p>
+            </div>
+            
+            <SearchBar 
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              activeFilter={activeFilter}
+              setActiveFilter={setActiveFilter}
+              getActiveFilterColor={() => getActiveFilterColor(activeFilter)}
+              getActiveFilterBlurColor={() => getActiveFilterBlurColor(activeFilter)}
+            />
+            
+            <CategoryFilters 
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+            />
+            
+            <div className="mt-6 w-full">
+              <InsightsList filteredInsights={filteredInsights} />
+            </div>
           </div>
         </main>
       )}
