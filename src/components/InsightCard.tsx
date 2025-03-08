@@ -1,6 +1,7 @@
+
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 type TokenIconProps = {
   symbol: string;
 };
@@ -63,9 +64,20 @@ const InsightsCarousel = ({
   return <div className={cn("w-full overflow-hidden transition-all duration-500 relative h-full flex flex-col", isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8")}>
       <div className="relative w-full flex-grow">
         <div className="glass-card rounded-xl p-3 mb-3 h-[80%]">
-          {/* Token icons */}
-          <div className="flex -space-x-2 mb-2">
-            {insights[currentIndex].tokens.map((token, index) => <TokenIcon key={index} symbol={token} />)}
+          {/* Token icons with arrow */}
+          <div className="flex items-center mb-2">
+            {insights[currentIndex].tokens.length > 0 && <TokenIcon symbol={insights[currentIndex].tokens[0]} />}
+            
+            {insights[currentIndex].tokens.length > 1 && (
+              <>
+                <ArrowRight size={16} className="mx-1 text-muted-foreground" />
+                <TokenIcon symbol={insights[currentIndex].tokens[1]} />
+              </>
+            )}
+            
+            {insights[currentIndex].tokens.slice(2).map((token, index) => (
+              <TokenIcon key={index + 2} symbol={token} />
+            ))}
           </div>
           
           {/* Insight title */}
