@@ -45,16 +45,16 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    @apply bg-background text-foreground antialiased overflow-x-hidden font-sans;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
 
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth font-sans;
   }
   
   * {
-    @apply border-border selection:bg-accent/10 selection:text-accent;
+    @apply border-border selection:bg-accent/10 selection:text-accent font-sans;
   }
 }
 
