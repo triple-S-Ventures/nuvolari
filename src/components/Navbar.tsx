@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Eye, BarChartHorizontal, FileText, Wallet } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -44,10 +45,10 @@ const Navbar = () => {
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 flex items-center justify-center py-3 px-6 transition-all duration-300", 
+      "fixed top-0 left-0 right-0 z-50 flex items-center justify-center py-3 transition-all duration-300", 
       isScrolled ? "bg-background/80 backdrop-blur-lg shadow-md" : "bg-transparent backdrop-blur-sm"
     )}>
-      <div className="flex items-center justify-between max-w-4xl w-full">
+      <div className="flex items-center justify-between max-w-4xl w-full px-6">
         <div className="flex items-center">
           <button className="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary/50 backdrop-blur-sm text-primary hover:bg-secondary/70 transition-all duration-300 mr-6 animate-fade-in">
             <div className="w-7 h-7 text-primary">
