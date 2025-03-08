@@ -115,7 +115,7 @@ const InsightsCarousel = ({
               className={cn(
                 "h-full overflow-hidden transition-all duration-300 transform",
                 position === 'center' ? "w-[60%] z-10 scale-100" : "w-[20%] z-0 opacity-60",
-                position === 'left' ? "-mr-2" : position === 'right' ? "-ml-2" : "mx-2"
+                position === 'left' ? "-mr-4 mx-4" : position === 'right' ? "-ml-4 mx-4" : "mx-6"
               )}
             >
               <div className={cn(
