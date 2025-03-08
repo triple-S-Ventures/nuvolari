@@ -12,15 +12,16 @@ type InsightsListProps = {
 
 const InsightsList = ({ filteredInsights }: InsightsListProps) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-5">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {filteredInsights.map(insight => (
-        <InsightsCarousel 
-          key={insight.id} 
-          insights={[{
-            title: insight.title,
-            tokens: insight.tokens
-          }]} 
-        />
+        <div key={insight.id} className="h-44">
+          <InsightsCarousel 
+            insights={[{
+              title: insight.title,
+              tokens: insight.tokens
+            }]} 
+          />
+        </div>
       ))}
     </div>
   );
