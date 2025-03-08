@@ -61,20 +61,27 @@ const InsightsCarousel = ({
   }, []);
 
   const nextSlide = () => {
-    setCurrentIndex(prevIndex => (prevIndex + 3) >= insights.length ? 0 : prevIndex + 3);
+    setCurrentIndex(prevIndex => (prevIndex + 1) >= insights.length ? 0 : prevIndex + 1);
   };
 
   const prevSlide = () => {
-    setCurrentIndex(prevIndex => prevIndex < 3 ? Math.max(insights.length - 3, 0) : prevIndex - 3);
+    setCurrentIndex(prevIndex => prevIndex === 0 ? insights.length - 1 : prevIndex - 1);
   };
 
-  // Helper function to get visible cards (3 at a time)
+  // Helper function to get visible cards (3 at a time with the center one being the focus)
   const getVisibleCards = () => {
     const cards = [];
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % insights.length;
-      cards.push(insights[index]);
-    }
+    // Previous card
+    const prevIndex = currentIndex === 0 ? insights.length - 1 : currentIndex - 1;
+    cards.push({ data: insights[prevIndex], position: 'left' });
+    
+    // Current card (center, main focus)
+    cards.push({ data: insights[currentIndex], position: 'center' });
+    
+    // Next card
+    const nextIndex = (currentIndex + 1) % insights.length;
+    cards.push({ data: insights[nextIndex], position: 'right' });
+    
     return cards;
   };
 
@@ -100,11 +107,21 @@ const InsightsCarousel = ({
           <ChevronRight size={20} className="text-foreground/60" />
         </button>
         
-        {/* Carousel container with 3 visible cards */}
-        <div className="relative flex justify-between items-center w-full h-[85%] px-2">
-          {getVisibleCards().map((insight, idx) => (
-            <div key={idx} className="w-[32%] h-full mx-[0.5%]">
-              <div className="glass-card rounded-xl p-3 h-full">
+        {/* Carousel container with 3 visible cards, center one bigger */}
+        <div className="relative flex justify-center items-center w-full h-[85%] px-2">
+          {getVisibleCards().map(({ data: insight, position }, idx) => (
+            <div 
+              key={idx} 
+              className={cn(
+                "h-full overflow-hidden transition-all duration-300 transform",
+                position === 'center' ? "w-[60%] z-10 scale-100" : "w-[20%] z-0 opacity-60",
+                position === 'left' ? "-mr-2" : position === 'right' ? "-ml-2" : "mx-2"
+              )}
+            >
+              <div className={cn(
+                "glass-card rounded-xl p-3 h-full",
+                position === 'center' ? "p-3" : "p-2"
+              )}>
                 <div className="flex items-center mb-2">
                   {insight.tokens.length > 0 && <TokenIcon symbol={insight.tokens[0]} />}
                   
@@ -114,7 +131,10 @@ const InsightsCarousel = ({
                     </>}
                 </div>
                 
-                <h3 className="text-base font-medium text-foreground line-clamp-3">
+                <h3 className={cn(
+                  "font-medium text-foreground line-clamp-3",
+                  position === 'center' ? "text-base" : "text-xs"
+                )}>
                   {insight.title}
                 </h3>
               </div>
@@ -125,12 +145,12 @@ const InsightsCarousel = ({
       
       {/* Pagination indicator dots */}
       <div className="flex justify-center mt-4 space-x-2">
-        {Array.from({ length: Math.ceil(insights.length / 3) }).map((_, index) => (
+        {insights.map((_, index) => (
           <div 
             key={index}
             className={cn(
               "w-1.5 h-1.5 rounded-full transition-all",
-              Math.floor(currentIndex / 3) === index ? "bg-primary w-3" : "bg-muted-foreground/30"
+              currentIndex === index ? "bg-primary w-3" : "bg-muted-foreground/30"
             )}
           />
         ))}
