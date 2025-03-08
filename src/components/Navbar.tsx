@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Eye, BarChartHorizontal, FileText, Wallet } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -21,7 +20,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Update active tab based on current route
   useEffect(() => {
     if (location.pathname === '/') {
       setActiveTab('mood');
@@ -35,7 +33,6 @@ const Navbar = () => {
   const handleTabClick = (tab: 'mood' | 'insights' | 'journal') => {
     setActiveTab(tab);
     
-    // Navigate to the appropriate route
     if (tab === 'mood') {
       navigate('/');
     } else if (tab === 'insights') {
@@ -47,11 +44,11 @@ const Navbar = () => {
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 flex justify-between py-3 px-6 transition-all duration-300", 
+      "fixed top-0 left-0 right-0 z-50 flex items-center justify-center py-3 px-6 transition-all duration-300", 
       isScrolled ? "bg-background/80 backdrop-blur-lg shadow-md" : "bg-transparent backdrop-blur-sm"
     )}>
-      <div className="flex items-center justify-center max-w-4xl w-full">
-        <div className="flex items-center justify-center w-full">
+      <div className="flex items-center justify-between max-w-4xl w-full">
+        <div className="flex items-center">
           <button className="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary/50 backdrop-blur-sm text-primary hover:bg-secondary/70 transition-all duration-300 mr-6 animate-fade-in">
             <div className="w-7 h-7 text-primary">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +59,7 @@ const Navbar = () => {
             </div>
           </button>
           
-          <div className="bg-secondary rounded-full p-1 backdrop-blur-md animate-fade-in mx-auto">
+          <div className="bg-secondary rounded-full p-1 backdrop-blur-md animate-fade-in">
             <div className="flex items-center justify-center space-x-1">
               <button 
                 onClick={() => handleTabClick('mood')}
@@ -105,15 +102,15 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      <button 
-        onClick={() => setIsWalletDialogOpen(true)}
-        className="flex items-center px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 animate-fade-in"
-      >
-        <Wallet size={16} className="mr-2" />
-        <span className="text-sm font-medium">Connect Wallet</span>
-      </button>
+        <button 
+          onClick={() => setIsWalletDialogOpen(true)}
+          className="flex items-center px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 animate-fade-in"
+        >
+          <Wallet size={16} className="mr-2" />
+          <span className="text-sm font-medium">Connect Wallet</span>
+        </button>
+      </div>
 
       <ConnectWalletDialog 
         open={isWalletDialogOpen} 
