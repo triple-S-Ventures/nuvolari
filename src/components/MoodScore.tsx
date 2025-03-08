@@ -25,10 +25,10 @@ const MoodScore = () => {
       <div className="absolute inset-0 bg-black/10 backdrop-blur-[2px]"></div>
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className={cn(
-          "transition-all duration-700 transform",
+          "transition-all duration-700 transform h-full flex items-center",
           isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
         )}>
-          <div className="bg-[#D6BCFA]/40 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+          <div className="bg-[#D6BCFA]/40 backdrop-blur-sm rounded-xl p-4 border border-white/10 h-full w-full flex flex-col justify-center">
             <div className="flex items-center mb-4">
               <div className="w-5 h-5 mr-2 text-primary">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
