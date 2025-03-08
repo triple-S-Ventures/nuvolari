@@ -15,15 +15,15 @@ const MoodScore = () => {
 
   return (
     <div 
-      className="relative w-full overflow-hidden rounded-2xl glass-card p-6 animate-scale-in"
+      className="relative w-full overflow-hidden rounded-2xl glass-card p-0 animate-scale-in"
       style={{
-        backgroundImage: `url('/lovable-uploads/98bf0b3c-cd64-4d40-afdb-0fb0a1ad36f5.png')`,
+        backgroundImage: `url('/lovable-uploads/05499396-c01f-4e6c-bdec-efec7f903b01.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
       <div className="absolute inset-0 bg-black/10 backdrop-blur-[2px]"></div>
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
         <div className={cn(
           "transition-all duration-700 transform h-full flex items-center",
           isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
