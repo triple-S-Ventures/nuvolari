@@ -63,7 +63,7 @@ const Navbar = () => {
           </button>
           
           <div className="bg-secondary rounded-full p-1 backdrop-blur-md animate-fade-in mx-auto">
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center justify-center space-x-1">
               <button 
                 onClick={() => handleTabClick('mood')}
                 className={cn(
