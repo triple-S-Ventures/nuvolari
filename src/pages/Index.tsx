@@ -13,6 +13,7 @@ import { toast } from "sonner";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [currentInsightIndex, setCurrentInsightIndex] = useState(0);
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -85,7 +86,22 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="h-full overflow-visible">
-                  <InsightsCarousel insights={insightsData} />
+                  <InsightsCarousel 
+                    insights={insightsData}
+                  />
+                </div>
+                
+                {/* Pagination dots moved here */}
+                <div className="flex justify-center mt-2 space-x-2">
+                  {insightsData.map((_, index) => (
+                    <div 
+                      key={index}
+                      className={cn(
+                        "w-1.5 h-1.5 rounded-full transition-all",
+                        currentInsightIndex === index ? "bg-gray-400 w-3" : "bg-gray-500/30"
+                      )}
+                    />
+                  ))}
                 </div>
               </div>
               

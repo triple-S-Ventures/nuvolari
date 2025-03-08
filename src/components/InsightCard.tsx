@@ -137,21 +137,6 @@ const InsightsCarousel = ({
                 )}>
                   {insight.title}
                 </h3>
-                
-                {/* Pagination indicator dots - moved inside the card */}
-                {position === 'center' && (
-                  <div className="flex justify-center mt-auto pt-2 space-x-2">
-                    {insights.map((_, index) => (
-                      <div 
-                        key={index}
-                        className={cn(
-                          "w-1.5 h-1.5 rounded-full transition-all",
-                          currentIndex === index ? "bg-gray-400 w-3" : "bg-gray-500/30"
-                        )}
-                      />
-                    ))}
-                  </div>
-                )}
               </div>
             </div>
           ))}
