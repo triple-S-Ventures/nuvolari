@@ -42,17 +42,28 @@ const Insights = () => {
   useEffect(() => {
     if (searchBarRef.current) {
       const width = searchBarRef.current.offsetWidth;
-      console.log('Setting searchBarWidth:', width);
+      console.log('Initial searchBarWidth measurement:', width);
       setSearchBarWidth(width);
       
       // Update width on window resize
       const handleResize = () => {
         if (searchBarRef.current) {
           const newWidth = searchBarRef.current.offsetWidth;
-          console.log('Resize searchBarWidth:', newWidth);
+          console.log('Window resize - new searchBarWidth:', newWidth);
           setSearchBarWidth(newWidth);
         }
       };
+      
+      // Force a measurement after a short delay to ensure accurate width
+      setTimeout(() => {
+        if (searchBarRef.current) {
+          const delayedWidth = searchBarRef.current.offsetWidth;
+          console.log('Delayed searchBarWidth measurement:', delayedWidth);
+          if (delayedWidth > 0) {
+            setSearchBarWidth(delayedWidth);
+          }
+        }
+      }, 500);
       
       window.addEventListener('resize', handleResize);
       return () => window.removeEventListener('resize', handleResize);
