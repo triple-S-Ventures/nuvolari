@@ -27,6 +27,36 @@ const SwapPopup = ({
   const [popupWidth, setPopupWidth] = useState(500); // Default width
   const [currentStep, setCurrentStep] = useState(step);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [isConfirmHovered, setIsConfirmHovered] = useState(false);
+  const [isExecuteHovered, setIsExecuteHovered] = useState(false);
+  
+  // Dynamic box-shadow values based on hover state for Confirm button
+  const getConfirmBoxShadow = () => {
+    const topGlow = isConfirmHovered ? 'rgba(174, 161, 255, 0.4)' : 'rgba(174, 161, 255, 0.25)';
+    const sideGlow = isConfirmHovered ? 'rgba(174, 161, 255, 0.2)' : 'rgba(174, 161, 255, 0.1)';
+    const border = 'rgba(0, 0, 0, 0.2)';
+    
+    return `
+      0 -1px 1px ${topGlow},
+      -1px -1px 1px ${sideGlow},
+      1px -1px 1px ${sideGlow},
+      0 0 0 1px ${border}
+    `;
+  };
+
+  // Dynamic box-shadow values based on hover state for Execute button
+  const getExecuteBoxShadow = () => {
+    const topGlow = isExecuteHovered ? 'rgba(174, 161, 255, 0.4)' : 'rgba(174, 161, 255, 0.25)';
+    const sideGlow = isExecuteHovered ? 'rgba(174, 161, 255, 0.2)' : 'rgba(174, 161, 255, 0.1)';
+    const border = 'rgba(0, 0, 0, 0.2)';
+    
+    return `
+      0 -1px 1px ${topGlow},
+      -1px -1px 1px ${sideGlow},
+      1px -1px 1px ${sideGlow},
+      0 0 0 1px ${border}
+    `;
+  };
   
   // Update popup width when searchBarWidth changes
   useEffect(() => {
@@ -216,7 +246,10 @@ const SwapPopup = ({
               <button
                 onClick={handleConfirm}
                 disabled={isLoading}
+                onMouseEnter={() => setIsConfirmHovered(true)}
+                onMouseLeave={() => setIsConfirmHovered(false)}
                 className="w-full py-3 rounded-xl bg-[#AEA1FF] text-white font-medium hover:bg-[#9A8FE5] transition-colors disabled:opacity-70"
+                style={{ boxShadow: getConfirmBoxShadow() }}
               >
                 {isLoading ? 'Processing...' : 'Confirm'}
               </button>
@@ -319,7 +352,10 @@ const SwapPopup = ({
                 <button
                   onClick={handleExecute}
                   disabled={isLoading}
+                  onMouseEnter={() => setIsExecuteHovered(true)}
+                  onMouseLeave={() => setIsExecuteHovered(false)}
                   className="flex-1 py-3 rounded-xl bg-[#AEA1FF] text-white font-medium hover:bg-[#9A8FE5] transition-colors disabled:opacity-70"
+                  style={{ boxShadow: getExecuteBoxShadow() }}
                 >
                   {isLoading ? 'Processing...' : 'Execute'}
                 </button>
