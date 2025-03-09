@@ -28,6 +28,7 @@ const SwapPopup = ({
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isConfirmHovered, setIsConfirmHovered] = useState(false);
   const [isExecuteHovered, setIsExecuteHovered] = useState(false);
+  const [isEditHovered, setIsEditHovered] = useState(false);
   const [effectiveWidth, setEffectiveWidth] = useState(500); // Default width
   
   // Update effective width when searchBarWidth changes
@@ -57,10 +58,24 @@ const SwapPopup = ({
     `;
   };
 
-  // Dynamic box-shadow values based on hover state for Execute button
+  // Dynamic box-shadow values based on hover state for Execute button - using gray colors like InsightCard
   const getExecuteBoxShadow = () => {
-    const topGlow = isExecuteHovered ? 'rgba(174, 161, 255, 0.4)' : 'rgba(174, 161, 255, 0.25)';
-    const sideGlow = isExecuteHovered ? 'rgba(174, 161, 255, 0.2)' : 'rgba(174, 161, 255, 0.1)';
+    const topGlow = isExecuteHovered ? 'rgba(180, 180, 180, 0.4)' : 'rgba(180, 180, 180, 0.25)';
+    const sideGlow = isExecuteHovered ? 'rgba(180, 180, 180, 0.2)' : 'rgba(180, 180, 180, 0.1)';
+    const border = 'rgba(0, 0, 0, 0.2)';
+    
+    return `
+      0 -1px 1px ${topGlow},
+      -1px -1px 1px ${sideGlow},
+      1px -1px 1px ${sideGlow},
+      0 0 0 1px ${border}
+    `;
+  };
+
+  // Dynamic box-shadow values based on hover state for Edit button - using gray colors like InsightCard
+  const getEditBoxShadow = () => {
+    const topGlow = isEditHovered ? 'rgba(180, 180, 180, 0.4)' : 'rgba(180, 180, 180, 0.25)';
+    const sideGlow = isEditHovered ? 'rgba(180, 180, 180, 0.2)' : 'rgba(180, 180, 180, 0.1)';
     const border = 'rgba(0, 0, 0, 0.2)';
     
     return `
@@ -350,7 +365,10 @@ const SwapPopup = ({
               <div className="flex w-full justify-between gap-4">
                 <button
                   onClick={handleEdit}
+                  onMouseEnter={() => setIsEditHovered(true)}
+                  onMouseLeave={() => setIsEditHovered(false)}
                   className="flex-1 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/15 transition-colors"
+                  style={{ boxShadow: getEditBoxShadow() }}
                 >
                   Edit
                 </button>
