@@ -166,13 +166,15 @@ const SearchBar = ({
               transition={{ duration: 0.2 }}
               style={{
                 boxShadow: activeFilter === 'balanced' 
-                  ? '0 10px 25px -5px rgba(96, 165, 250, 0.1), 0 0 15px -5px rgba(96, 165, 250, 0.15)' 
+                  ? '0 10px 25px -5px rgba(96, 165, 250, 0.15), 0 0 15px -5px rgba(96, 165, 250, 0.2)' 
                   : activeFilter === 'degen'
-                    ? '0 10px 25px -5px rgba(251, 146, 60, 0.1), 0 0 15px -5px rgba(251, 146, 60, 0.15)'
-                    : '0 10px 25px -5px rgba(74, 222, 128, 0.1), 0 0 15px -5px rgba(74, 222, 128, 0.15)'
+                    ? '0 10px 25px -5px rgba(251, 146, 60, 0.15), 0 0 15px -5px rgba(251, 146, 60, 0.2)'
+                    : '0 10px 25px -5px rgba(74, 222, 128, 0.15), 0 0 15px -5px rgba(74, 222, 128, 0.2)'
               }}
             >
-              <SearchSuggestions onSuggestionClick={handleSearchSuggestionClick} />
+              <div className="bg-black/50 backdrop-blur-xl">
+                <SearchSuggestions onSuggestionClick={handleSearchSuggestionClick} />
+              </div>
             </motion.div>
           </>
         )}

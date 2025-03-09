@@ -11,7 +11,7 @@ const SearchSuggestion = ({ icon: Icon, label, onClick }: SearchSuggestionProps)
   return (
     <button 
       onClick={onClick} 
-      className="w-full flex items-center justify-between px-4 py-3 hover:bg-secondary/50 transition-colors rounded-md group"
+      className="w-full flex items-center justify-between px-4 py-3 hover:bg-black/50 transition-colors rounded-md group"
     >
       <div className="flex items-center gap-3">
         <div className="w-8 h-8 rounded-md bg-[#AC87CF] flex items-center justify-center text-white">
@@ -43,8 +43,8 @@ const SearchSuggestions = ({ onSuggestionClick }: SearchSuggestionsProps) => {
   ];
 
   return (
-    <div className="py-2 bg-transparent">
-      <div className="px-4 py-2 text-xs text-muted-foreground">
+    <div className="py-2">
+      <div className="px-4 py-2 text-xs text-muted-foreground font-medium">
         Suggested
       </div>
       <div className="max-h-[calc(100vh-250px)] overflow-y-auto">
