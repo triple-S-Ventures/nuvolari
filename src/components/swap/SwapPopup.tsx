@@ -133,25 +133,34 @@ const SwapPopup = ({
                 </div>
               </div>
             </div>
-            <div className="bg-[#1B191F] rounded-xl p-4 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
-              <div className="flex items-start justify-between">
-                <div className="w-full">
-                  <input
-                    type="text"
-                    value={amount}
-                    onChange={handleAmountChange}
-                    className="text-4xl font-semibold text-white bg-transparent outline-none w-full"
-                  />
-                  <div className="flex items-center justify-between mt-3">
-                    <div className="text-gray-400 text-sm">${(amount * 2600).toLocaleString()}</div>
-                    <div className="flex items-center">
-                      <div className="text-gray-400 text-sm mr-2">36 ETH</div>
-                      <button
-                        onClick={handleMaxClick}
-                        className="px-3 py-1 rounded-full bg-[#AC87CF]/30 text-xs text-[#AC87CF] font-medium hover:bg-[#AC87CF]/40 transition-colors"
-                      >
-                        MAX
-                      </button>
+            {/* Inner card with distinct background */}
+            <div 
+              className="rounded-xl overflow-hidden" 
+              style={{ 
+                backgroundColor: '#1B191F',
+                boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
+              }}
+            >
+              <div className="p-4">
+                <div className="flex items-start justify-between">
+                  <div className="w-full">
+                    <input
+                      type="text"
+                      value={amount}
+                      onChange={handleAmountChange}
+                      className="text-4xl font-semibold text-white bg-transparent outline-none w-full"
+                    />
+                    <div className="flex items-center justify-between mt-3">
+                      <div className="text-gray-400 text-sm">${(amount * 2600).toLocaleString()}</div>
+                      <div className="flex items-center">
+                        <div className="text-gray-400 text-sm mr-2">36 ETH</div>
+                        <button
+                          onClick={handleMaxClick}
+                          className="px-3 py-1 rounded-full bg-[#AC87CF]/30 text-xs text-[#AC87CF] font-medium hover:bg-[#AC87CF]/40 transition-colors"
+                        >
+                          MAX
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -170,11 +179,20 @@ const SwapPopup = ({
                 <span className="text-white font-medium">{toToken}</span>
               </div>
             </div>
-            <div className="bg-[#1B191F] rounded-xl p-4 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
-              <div className="flex items-start justify-between">
-                <div>
-                  <div className="text-4xl font-semibold text-white">18,195,766,163.51</div>
-                  <div className="text-gray-400 text-sm mt-3">${(amount * 2600 * 0.999).toLocaleString()}</div>
+            {/* Inner card with distinct background */}
+            <div 
+              className="rounded-xl overflow-hidden" 
+              style={{ 
+                backgroundColor: '#1B191F',
+                boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
+              }}
+            >
+              <div className="p-4">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="text-4xl font-semibold text-white">18,195,766,163.51</div>
+                    <div className="text-gray-400 text-sm mt-3">${(amount * 2600 * 0.999).toLocaleString()}</div>
+                  </div>
                 </div>
               </div>
             </div>
