@@ -83,7 +83,7 @@ const Navbar = () => {
                 )}
               >
                 <img 
-                  src="/eye.png" 
+                  src="/mood_icon.png" 
                   alt="Mood Icon" 
                   className="w-4 h-4 mr-2"
                 />
