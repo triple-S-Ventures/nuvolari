@@ -79,21 +79,21 @@ const SearchBar = ({
           <>
             {/* Subtle glow effect around all four borders */}
             <div className="absolute -z-10 overflow-hidden" style={{ 
-              top: '-15px', 
-              left: '-15px', 
-              right: '-15px', 
-              bottom: '-15px',
+              top: '-10px', 
+              left: '-10px', 
+              right: '-10px', 
+              bottom: '-20px',
               pointerEvents: 'none'
             }}>
               <motion.div 
                 className="w-full h-full"
                 style={{
                   background: activeFilter === 'balanced' 
-                    ? 'radial-gradient(ellipse at center, rgba(96, 165, 250, 0.15) 0%, rgba(96, 165, 250, 0.05) 50%, transparent 80%)' 
+                    ? 'radial-gradient(ellipse at center, rgba(96, 165, 250, 0.1) 0%, rgba(96, 165, 250, 0.03) 50%, transparent 80%)' 
                     : activeFilter === 'degen'
-                      ? 'radial-gradient(ellipse at center, rgba(251, 146, 60, 0.15) 0%, rgba(251, 146, 60, 0.05) 50%, transparent 80%)'
-                      : 'radial-gradient(ellipse at center, rgba(74, 222, 128, 0.15) 0%, rgba(74, 222, 128, 0.05) 50%, transparent 80%)',
-                  filter: 'blur(8px)'
+                      ? 'radial-gradient(ellipse at center, rgba(251, 146, 60, 0.1) 0%, rgba(251, 146, 60, 0.03) 50%, transparent 80%)'
+                      : 'radial-gradient(ellipse at center, rgba(74, 222, 128, 0.1) 0%, rgba(74, 222, 128, 0.03) 50%, transparent 80%)',
+                  filter: 'blur(6px)'
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -101,6 +101,59 @@ const SearchBar = ({
                 transition={{ duration: 0.2 }}
               />
             </div>
+            
+            {/* Subtle border glow effects for each side */}
+            <div className="absolute -z-10" style={{
+              top: '0',
+              left: '10px',
+              right: '10px',
+              height: '1px',
+              background: activeFilter === 'balanced' 
+                ? 'linear-gradient(to right, transparent, rgba(96, 165, 250, 0.3), transparent)'
+                : activeFilter === 'degen'
+                  ? 'linear-gradient(to right, transparent, rgba(251, 146, 60, 0.3), transparent)'
+                  : 'linear-gradient(to right, transparent, rgba(74, 222, 128, 0.3), transparent)',
+              pointerEvents: 'none'
+            }} />
+            
+            <div className="absolute -z-10" style={{
+              bottom: '0',
+              left: '10px',
+              right: '10px',
+              height: '1px',
+              background: activeFilter === 'balanced' 
+                ? 'linear-gradient(to right, transparent, rgba(96, 165, 250, 0.3), transparent)'
+                : activeFilter === 'degen'
+                  ? 'linear-gradient(to right, transparent, rgba(251, 146, 60, 0.3), transparent)'
+                  : 'linear-gradient(to right, transparent, rgba(74, 222, 128, 0.3), transparent)',
+              pointerEvents: 'none'
+            }} />
+            
+            <div className="absolute -z-10" style={{
+              left: '0',
+              top: '10px',
+              bottom: '10px',
+              width: '1px',
+              background: activeFilter === 'balanced' 
+                ? 'linear-gradient(to bottom, transparent, rgba(96, 165, 250, 0.3), transparent)'
+                : activeFilter === 'degen'
+                  ? 'linear-gradient(to bottom, transparent, rgba(251, 146, 60, 0.3), transparent)'
+                  : 'linear-gradient(to bottom, transparent, rgba(74, 222, 128, 0.3), transparent)',
+              pointerEvents: 'none'
+            }} />
+            
+            <div className="absolute -z-10" style={{
+              right: '0',
+              top: '10px',
+              bottom: '10px',
+              width: '1px',
+              background: activeFilter === 'balanced' 
+                ? 'linear-gradient(to bottom, transparent, rgba(96, 165, 250, 0.3), transparent)'
+                : activeFilter === 'degen'
+                  ? 'linear-gradient(to bottom, transparent, rgba(251, 146, 60, 0.3), transparent)'
+                  : 'linear-gradient(to bottom, transparent, rgba(74, 222, 128, 0.3), transparent)',
+              pointerEvents: 'none'
+            }} />
             
             <motion.div 
               className={cn(
@@ -113,10 +166,10 @@ const SearchBar = ({
               transition={{ duration: 0.2 }}
               style={{
                 boxShadow: activeFilter === 'balanced' 
-                  ? '0 10px 25px -5px rgba(96, 165, 250, 0.15), 0 0 15px -5px rgba(96, 165, 250, 0.2)' 
+                  ? '0 10px 25px -5px rgba(96, 165, 250, 0.1), 0 0 15px -5px rgba(96, 165, 250, 0.15)' 
                   : activeFilter === 'degen'
-                    ? '0 10px 25px -5px rgba(251, 146, 60, 0.15), 0 0 15px -5px rgba(251, 146, 60, 0.2)'
-                    : '0 10px 25px -5px rgba(74, 222, 128, 0.15), 0 0 15px -5px rgba(74, 222, 128, 0.2)'
+                    ? '0 10px 25px -5px rgba(251, 146, 60, 0.1), 0 0 15px -5px rgba(251, 146, 60, 0.15)'
+                    : '0 10px 25px -5px rgba(74, 222, 128, 0.1), 0 0 15px -5px rgba(74, 222, 128, 0.15)'
               }}
             >
               <SearchSuggestions onSuggestionClick={handleSearchSuggestionClick} />
