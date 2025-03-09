@@ -66,61 +66,69 @@ const Navbar = () => {
           />
         </div>
         
+        {/* Vertical separator */}
+        <div className="h-6 w-px bg-white/10"></div>
+        
         {/* Navigation buttons */}
         {isConnected && (
-          <div className="flex items-center space-x-1">
-            <button 
-              onClick={() => handleTabClick('mood')}
-              className={cn(
-                "flex items-center px-3 py-2 transition-all duration-300",
-                activeTab === 'mood' 
-                  ? "bg-card text-foreground shadow-sm rounded-2xl" 
-                  : "text-muted-foreground hover:text-foreground rounded-2xl"
-              )}
-            >
-              <img 
-                src="/eye.png" 
-                alt="Mood Icon" 
-                className="w-4 h-4 mr-2"
-              />
-              <span className="text-sm font-medium">Mood</span>
-            </button>
-            
-            <button 
-              onClick={() => handleTabClick('insights')}
-              className={cn(
-                "flex items-center px-3 py-2 transition-all duration-300",
-                activeTab === 'insights' 
-                  ? "bg-card text-foreground shadow-sm rounded-2xl" 
-                  : "text-muted-foreground hover:text-foreground rounded-2xl"
-              )}
-            >
-              <img 
-                src="/navbar_logo.png" 
-                alt="Insights Icon" 
-                className="w-4 h-4 mr-2"
-              />
-              <span className="text-sm font-medium">Insights</span>
-            </button>
-            
-            <button 
-              onClick={() => handleTabClick('journal')}
-              className={cn(
-                "flex items-center px-3 py-2 transition-all duration-300",
-                activeTab === 'journal' 
-                  ? "bg-card text-foreground shadow-sm rounded-2xl" 
-                  : "text-muted-foreground hover:text-foreground rounded-2xl"
-              )}
-            >
-              <img 
-                src="/journal.png" 
-                alt="Journal Icon" 
-                className="w-4 h-4 mr-2"
-              />
-              <span className="text-sm font-medium">Journal</span>
-            </button>
+          <div className="bg-[#1A1A1A] rounded-full px-2 py-1">
+            <div className="flex items-center space-x-1">
+              <button 
+                onClick={() => handleTabClick('mood')}
+                className={cn(
+                  "flex items-center px-3 py-2 transition-all duration-300",
+                  activeTab === 'mood' 
+                    ? "bg-card text-foreground shadow-sm rounded-2xl" 
+                    : "text-muted-foreground hover:text-foreground rounded-2xl"
+                )}
+              >
+                <img 
+                  src="/eye.png" 
+                  alt="Mood Icon" 
+                  className="w-4 h-4 mr-2"
+                />
+                <span className="text-sm font-medium">Mood</span>
+              </button>
+              
+              <button 
+                onClick={() => handleTabClick('insights')}
+                className={cn(
+                  "flex items-center px-3 py-2 transition-all duration-300",
+                  activeTab === 'insights' 
+                    ? "bg-card text-foreground shadow-sm rounded-2xl" 
+                    : "text-muted-foreground hover:text-foreground rounded-2xl"
+                )}
+              >
+                <img 
+                  src="/navbar_logo.png" 
+                  alt="Insights Icon" 
+                  className="w-4 h-4 mr-2"
+                />
+                <span className="text-sm font-medium">Insights</span>
+              </button>
+              
+              <button 
+                onClick={() => handleTabClick('journal')}
+                className={cn(
+                  "flex items-center px-3 py-2 transition-all duration-300",
+                  activeTab === 'journal' 
+                    ? "bg-card text-foreground shadow-sm rounded-2xl" 
+                    : "text-muted-foreground hover:text-foreground rounded-2xl"
+                )}
+              >
+                <img 
+                  src="/journal.png" 
+                  alt="Journal Icon" 
+                  className="w-4 h-4 mr-2"
+                />
+                <span className="text-sm font-medium">Journal</span>
+              </button>
+            </div>
           </div>
         )}
+        
+        {/* Vertical separator */}
+        <div className="h-6 w-px bg-white/10"></div>
         
         {/* Connect button */}
         <button 
