@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -17,7 +16,7 @@ const MoodScore = () => {
     <div 
       className="relative w-full overflow-hidden rounded-2xl glass-card p-0 animate-scale-in"
       style={{
-        backgroundImage: `url('/lovable-uploads/05499396-c01f-4e6c-bdec-efec7f903b01.png')`,
+        backgroundImage: `url('/mood_BG.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
