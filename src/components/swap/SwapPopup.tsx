@@ -29,6 +29,11 @@ const SwapPopup = ({
   const [isConfirmHovered, setIsConfirmHovered] = useState(false);
   const [isExecuteHovered, setIsExecuteHovered] = useState(false);
   
+  // Get the popup width with a fallback to ensure visibility
+  const getPopupWidth = () => {
+    return searchBarWidth && searchBarWidth > 0 ? searchBarWidth : 500;
+  };
+  
   // Dynamic box-shadow values based on hover state for Confirm button
   const getConfirmBoxShadow = () => {
     const topGlow = isConfirmHovered ? 'rgba(174, 161, 255, 0.4)' : 'rgba(174, 161, 255, 0.25)';
@@ -128,7 +133,7 @@ const SwapPopup = ({
           <motion.div
             key="swap-form"
             ref={popupRef}
-            style={{ width: `${searchBarWidth}px` }}
+            style={{ width: `${getPopupWidth()}px` }}
             className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl"
             initial={{ scale: 0.9, y: 100, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
@@ -250,7 +255,7 @@ const SwapPopup = ({
           <motion.div
             key="confirmation-popup"
             ref={popupRef}
-            style={{ width: `${searchBarWidth}px` }}
+            style={{ width: `${getPopupWidth()}px` }}
             className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl"
             initial={{ scale: 0.9, y: 100, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
