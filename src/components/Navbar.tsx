@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Eye, Wallet } from 'lucide-react';
+import { Wallet } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ConnectWalletDialog from './wallet/ConnectWalletDialog';
+import { useWallet } from '@/contexts/WalletContext';
 
 const Navbar = () => {
   const [activeTab, setActiveTab] = useState<'mood' | 'insights' | 'journal'>('mood');
@@ -10,6 +11,7 @@ const Navbar = () => {
   const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { isConnected } = useWallet();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +33,11 @@ const Navbar = () => {
   }, [location.pathname]);
 
   const handleTabClick = (tab: 'mood' | 'insights' | 'journal') => {
+    if (!isConnected) {
+      navigate('/onboarding');
+      return;
+    }
+    
     setActiveTab(tab);
     
     if (tab === 'mood') {
@@ -45,8 +52,10 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center py-3 transition-all duration-300">
       <div className={cn(
-        "flex items-center gap-4 px-6 py-2 rounded-full transition-all duration-300", 
-        isScrolled ? "bg-background/80 backdrop-blur-lg shadow-md" : "bg-secondary/50 backdrop-blur-md"
+        "flex items-center gap-4 px-6 py-2 rounded-2xl transition-all duration-300", 
+        isScrolled 
+          ? "bg-[#121212]/90 backdrop-blur-lg shadow-md border border-[#2A2A2A]" 
+          : "bg-[#121212]/80 backdrop-blur-md border border-[#2A2A2A]"
       )}>
         {/* Logo */}
         <div className="flex items-center justify-center w-8 h-8">
@@ -58,65 +67,71 @@ const Navbar = () => {
         </div>
         
         {/* Navigation buttons */}
-        <div className="flex items-center space-x-1">
-          <button 
-            onClick={() => handleTabClick('mood')}
-            className={cn(
-              "flex items-center px-3 py-2 rounded-full transition-all duration-300",
-              activeTab === 'mood' 
-                ? "bg-card text-foreground shadow-sm" 
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            <Eye size={16} className="mr-2" />
-            <span className="text-sm font-medium">Mood</span>
-          </button>
-          
-          <button 
-            onClick={() => handleTabClick('insights')}
-            className={cn(
-              "flex items-center px-3 py-2 rounded-full transition-all duration-300",
-              activeTab === 'insights' 
-                ? "bg-card text-foreground shadow-sm" 
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            <img 
-              src="/navbar_logo.png" 
-              alt="Insights Icon" 
-              className="w-4 h-4 mr-2"
-            />
-            <span className="text-sm font-medium">Insights</span>
-          </button>
-          
-          <button 
-            onClick={() => handleTabClick('journal')}
-            className={cn(
-              "flex items-center px-3 py-2 rounded-full transition-all duration-300",
-              activeTab === 'journal' 
-                ? "bg-card text-foreground shadow-sm" 
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            <img 
-              src="/journal.png" 
-              alt="Journal Icon" 
-              className="w-4 h-4 mr-2"
-            />
-            <span className="text-sm font-medium">Journal</span>
-          </button>
-        </div>
-
+        {isConnected && (
+          <div className="flex items-center space-x-1">
+            <button 
+              onClick={() => handleTabClick('mood')}
+              className={cn(
+                "flex items-center px-3 py-2 transition-all duration-300",
+                activeTab === 'mood' 
+                  ? "bg-card text-foreground shadow-sm rounded-2xl" 
+                  : "text-muted-foreground hover:text-foreground rounded-2xl"
+              )}
+            >
+              <img 
+                src="/eye.png" 
+                alt="Mood Icon" 
+                className="w-4 h-4 mr-2"
+              />
+              <span className="text-sm font-medium">Mood</span>
+            </button>
+            
+            <button 
+              onClick={() => handleTabClick('insights')}
+              className={cn(
+                "flex items-center px-3 py-2 transition-all duration-300",
+                activeTab === 'insights' 
+                  ? "bg-card text-foreground shadow-sm rounded-2xl" 
+                  : "text-muted-foreground hover:text-foreground rounded-2xl"
+              )}
+            >
+              <img 
+                src="/navbar_logo.png" 
+                alt="Insights Icon" 
+                className="w-4 h-4 mr-2"
+              />
+              <span className="text-sm font-medium">Insights</span>
+            </button>
+            
+            <button 
+              onClick={() => handleTabClick('journal')}
+              className={cn(
+                "flex items-center px-3 py-2 transition-all duration-300",
+                activeTab === 'journal' 
+                  ? "bg-card text-foreground shadow-sm rounded-2xl" 
+                  : "text-muted-foreground hover:text-foreground rounded-2xl"
+              )}
+            >
+              <img 
+                src="/journal.png" 
+                alt="Journal Icon" 
+                className="w-4 h-4 mr-2"
+              />
+              <span className="text-sm font-medium">Journal</span>
+            </button>
+          </div>
+        )}
+        
         {/* Connect button */}
         <button 
           onClick={() => setIsWalletDialogOpen(true)}
-          className="flex items-center px-3 py-1.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 text-xs"
+          className="flex items-center px-3 py-1.5 rounded-2xl bg-[#AC87CF] text-white hover:bg-[#9A78BA] transition-all duration-300 text-xs"
         >
           <Wallet size={12} className="mr-1.5" />
-          <span className="font-medium">Connect</span>
+          <span className="font-medium">{isConnected ? 'Wallet' : 'Connect'}</span>
         </button>
       </div>
-
+      
       <ConnectWalletDialog 
         open={isWalletDialogOpen} 
         onOpenChange={setIsWalletDialogOpen} 
