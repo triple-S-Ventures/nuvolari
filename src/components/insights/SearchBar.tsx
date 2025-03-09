@@ -65,10 +65,10 @@ const SearchBar = ({
       <div className={cn(
         "rounded-2xl overflow-hidden flex items-center px-4 py-3 transition-all duration-300 relative z-20", 
         isSearchFocused 
-          ? "ring-1 ring-primary/30 shadow-lg" 
-          : "focus-within:ring-1 focus-within:ring-primary/30", 
+          ? "ring-1 ring-white/20 shadow-lg" 
+          : "focus-within:ring-1 focus-within:ring-white/20", 
         isSearchFocused 
-          ? getSearchBarBlurColor(activeFilter)
+          ? "bg-black/60 backdrop-blur-md border border-white/20"
           : getStandardSearchBarColor()
       )}>
         <Search className="h-5 w-5 text-muted-foreground mr-3" />

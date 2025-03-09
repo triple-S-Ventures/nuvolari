@@ -21,12 +21,12 @@ const SearchSuggestion = ({ icon: Icon, label, onClick, isDarkText = false }: Se
       className="w-full flex items-center justify-between px-4 py-3 transition-colors rounded-md group text-white hover:bg-white/5"
     >
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-2xl bg-[#AC87CF] flex items-center justify-center text-white">
+        <div className="w-9 h-9 rounded-md bg-[#AC87CF] flex items-center justify-center text-white">
           <Icon size={18} />
         </div>
         <span className="text-base font-medium">{label}</span>
       </div>
-      <div className="w-8 h-8 rounded-2xl bg-[#2A2A2A] flex items-center justify-center">
+      <div className="w-8 h-8 rounded-md bg-[#2A2A2A] flex items-center justify-center">
         <ArrowUpRight size={14} className="text-white/70" />
       </div>
     </button>
