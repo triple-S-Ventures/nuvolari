@@ -9,7 +9,7 @@ type FilterButtonsProps = {
 const FilterButtons = ({ activeFilter, setActiveFilter }: FilterButtonsProps) => {
   return (
     <div className="flex gap-2 items-center pl-2 overflow-visible">
-      <div className="bg-[#121212] backdrop-blur-sm rounded-full p-2 flex gap-3 border border-[#2A2A2A] shadow-md">
+      <div className="bg-[#121212] backdrop-blur-sm rounded-full p-2 flex gap-1.5 border border-[#2A2A2A] shadow-md">
         <motion.div 
           className={cn(
             "flex items-center justify-center rounded-full cursor-pointer transition-all duration-300", 

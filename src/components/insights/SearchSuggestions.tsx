@@ -18,10 +18,10 @@ const SearchSuggestion = ({ icon: Icon, label, onClick, isDarkText = false }: Se
   return (
     <button 
       onClick={onClick} 
-      className="w-full flex items-center justify-between px-4 py-3 transition-colors rounded-md group text-white hover:bg-white/5"
+      className="w-full flex items-center justify-between px-4 py-3 transition-colors rounded group text-white hover:bg-white/5"
     >
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-[#AC87CF] flex items-center justify-center text-white">
+        <div className="w-10 h-10 rounded bg-[#AC87CF] flex items-center justify-center text-white">
           <Icon size={20} />
         </div>
         <span className="text-sm font-medium">{label}</span>
@@ -53,9 +53,6 @@ export const searchSuggestions: SearchSuggestionAction[] = [
 const SearchSuggestions = ({ onSuggestionClick, className }: SearchSuggestionsProps) => {
   return (
     <div className="py-2 bg-black" style={{ backgroundColor: '#000000' }}>
-      <div className="px-4 py-2 text-xs font-medium text-white/70">
-        Suggested
-      </div>
       <div className="max-h-[calc(100vh-250px)] overflow-y-auto">
         {searchSuggestions.map(suggestion => (
           <SearchSuggestion 
