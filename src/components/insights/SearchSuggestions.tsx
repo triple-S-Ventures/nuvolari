@@ -1,4 +1,4 @@
-import { ChevronRight, Plus, ArrowRightLeft, RefreshCw, Wallet, DollarSign, ClipboardList, Info, BarChart3, TrendingUp } from 'lucide-react';
+import { ArrowUpRight, Plus, ArrowRightLeft, RefreshCw, Wallet, DollarSign, ClipboardList, Info, BarChart3, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export type SearchSuggestionAction = {
@@ -26,7 +26,9 @@ const SearchSuggestion = ({ icon: Icon, label, onClick, isDarkText = false }: Se
         </div>
         <span className="text-base font-medium">{label}</span>
       </div>
-      <ChevronRight size={16} className="text-white/60" />
+      <div className="w-8 h-8 rounded-2xl bg-[#2A2A2A] flex items-center justify-center">
+        <ArrowUpRight size={14} className="text-white/70" />
+      </div>
     </button>
   );
 };
