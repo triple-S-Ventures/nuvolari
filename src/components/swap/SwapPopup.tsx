@@ -43,10 +43,10 @@ const SwapPopup = ({
     }
   }, [searchBarWidth]);
   
-  // Dynamic box-shadow values based on hover state for Confirm button
+  // Dynamic box-shadow values based on hover state for Confirm button - using gray colors like InsightCard
   const getConfirmBoxShadow = () => {
-    const topGlow = isConfirmHovered ? 'rgba(174, 161, 255, 0.4)' : 'rgba(174, 161, 255, 0.25)';
-    const sideGlow = isConfirmHovered ? 'rgba(174, 161, 255, 0.2)' : 'rgba(174, 161, 255, 0.1)';
+    const topGlow = isConfirmHovered ? 'rgba(180, 180, 180, 0.4)' : 'rgba(180, 180, 180, 0.25)';
+    const sideGlow = isConfirmHovered ? 'rgba(180, 180, 180, 0.2)' : 'rgba(180, 180, 180, 0.1)';
     const border = 'rgba(0, 0, 0, 0.2)';
     
     return `
