@@ -63,9 +63,9 @@ const SearchBar = ({
   return (
     <div className="relative mb-10 z-20" ref={searchRef}>
       <div className={cn(
-        "rounded-full overflow-hidden flex items-center px-4 py-3 transition-all duration-300 relative z-20", 
+        "rounded-2xl overflow-hidden flex items-center px-4 py-3 transition-all duration-300 relative z-20", 
         isSearchFocused 
-          ? "ring-1 ring-primary/30 rounded-t-xl rounded-b-none shadow-lg" 
+          ? "ring-1 ring-primary/30 shadow-lg" 
           : "focus-within:ring-1 focus-within:ring-primary/30", 
         isSearchFocused 
           ? getSearchBarBlurColor(activeFilter)
@@ -174,13 +174,13 @@ const SearchBar = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 mt-2 z-50 rounded-xl overflow-hidden"
+              className="absolute top-full left-0 right-0 mt-1 z-50 rounded-2xl overflow-hidden"
               style={{
                 boxShadow: '0 10px 25px rgba(0, 0, 0, 0.8)'
               }}
             >
               <div 
-                className="bg-black text-white w-full" 
+                className="bg-black text-white w-full rounded-2xl" 
                 style={{ 
                   backdropFilter: 'none', 
                   backgroundColor: '#000000', 
