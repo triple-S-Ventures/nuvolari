@@ -27,18 +27,31 @@ export const getActiveFilterBlurColor = (activeFilter: string) => {
 export const getSearchBarBlurColor = (activeFilter: string) => {
   switch (activeFilter) {
     case 'balanced':
-      return 'bg-blue-400/10 backdrop-blur-md border-blue-400/20';
+      return 'bg-blue-400/15 backdrop-blur-md border-blue-400/30';
     case 'degen':
-      return 'bg-orange-400/10 backdrop-blur-md border-orange-400/20';
+      return 'bg-orange-400/15 backdrop-blur-md border-orange-400/30';
     case 'saver':
-      return 'bg-green-400/10 backdrop-blur-md border-green-400/20';
+      return 'bg-green-400/15 backdrop-blur-md border-green-400/30';
     default:
-      return 'bg-black/50 backdrop-blur-md border-white/10';
+      return 'bg-black/60 backdrop-blur-md border-white/20';
+  }
+};
+
+export const getDropdownBackgroundColor = (activeFilter: string) => {
+  switch (activeFilter) {
+    case 'balanced':
+      return 'bg-blue-400/15 backdrop-blur-md border border-blue-400/30';
+    case 'degen':
+      return 'bg-orange-400/15 backdrop-blur-md border border-orange-400/30';
+    case 'saver':
+      return 'bg-green-400/15 backdrop-blur-md border border-green-400/30';
+    default:
+      return 'bg-black/60 backdrop-blur-md border border-white/20';
   }
 };
 
 export const getStandardSearchBarColor = () => {
-  return 'bg-black/50 border border-white/10';
+  return 'bg-black/60 border border-white/20';
 };
 
 type Insight = {
