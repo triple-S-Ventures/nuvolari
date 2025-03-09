@@ -49,12 +49,12 @@ const InsightCard = ({ title, tokens }: InsightCardProps) => {
   
   // Dynamic box-shadow values based on hover state
   const getBoxShadow = () => {
-    const topGlow = isHovered ? 'rgba(255, 255, 255, 0.7)' : 'rgba(255, 255, 255, 0.5)';
-    const sideGlow = isHovered ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.2)';
+    const topGlow = isHovered ? 'rgba(180, 180, 180, 0.4)' : 'rgba(180, 180, 180, 0.25)';
+    const sideGlow = isHovered ? 'rgba(180, 180, 180, 0.2)' : 'rgba(180, 180, 180, 0.1)';
     const border = 'rgba(0, 0, 0, 0.2)';
     
     return `
-      0 -1px 2px ${topGlow},
+      0 -1px 1px ${topGlow},
       -1px -1px 1px ${sideGlow},
       1px -1px 1px ${sideGlow},
       0 0 0 1px ${border}
