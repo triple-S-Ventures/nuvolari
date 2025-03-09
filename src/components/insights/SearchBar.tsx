@@ -14,6 +14,9 @@ type SearchBarProps = {
   setActiveFilter: (filter: string) => void;
   getActiveFilterColor: () => string;
   getActiveFilterBlurColor: () => string;
+  onSuggestionClick?: (suggestionId: string) => void;
+  isSearchFocused?: boolean;
+  setIsSearchFocused?: (focused: boolean) => void;
 };
 
 const SearchBar = ({
@@ -22,10 +25,17 @@ const SearchBar = ({
   activeFilter,
   setActiveFilter,
   getActiveFilterColor,
-  getActiveFilterBlurColor
+  getActiveFilterBlurColor,
+  onSuggestionClick,
+  isSearchFocused: externalIsSearchFocused,
+  setIsSearchFocused: externalSetIsSearchFocused
 }: SearchBarProps) => {
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [internalIsSearchFocused, setInternalIsSearchFocused] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  
+  // Use either external or internal state for focus
+  const isSearchFocused = externalIsSearchFocused !== undefined ? externalIsSearchFocused : internalIsSearchFocused;
+  const setIsSearchFocused = externalSetIsSearchFocused || setInternalIsSearchFocused;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -38,12 +48,16 @@ const SearchBar = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [setIsSearchFocused]);
 
   const handleSearchSuggestionClick = (suggestionId: string) => {
-    setSearchQuery(suggestionId);
-    setIsSearchFocused(false);
-    toast.info(`Selected action: ${suggestionId}`);
+    if (onSuggestionClick) {
+      onSuggestionClick(suggestionId);
+    } else {
+      setSearchQuery(suggestionId);
+      setIsSearchFocused(false);
+      toast.info(`Selected action: ${suggestionId}`);
+    }
   };
 
   return (
@@ -155,25 +169,28 @@ const SearchBar = ({
               pointerEvents: 'none'
             }} />
             
-            <motion.div 
-              className={cn(
-                "absolute w-full rounded-b-xl shadow-lg overflow-hidden z-20 border-t-0",
-                getDropdownBackgroundColor(activeFilter)
-              )} 
+            <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 right-0 mt-2 z-50 rounded-xl overflow-hidden"
               style={{
-                boxShadow: activeFilter === 'balanced' 
-                  ? '0 10px 25px -5px rgba(96, 165, 250, 0.15), 0 0 15px -5px rgba(96, 165, 250, 0.2)' 
-                  : activeFilter === 'degen'
-                    ? '0 10px 25px -5px rgba(251, 146, 60, 0.15), 0 0 15px -5px rgba(251, 146, 60, 0.2)'
-                    : '0 10px 25px -5px rgba(74, 222, 128, 0.15), 0 0 15px -5px rgba(74, 222, 128, 0.2)'
+                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.8)'
               }}
             >
-              <div className="bg-black/50 backdrop-blur-xl">
-                <SearchSuggestions onSuggestionClick={handleSearchSuggestionClick} />
+              <div 
+                className="bg-black text-white w-full" 
+                style={{ 
+                  backdropFilter: 'none', 
+                  backgroundColor: '#000000', 
+                  boxShadow: '0 0 0 2px rgba(255, 255, 255, 0.1)' 
+                }}
+              >
+                <SearchSuggestions 
+                  onSuggestionClick={handleSearchSuggestionClick} 
+                  className="text-white"
+                />
               </div>
             </motion.div>
           </>

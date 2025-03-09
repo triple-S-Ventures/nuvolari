@@ -40,13 +40,13 @@ export const getSearchBarBlurColor = (activeFilter: string) => {
 export const getDropdownBackgroundColor = (activeFilter: string) => {
   switch (activeFilter) {
     case 'balanced':
-      return 'bg-blue-400/30 backdrop-blur-md border border-blue-400/40';
+      return 'bg-blue-400/40 backdrop-blur-xl border border-blue-400/50';
     case 'degen':
-      return 'bg-orange-400/30 backdrop-blur-md border border-orange-400/40';
+      return 'bg-orange-400/40 backdrop-blur-xl border border-orange-400/50';
     case 'saver':
-      return 'bg-green-400/30 backdrop-blur-md border border-green-400/40';
+      return 'bg-green-400/40 backdrop-blur-xl border border-green-400/50';
     default:
-      return 'bg-black/90 backdrop-blur-md border border-white/30';
+      return 'bg-black/95 backdrop-blur-xl border border-white/40';
   }
 };
 

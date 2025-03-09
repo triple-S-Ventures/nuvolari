@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -7,6 +7,8 @@ import SearchBar from '@/components/insights/SearchBar';
 import CategoryFilters from '@/components/insights/CategoryFilters';
 import InsightsList from '@/components/insights/InsightsList';
 import { getActiveFilterColor, getActiveFilterBlurColor, insights, filterInsights } from '@/components/insights/filterUtils';
+import SwapInterface from '@/components/swap/SwapInterface';
+import { searchSuggestions } from '@/components/insights/SearchSuggestions';
 
 const Insights = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +16,13 @@ const Insights = () => {
   const [activeCategory, setActiveCategory] = useState('favorites');
   const [activeFilter, setActiveFilter] = useState('balanced');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [showSwapInterface, setShowSwapInterface] = useState(false);
+  const [swapDetails, setSwapDetails] = useState({
+    fromToken: 'ETH',
+    toToken: 'MOG',
+    amount: 5.8
+  });
+  const insightsListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,6 +36,42 @@ const Insights = () => {
   }, []);
 
   const filteredInsights = filterInsights(insights, activeCategory, searchQuery);
+
+  const handleSearchSuggestionClick = (suggestionId: string) => {
+    // Find the suggestion that was clicked
+    const suggestion = searchSuggestions.find(s => s.id === suggestionId);
+    
+    if (suggestionId === 'swap') {
+      // Set a predefined search query for swap
+      setSearchQuery('Swap 5.8 ETH to MOG');
+      setIsSearchFocused(false);
+      
+      // Scroll to insights list with animation
+      setTimeout(() => {
+        if (insightsListRef.current) {
+          insightsListRef.current.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+          
+          // Show swap interface after scrolling
+          setTimeout(() => {
+            setShowSwapInterface(true);
+          }, 800);
+        }
+      }, 500);
+    } else if (suggestionId === 'yield') {
+      // Set a predefined search query for yield
+      setSearchQuery('Yield farming opportunities for ETH');
+      setIsSearchFocused(false);
+      toast.info(`Selected action: ${suggestion?.label || suggestionId}`);
+    } else {
+      // Handle other suggestions
+      setSearchQuery(`${suggestion?.label || suggestionId} query`);
+      setIsSearchFocused(false);
+      toast.info(`Selected action: ${suggestion?.label || suggestionId}`);
+    }
+  };
 
   return (
     <motion.div 
@@ -57,6 +102,9 @@ const Insights = () => {
               setActiveFilter={setActiveFilter}
               getActiveFilterColor={() => getActiveFilterColor(activeFilter)}
               getActiveFilterBlurColor={() => getActiveFilterBlurColor(activeFilter)}
+              onSuggestionClick={handleSearchSuggestionClick}
+              setIsSearchFocused={setIsSearchFocused}
+              isSearchFocused={isSearchFocused}
             />
             
             <CategoryFilters 
@@ -64,7 +112,7 @@ const Insights = () => {
               setActiveCategory={setActiveCategory}
             />
             
-            <div className="mt-8 w-full">
+            <div className="mt-8 w-full" ref={insightsListRef}>
               <InsightsList filteredInsights={filteredInsights} />
             </div>
           </div>
@@ -82,6 +130,17 @@ const Insights = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={() => setIsSearchFocused(false)} 
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showSwapInterface && (
+          <SwapInterface 
+            fromToken={swapDetails.fromToken}
+            toToken={swapDetails.toToken}
+            amount={swapDetails.amount}
+            onClose={() => setShowSwapInterface(false)}
           />
         )}
       </AnimatePresence>

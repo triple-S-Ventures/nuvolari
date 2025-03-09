@@ -88,7 +88,7 @@ const journalEntries: DateGroup[] = [
       {
         id: 'entry5',
         title: 'Mint NFT',
-        description: 'Minted a new NFT from the Bored Ape collection',
+        description: 'Minted SchizoPoster 1798',
         timestamp: '11:30 AM',
         type: 'mint',
         executed: true
