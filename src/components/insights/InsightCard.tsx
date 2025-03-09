@@ -49,78 +49,19 @@ const InsightCard = ({ title, tokens }: InsightCardProps) => {
   
   return (
     <div 
-      className="relative w-full h-full"
+      className={cn(
+        "relative w-full h-full rounded-xl overflow-hidden",
+        isHovered ? "shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_1px_0_0_rgba(255,255,255,0.15)]" : "shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_1px_0_0_rgba(255,255,255,0.07)]"
+      )}
+      style={{ transition: "box-shadow 0.3s ease" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Card background */}
-      <div className="absolute inset-0 rounded-xl bg-black/70 backdrop-blur-md"></div>
-      
-      {/* Top light effect */}
-      <div 
-        className="absolute -top-[2px] left-0 right-0 h-[2px] z-20 pointer-events-none"
-        style={{
-          background: 'linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.7) 50%, transparent 100%)',
-          opacity: isHovered ? 0.8 : 0.4,
-          transition: 'opacity 0.3s ease',
-          filter: 'blur(1px)'
-        }}
-      ></div>
-      
-      {/* Left edge light effect */}
-      <div 
-        className="absolute top-0 left-0 w-[2px] h-[30%] z-20 pointer-events-none"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, transparent 100%)',
-          opacity: isHovered ? 0.6 : 0.3,
-          transition: 'opacity 0.3s ease',
-          filter: 'blur(1px)'
-        }}
-      ></div>
-      
-      {/* Right edge light effect */}
-      <div 
-        className="absolute top-0 right-0 w-[2px] h-[30%] z-20 pointer-events-none"
-        style={{
-          background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, transparent 100%)',
-          opacity: isHovered ? 0.6 : 0.3,
-          transition: 'opacity 0.3s ease',
-          filter: 'blur(1px)'
-        }}
-      ></div>
-      
-      {/* Top corners light effect */}
-      <div 
-        className="absolute top-0 left-0 w-[15%] h-[15%] rounded-tl-xl z-20 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at top left, rgba(255, 255, 255, 0.3) 0%, transparent 70%)',
-          opacity: isHovered ? 0.6 : 0.3,
-          transition: 'opacity 0.3s ease'
-        }}
-      ></div>
-      
-      <div 
-        className="absolute top-0 right-0 w-[15%] h-[15%] rounded-tr-xl z-20 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at top right, rgba(255, 255, 255, 0.3) 0%, transparent 70%)',
-          opacity: isHovered ? 0.6 : 0.3,
-          transition: 'opacity 0.3s ease'
-        }}
-      ></div>
-      
-      {/* Subtle glow effect */}
-      <div 
-        className="absolute inset-0 rounded-xl z-10 pointer-events-none"
-        style={{
-          boxShadow: isHovered 
-            ? 'inset 0 1px 3px 0 rgba(255, 255, 255, 0.15), 0 1px 2px 0 rgba(255, 255, 255, 0.05)' 
-            : 'inset 0 1px 2px 0 rgba(255, 255, 255, 0.1)',
-          transition: 'box-shadow 0.3s ease'
-        }}
-      ></div>
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
       
       {/* Card content */}
-      <div className="absolute inset-0 rounded-xl p-4 flex flex-col hover:bg-black/80 transition-all duration-300 cursor-pointer z-5">
+      <div className="relative p-4 flex flex-col hover:bg-black/80 transition-all duration-300 cursor-pointer h-full">
         <div className="flex items-center mb-3 gap-2">
           {tokens.map((token, index) => (
             <div key={index} className="flex items-center">
