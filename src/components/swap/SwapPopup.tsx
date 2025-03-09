@@ -24,7 +24,6 @@ const SwapPopup = ({
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState(initialAmount);
   const popupRef = useRef<HTMLDivElement>(null);
-  const [popupWidth, setPopupWidth] = useState(500); // Default width
   const [currentStep, setCurrentStep] = useState(step);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [isConfirmHovered, setIsConfirmHovered] = useState(false);
@@ -57,14 +56,6 @@ const SwapPopup = ({
       0 0 0 1px ${border}
     `;
   };
-  
-  // Update popup width when searchBarWidth changes
-  useEffect(() => {
-    console.log('SwapPopup searchBarWidth:', searchBarWidth);
-    if (searchBarWidth > 0) {
-      setPopupWidth(searchBarWidth);
-    }
-  }, [searchBarWidth]);
 
   useEffect(() => {
     // Add event listener to close popup when clicking outside
@@ -137,7 +128,7 @@ const SwapPopup = ({
           <motion.div
             key="swap-form"
             ref={popupRef}
-            style={{ width: `${popupWidth}px` }}
+            style={{ width: `${searchBarWidth}px` }}
             className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl"
             initial={{ scale: 0.9, y: 100, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
@@ -259,7 +250,7 @@ const SwapPopup = ({
           <motion.div
             key="confirmation-popup"
             ref={popupRef}
-            style={{ width: `${popupWidth}px` }}
+            style={{ width: `${searchBarWidth}px` }}
             className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl"
             initial={{ scale: 0.9, y: 100, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
