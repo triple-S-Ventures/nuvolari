@@ -263,44 +263,47 @@ const SwapPopup = ({
             </div>
 
             <div className="px-6 py-4">
-              {/* You spend card */}
-              <div 
-                className="rounded-xl overflow-hidden mb-4 p-4" 
-                style={{ 
-                  backgroundColor: '#1B191F',
-                  boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
-                }}
-              >
-                <div className="flex items-center">
-                  <div className="text-gray-400 text-sm mr-auto">You spend</div>
-                </div>
-                <div className="flex items-center mt-2">
-                  <div className="w-10 h-10 rounded-full bg-[#6c5ce7] flex items-center justify-center mr-3">
-                    <img src="/eth-logo.png" alt="ETH" className="w-5 h-5" />
+              {/* Cards side by side */}
+              <div className="flex gap-4 mb-6">
+                {/* You spend card */}
+                <div 
+                  className="flex-1 rounded-xl overflow-hidden p-4" 
+                  style={{ 
+                    backgroundColor: '#1B191F',
+                    boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
+                  }}
+                >
+                  <div className="flex items-center">
+                    <div className="text-gray-400 text-sm mr-auto">You spend</div>
                   </div>
-                  <div>
-                    <div className="text-white font-medium text-lg">5.8 ETH</div>
+                  <div className="flex items-center mt-2">
+                    <div className="w-10 h-10 rounded-full bg-[#6c5ce7] flex items-center justify-center mr-3">
+                      <img src="/eth-logo.png" alt="ETH" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-white font-medium text-lg">5.8 ETH</div>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* You get card */}
-              <div 
-                className="rounded-xl overflow-hidden mb-6 p-4" 
-                style={{ 
-                  backgroundColor: '#1B191F',
-                  boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
-                }}
-              >
-                <div className="flex items-center">
-                  <div className="text-gray-400 text-sm mr-auto">You get</div>
-                </div>
-                <div className="flex items-center mt-2">
-                  <div className="w-10 h-10 rounded-full bg-[#f39c12] flex items-center justify-center mr-3">
-                    <img src="/mog-logo.png" alt="MOG" className="w-5 h-5" />
+                {/* You get card */}
+                <div 
+                  className="flex-1 rounded-xl overflow-hidden p-4" 
+                  style={{ 
+                    backgroundColor: '#1B191F',
+                    boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
+                  }}
+                >
+                  <div className="flex items-center">
+                    <div className="text-gray-400 text-sm mr-auto">You get</div>
                   </div>
-                  <div>
-                    <div className="text-white font-medium text-lg">18,195,766,163.51 MOG</div>
+                  <div className="flex items-center mt-2">
+                    <div className="w-10 h-10 rounded-full bg-[#f39c12] flex items-center justify-center mr-3">
+                      <img src="/mog-logo.png" alt="MOG" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-white font-medium text-lg">18,195,766,163.51 MOG</div>
+                    </div>
                   </div>
                 </div>
               </div>
