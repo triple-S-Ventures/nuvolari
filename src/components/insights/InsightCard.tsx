@@ -47,21 +47,34 @@ type InsightCardProps = {
 const InsightCard = ({ title, tokens }: InsightCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   
+  // Dynamic box-shadow values based on hover state
+  const getBoxShadow = () => {
+    const topGlow = isHovered ? 'rgba(255, 255, 255, 0.7)' : 'rgba(255, 255, 255, 0.5)';
+    const sideGlow = isHovered ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.2)';
+    const border = 'rgba(0, 0, 0, 0.2)';
+    
+    return `
+      0 -1px 2px ${topGlow},
+      -1px -1px 1px ${sideGlow},
+      1px -1px 1px ${sideGlow},
+      0 0 0 1px ${border}
+    `;
+  };
+  
   return (
     <div 
-      className={cn(
-        "relative w-full h-full rounded-xl overflow-hidden",
-        isHovered ? "shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_1px_0_0_rgba(255,255,255,0.15)]" : "shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_1px_0_0_rgba(255,255,255,0.07)]"
-      )}
-      style={{ transition: "box-shadow 0.3s ease" }}
+      className="relative w-full h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Card background */}
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
-      
-      {/* Card content */}
-      <div className="relative p-4 flex flex-col hover:bg-black/80 transition-all duration-300 cursor-pointer h-full">
+      {/* Card with illuminated border using box-shadow */}
+      <div 
+        className="w-full h-full rounded-xl bg-black/70 backdrop-blur-md p-4 flex flex-col hover:bg-black/80 transition-all duration-300 cursor-pointer"
+        style={{
+          boxShadow: getBoxShadow(),
+          transition: 'box-shadow 0.3s ease, background-color 0.3s ease'
+        }}
+      >
         <div className="flex items-center mb-3 gap-2">
           {tokens.map((token, index) => (
             <div key={index} className="flex items-center">
