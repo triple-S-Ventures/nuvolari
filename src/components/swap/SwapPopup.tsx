@@ -123,76 +123,63 @@ const SwapPopup = ({
         </div>
 
         <div className="px-6 py-4">
-          {/* You spend section */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
-              <div className="text-gray-400 text-sm">You spend</div>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-full bg-[#6c5ce7] flex items-center justify-center">
-                  <img src="/eth-logo.png" alt="ETH" className="w-4 h-4" />
+          {/* Single background card for both sections */}
+          <div 
+            className="rounded-xl overflow-hidden mb-6" 
+            style={{ 
+              backgroundColor: '#1B191F',
+              boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
+            }}
+          >
+            {/* You spend section */}
+            <div className="p-4 border-b border-white/5">
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-gray-400 text-sm">You spend</div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 rounded-full bg-[#6c5ce7] flex items-center justify-center">
+                    <img src="/eth-logo.png" alt="ETH" className="w-4 h-4" />
+                  </div>
                 </div>
               </div>
-            </div>
-            {/* Inner card with distinct background */}
-            <div 
-              className="rounded-xl overflow-hidden" 
-              style={{ 
-                backgroundColor: '#1B191F',
-                boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
-              }}
-            >
-              <div className="p-4">
-                <div className="flex items-start justify-between">
-                  <div className="w-full">
-                    <input
-                      type="text"
-                      value={amount}
-                      onChange={handleAmountChange}
-                      className="text-4xl font-semibold text-white bg-transparent outline-none w-full"
-                    />
-                    <div className="flex items-center justify-between mt-3">
-                      <div className="text-gray-400 text-sm">${(amount * 2600).toLocaleString()}</div>
-                      <div className="flex items-center">
-                        <div className="text-gray-400 text-sm mr-2">36 ETH</div>
-                        <button
-                          onClick={handleMaxClick}
-                          className="px-3 py-1 rounded-full bg-[#AC87CF]/30 text-xs text-[#AC87CF] font-medium hover:bg-[#AC87CF]/40 transition-colors"
-                        >
-                          MAX
-                        </button>
-                      </div>
+              <div className="flex items-start justify-between">
+                <div className="w-full">
+                  <input
+                    type="text"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    className="text-4xl font-semibold text-white bg-transparent outline-none w-full"
+                  />
+                  <div className="flex items-center justify-between mt-3">
+                    <div className="text-gray-400 text-sm">${(amount * 2600).toLocaleString()}</div>
+                    <div className="flex items-center">
+                      <div className="text-gray-400 text-sm mr-2">36 ETH</div>
+                      <button
+                        onClick={handleMaxClick}
+                        className="px-3 py-1 rounded-full bg-[#AC87CF]/30 text-xs text-[#AC87CF] font-medium hover:bg-[#AC87CF]/40 transition-colors"
+                      >
+                        MAX
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* You get section */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
-              <div className="text-gray-400 text-sm">You get</div>
-              <div className="flex items-center bg-white/5 rounded-full px-3 py-1.5">
-                <div className="w-6 h-6 rounded-full bg-[#f39c12] flex items-center justify-center mr-2">
-                  <img src="/mog-logo.png" alt="MOG" className="w-3.5 h-3.5" />
-                </div>
-                <span className="text-white font-medium">{toToken}</span>
-              </div>
-            </div>
-            {/* Inner card with distinct background */}
-            <div 
-              className="rounded-xl overflow-hidden" 
-              style={{ 
-                backgroundColor: '#1B191F',
-                boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
-              }}
-            >
-              <div className="p-4">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="text-4xl font-semibold text-white">18,195,766,163.51</div>
-                    <div className="text-gray-400 text-sm mt-3">${(amount * 2600 * 0.999).toLocaleString()}</div>
+            {/* You get section */}
+            <div className="p-4">
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-gray-400 text-sm">You get</div>
+                <div className="flex items-center bg-white/5 rounded-full px-3 py-1.5">
+                  <div className="w-6 h-6 rounded-full bg-[#f39c12] flex items-center justify-center mr-2">
+                    <img src="/mog-logo.png" alt="MOG" className="w-3.5 h-3.5" />
                   </div>
+                  <span className="text-white font-medium">{toToken}</span>
+                </div>
+              </div>
+              <div className="flex items-start justify-between">
+                <div>
+                  <div className="text-4xl font-semibold text-white">18,195,766,163.51</div>
+                  <div className="text-gray-400 text-sm mt-3">${(amount * 2600 * 0.999).toLocaleString()}</div>
                 </div>
               </div>
             </div>
