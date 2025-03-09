@@ -18,13 +18,13 @@ const SearchSuggestion = ({ icon: Icon, label, onClick, isDarkText = false }: Se
   return (
     <button 
       onClick={onClick} 
-      className="w-full flex items-center justify-between px-4 py-3 transition-colors rounded group text-white hover:bg-white/5"
+      className="w-full flex items-center justify-between px-4 py-3 transition-colors rounded-md group text-white hover:bg-white/5"
     >
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded bg-[#AC87CF] flex items-center justify-center text-white">
-          <Icon size={20} />
+        <div className="w-9 h-9 rounded-2xl bg-[#AC87CF] flex items-center justify-center text-white">
+          <Icon size={18} />
         </div>
-        <span className="text-sm font-medium">{label}</span>
+        <span className="text-base font-medium">{label}</span>
       </div>
       <ChevronRight size={16} className="text-white/60" />
     </button>
