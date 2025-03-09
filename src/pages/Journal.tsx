@@ -8,6 +8,8 @@ import JournalEntry from '@/components/JournalEntry';
 import JournalAccessPopup from '@/components/JournalAccessPopup';
 import BackgroundGradient from '@/components/BackgroundGradient';
 import { Switch } from '@/components/ui/switch';
+import Toggle from '@/components/ui/toggle';
+import JournalPopup from '@/components/JournalPopup';
 import { cn } from '@/lib/utils';
 
 // Define types
@@ -138,11 +140,11 @@ const Journal = () => {
       toast.success("Journal loaded successfully");
     }, 1000);
     
-    // Show popup after 2 seconds
+    // Show popup after 0.4 seconds
     const popupTimer = setTimeout(() => {
       setIsBlurred(true);
       setShowPopup(true);
-    }, 2000);
+    }, 400);
     
     return () => {
       clearTimeout(loadingTimer);
@@ -150,9 +152,9 @@ const Journal = () => {
     };
   }, []);
 
-  const handleClosePopup = () => {
-    setShowPopup(false);
-    setIsBlurred(false);
+  const handleGetAccess = () => {
+    // Open Telegram with link to Google
+    window.open('https://t.me/share/url?url=https://google.com', '_blank');
   };
 
   // Filter entries based on search query, filter type, and executed status
@@ -194,6 +196,15 @@ const Journal = () => {
       <BackgroundGradient />
       <Navbar />
       
+      <AnimatePresence>
+        {showPopup && (
+          <JournalPopup 
+            onClose={() => {}} 
+            onGetAccess={handleGetAccess}
+          />
+        )}
+      </AnimatePresence>
+      
       {isLoading ? (
         <div className="flex-1 flex items-center justify-center">
           <div className="w-10 h-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
@@ -205,11 +216,17 @@ const Journal = () => {
               "fixed inset-0 z-10 bg-black/60 backdrop-blur-md transition-opacity duration-500",
               isBlurred ? "opacity-100" : "opacity-0 pointer-events-none"
             )}
+            style={{ 
+              pointerEvents: isBlurred ? 'auto' : 'none',
+              top: '60px'
+            }}
           />
           <main className={cn(
             "flex-1 pt-28 pb-16 flex flex-col items-center justify-start w-full transition-all duration-500 relative z-20",
-            isBlurred && "blur-sm pointer-events-none"
-          )}>
+            isBlurred && "blur-sm"
+          )}
+            style={{ pointerEvents: isBlurred ? 'none' : 'auto' }}
+          >
             <div className="w-full max-w-4xl mx-auto px-4">
               <div className="mb-8 text-center">
                 <h1 className="text-4xl font-bold mb-2">Journal</h1>
@@ -287,20 +304,12 @@ const Journal = () => {
                 </button>
               </div>
               
-              <div className="flex items-center justify-between mb-6 mt-4">
-                <div className="flex items-center gap-2">
-                  <Switch 
-                    checked={showExecuted} 
-                    onCheckedChange={setShowExecuted} 
-                    className="data-[state=checked]:bg-primary"
-                  />
-                  <span className="text-sm text-muted-foreground">Show executed</span>
-                </div>
-                
-                <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  <span>Latest first</span>
-                  <ChevronDown size={16} />
-                </button>
+              <div className="w-full max-w-4xl mx-auto px-4 mb-4 flex justify-end">
+                <Toggle 
+                  label="Show executed" 
+                  isChecked={showExecuted}
+                  onChange={setShowExecuted}
+                />
               </div>
               
               {filteredEntries.length > 0 ? (
@@ -341,12 +350,6 @@ const Journal = () => {
       )}
       
       <Footer />
-      
-      <AnimatePresence>
-        {showPopup && (
-          <JournalAccessPopup onClose={handleClosePopup} />
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 };

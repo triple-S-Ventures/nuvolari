@@ -15,7 +15,7 @@ const JournalAccessPopup = ({ onClose }: JournalAccessPopupProps) => {
       onClick={onClose}
     >
       <motion.div
-        className="relative bg-black/80 backdrop-blur-xl border border-white/20 rounded-xl p-6 max-w-md w-full shadow-2xl overflow-hidden"
+        className="relative bg-black/80 backdrop-blur-xl border border-white/20 rounded-xl p-6 max-w-xl w-full shadow-2xl overflow-hidden"
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
@@ -35,7 +35,7 @@ const JournalAccessPopup = ({ onClose }: JournalAccessPopupProps) => {
             </button>
           </div>
           
-          <h2 className="text-2xl font-bold text-white mb-3">Tired of manually journaling your trades?</h2>
+          <h2 className="text-2xl font-bold text-white mb-3 whitespace-nowrap">manually journaling your trades?</h2>
           <p className="text-gray-300 mb-8">
             Get early access to nuvolariAI's automated journaling solution
           </p>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import PortfolioBalanceHeader from './portfolio/PortfolioBalanceHeader';
@@ -45,7 +44,7 @@ const PortfolioBalance = () => {
 
   return (
     <div className={cn(
-      "glass-card rounded-2xl p-4 transition-all duration-700 transform h-full",
+      "rounded-2xl p-4 transition-all duration-700 transform h-full bg-[#151417]",
       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
     )}>
       <PortfolioBalanceHeader isPrivate={isPrivate} setIsPrivate={setIsPrivate} />

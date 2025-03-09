@@ -69,7 +69,7 @@ const InsightCard = ({ title, tokens }: InsightCardProps) => {
     >
       {/* Card with illuminated border using box-shadow */}
       <div 
-        className="w-full h-full rounded-xl bg-black/70 backdrop-blur-md p-4 flex flex-col hover:bg-black/80 transition-all duration-300 cursor-pointer"
+        className="w-full h-full rounded-xl bg-black/50 backdrop-blur-md p-4 flex flex-col hover:bg-black/60 transition-all duration-300 cursor-pointer"
         style={{
           boxShadow: getBoxShadow(),
           transition: 'box-shadow 0.3s ease, background-color 0.3s ease'

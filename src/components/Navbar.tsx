@@ -50,7 +50,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center py-3 transition-all duration-300">
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 transition-all duration-300 z-50",
+        isScrolled ? "py-2 bg-background/80 backdrop-blur-md border-b border-white/5" : "py-4"
+      )}
+    >
       <div className={cn(
         "flex items-center gap-4 px-6 py-2 rounded-2xl transition-all duration-300", 
         isScrolled 
@@ -144,7 +149,7 @@ const Navbar = () => {
         open={isWalletDialogOpen} 
         onOpenChange={setIsWalletDialogOpen} 
       />
-    </div>
+    </header>
   );
 };
 

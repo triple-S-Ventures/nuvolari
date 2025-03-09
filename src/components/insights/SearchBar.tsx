@@ -31,11 +31,26 @@ const SearchBar = ({
   setIsSearchFocused: externalSetIsSearchFocused
 }: SearchBarProps) => {
   const [internalIsSearchFocused, setInternalIsSearchFocused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   
   // Use either external or internal state for focus
   const isSearchFocused = externalIsSearchFocused !== undefined ? externalIsSearchFocused : internalIsSearchFocused;
   const setIsSearchFocused = externalSetIsSearchFocused || setInternalIsSearchFocused;
+
+  // Dynamic box-shadow values based on hover state
+  const getBoxShadow = () => {
+    const topGlow = isHovered || isSearchFocused ? 'rgba(180, 180, 180, 0.4)' : 'rgba(180, 180, 180, 0.25)';
+    const sideGlow = isHovered || isSearchFocused ? 'rgba(180, 180, 180, 0.2)' : 'rgba(180, 180, 180, 0.1)';
+    const border = 'rgba(0, 0, 0, 0.2)';
+    
+    return `
+      0 -1px 1px ${topGlow},
+      -1px -1px 1px ${sideGlow},
+      1px -1px 1px ${sideGlow},
+      0 0 0 1px ${border}
+    `;
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -61,16 +76,23 @@ const SearchBar = ({
   };
 
   return (
-    <div className="relative mb-10 z-20" ref={searchRef}>
+    <div 
+      className="relative mb-10 z-20" 
+      ref={searchRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className={cn(
         "rounded-2xl overflow-hidden flex items-center px-4 py-3 transition-all duration-300 relative z-20", 
         isSearchFocused 
-          ? "ring-1 ring-white/20 shadow-lg" 
-          : "focus-within:ring-1 focus-within:ring-white/20", 
-        isSearchFocused 
-          ? "bg-black/60 backdrop-blur-md border border-white/20"
+          ? "bg-black/60 backdrop-blur-md" 
           : getStandardSearchBarColor()
-      )}>
+      )}
+      style={{
+        boxShadow: getBoxShadow(),
+        transition: 'box-shadow 0.3s ease, background-color 0.3s ease'
+      }}
+      >
         <Search className="h-5 w-5 text-muted-foreground mr-3" />
         <input 
           type="text" 
@@ -175,16 +197,19 @@ const SearchBar = ({
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
               className="absolute top-full left-0 right-0 mt-1 z-50 rounded-2xl overflow-hidden"
-              style={{
-                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.8)'
-              }}
+              style={{ pointerEvents: 'auto' }}
             >
               <div 
                 className="bg-black text-white w-full rounded-2xl" 
                 style={{ 
                   backdropFilter: 'none', 
-                  backgroundColor: '#000000', 
-                  boxShadow: '0 0 0 2px rgba(255, 255, 255, 0.1)' 
+                  backgroundColor: '#000000',
+                  boxShadow: `
+                    0 -1px 1px rgba(180, 180, 180, 0.25),
+                    -1px -1px 1px rgba(180, 180, 180, 0.1),
+                    1px -1px 1px rgba(180, 180, 180, 0.1),
+                    0 0 0 1px rgba(0, 0, 0, 0.2)
+                  `
                 }}
               >
                 <SearchSuggestions 

@@ -64,7 +64,7 @@ const FilterButtons = ({ activeFilter, setActiveFilter }: FilterButtonsProps) =>
           className={cn(
             "flex items-center justify-center rounded-full cursor-pointer transition-all duration-300", 
             activeFilter === 'saver' 
-              ? "text-black px-5 py-1.5" 
+              ? "text-white px-5 py-1.5" 
               : "w-8 h-8"
           )} 
           style={{

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import CryptoIcon from './CryptoIcon';
@@ -44,13 +43,13 @@ const AssetItem = ({
 
   return (
     <div className={cn(
-      "flex items-center py-2 border-b border-white/5 transition-all duration-700 transform",
+      "flex items-center py-3 px-3 mb-2 rounded-xl bg-[#1B1B1C] border border-white/5 transition-all duration-700 transform",
       isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8",
       animationDirection === "top" && isVisible ? "translate-y-0" : animationDirection === "top" ? "translate-y-8" : ""
     )}>
       <div className="flex items-center">
-        <div className="mr-2">
-          <CryptoIcon symbol={symbol} />
+        <div className="mr-3">
+          <CryptoIcon symbol={symbol} className="w-10 h-10" />
         </div>
         
         <div>

@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from "sonner";
 
@@ -25,7 +24,7 @@ export type WalletAsset = {
 const demoWallets: WalletType[] = [
   {
     address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
-    label: "Whale Wallet",
+    label: "Balanced",
     balance: 1250000.89,
     assets: [
       { symbol: "BTC", name: "Bitcoin", value: 500000, change: 5.24, changeValue: 25000.00, isPositive: true },
@@ -39,13 +38,13 @@ const demoWallets: WalletType[] = [
       { symbol: "cDAI", name: "Compound DAI", value: 80000, change: 2.12, changeValue: 1664.00, isPositive: true },
     ],
     nfts: [
-      { symbol: "BAYC", name: "Bored Ape Yacht Club", value: 200000, change: 8.32, changeValue: 15420.00, isPositive: true },
+      { symbol: "MILADY", name: "Milady Maker", value: 200000, change: 8.32, changeValue: 15420.00, isPositive: true },
       { symbol: "PUNK", name: "CryptoPunks", value: 150000, change: 4.11, changeValue: 5958.00, isPositive: true },
     ]
   },
   {
     address: "0x8932Be3bA383F81A508c43C037dD31B4bA61afF4",
-    label: "Mid-size Portfolio",
+    label: "Degen",
     balance: 124688.46,
     assets: [
       { symbol: "ETH", name: "Ethereum", value: 45000, change: -1.72, changeValue: 788.00, isPositive: false },
@@ -57,12 +56,12 @@ const demoWallets: WalletType[] = [
       { symbol: "yvUSDC", name: "Yearn USDC", value: 11000, change: 8.35, changeValue: 847.00, isPositive: true },
     ],
     nfts: [
-      { symbol: "MAYC", name: "Mutant Ape Yacht Club", value: 12000, change: -2.25, changeValue: 276.00, isPositive: false },
+      { symbol: "SCHIZO", name: "SchizoPoster", value: 12000, change: -2.25, changeValue: 276.00, isPositive: false },
     ]
   },
   {
     address: "0x1a89aA97D31576d66CF5bFd0E674138B55495E16",
-    label: "Beginner Portfolio",
+    label: "Saver",
     balance: 5325.78,
     assets: [
       { symbol: "ETH", name: "Ethereum", value: 2800, change: 1.32, changeValue: 36.50, isPositive: true },

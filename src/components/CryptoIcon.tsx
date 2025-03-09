@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 
@@ -12,7 +11,7 @@ const CryptoIcon: React.FC<CryptoIconProps> = ({ symbol, className }) => {
     switch (symbol) {
       case 'ETH':
         return (
-          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-crypto-eth">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-crypto-eth">
             <g fill="currentColor">
               <path d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0s16 7.163 16 16-7.163 16-16 16zm7.994-15.781L16.498 4 9 16.22l7.498 4.353 7.496-4.354zM16.498 27.3l7.496-4.354L16.498 20l-7.498 2.946 7.498 4.354z" />
               <path opacity=".5" d="M16.498 20v7.3l7.496-4.353L16.498 20zm0-15.991v9.802l7.496-4.353-7.496-5.45z" />
@@ -23,7 +22,7 @@ const CryptoIcon: React.FC<CryptoIconProps> = ({ symbol, className }) => {
         );
       case 'SOL':
         return (
-          <svg viewBox="0 0 397.7 311.7" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-crypto-sol">
+          <svg viewBox="0 0 397.7 311.7" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-crypto-sol">
             <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="360.879" x2="141.213" y1="351.455" y2="-69.294">
               <stop offset="0" stopColor="#00ffa3" />
               <stop offset="1" stopColor="#dc1fff" />
@@ -36,7 +35,7 @@ const CryptoIcon: React.FC<CryptoIconProps> = ({ symbol, className }) => {
       case 'FART':
       default:
         return (
-          <div className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center text-white text-xs font-medium">
+          <div className="w-full h-full bg-gray-500 rounded-full flex items-center justify-center text-white text-xs font-medium">
             {symbol.charAt(0)}
           </div>
         );
@@ -45,7 +44,7 @@ const CryptoIcon: React.FC<CryptoIconProps> = ({ symbol, className }) => {
 
   return (
     <div className={cn(
-      "rounded-full bg-secondary/70 w-8 h-8 flex items-center justify-center",
+      "rounded-full bg-secondary/70 w-8 h-8 flex items-center justify-center p-1.5",
       className
     )}>
       {getCryptoIcon(symbol)}

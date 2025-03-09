@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Wallet, ArrowRight, Copy } from 'lucide-react';
+import { Wallet, ArrowUpRight, Copy } from 'lucide-react';
 import { useWallet } from '@/contexts/WalletContext';
 import BackgroundGradient from '@/components/BackgroundGradient';
 import Footer from '@/components/Footer';
@@ -14,19 +14,8 @@ const Onboarding = () => {
 
   const demoWallets = [
     {
-      name: "Whale Wallet",
+      name: "Balanced",
       address: "0x31794deb7ac412929cc6506b64f9c43870086ac3",
-      balance: "$1,250,000.89",
-      allocation: {
-        defi: 70,
-        tokens: 20,
-        nfts: 10
-      }
-    },
-    {
-      name: "Mid-size Portfolio",
-      address: "0x21794deb7ac412929cc6506b64f9c43870086ac2",
-      balance: "$124,688.46",
       allocation: {
         defi: 40,
         tokens: 50,
@@ -34,12 +23,20 @@ const Onboarding = () => {
       }
     },
     {
-      name: "Beginner Portfolio",
-      address: "0x11794deb7ac412929cc6506b64f9c43870086ac1",
-      balance: "$5,325.78",
+      name: "Degen",
+      address: "0x21794deb7ac412929cc6506b64f9c43870086ac2",
       allocation: {
         defi: 20,
         tokens: 70,
+        nfts: 10
+      }
+    },
+    {
+      name: "Saver",
+      address: "0x11794deb7ac412929cc6506b64f9c43870086ac1",
+      allocation: {
+        defi: 70,
+        tokens: 20,
         nfts: 10
       }
     }
@@ -73,82 +70,69 @@ const Onboarding = () => {
     >
       <BackgroundGradient />
       
-      <main className="flex-1 flex flex-col items-center justify-center px-4 py-12">
+      <main className="flex-1 flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-md mx-auto">
-          <div className="text-center mb-10">
-            <div className="inline-block mb-6">
+          <div className="text-center mb-6">
+            <div className="inline-block mb-4">
               <img 
                 src="/logo_brand.png" 
                 alt="Nuvolari Logo" 
                 className="h-12 w-auto"
               />
             </div>
-            <h1 className="text-4xl font-bold mb-3">Welcome to Nuvolari</h1>
+            <h1 className="text-4xl font-bold mb-2">Welcome to Nuvolari</h1>
             <p className="text-lg text-white/60">
               Connect your wallet or try a demo to get started
             </p>
           </div>
           
-          <div className="glass-card rounded-2xl p-6 backdrop-blur-md bg-[#121212]/80 border border-white/5">
-            <h2 className="text-xl font-medium text-white mb-6 text-center">Select a Wallet</h2>
+          <div className="glass-card rounded-2xl p-5 backdrop-blur-md bg-[#121212]/80 border border-white/5">
+            <h2 className="text-xl font-medium text-white mb-4 text-center">Select a Portfolio Type</h2>
             
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 mb-6">
               {demoWallets.map((wallet, index) => (
                 <div 
                   key={wallet.address}
-                  className="w-full p-4 rounded-lg bg-[#1a1a1a] hover:bg-[#252525] transition-colors text-left border border-white/5"
+                  className="w-full p-3 rounded-lg bg-[#1a1a1a] hover:bg-[#252525] transition-colors text-left border border-white/5 cursor-pointer"
+                  onClick={() => handleDemoWalletConnect(index)}
                 >
-                  <div className="flex justify-between items-start mb-2">
+                  <div className="flex justify-between items-start">
                     <div>
                       <div className="font-medium text-lg text-white">{wallet.name}</div>
-                      <div className="text-sm text-white/60 mb-1">{wallet.balance}</div>
                     </div>
-                    <button
-                      onClick={() => handleDemoWalletConnect(index)}
-                      className="w-8 h-8 rounded-full bg-[#6c5ce7] flex items-center justify-center flex-shrink-0"
+                    <div
+                      className="w-8 h-8 rounded-md bg-[#2A2A2A] flex items-center justify-center flex-shrink-0"
                     >
-                      <ArrowRight className="h-4 w-4 text-white" />
-                    </button>
+                      <ArrowUpRight className="h-4 w-4 text-white/70" />
+                    </div>
                   </div>
                   
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="text-xs text-white/60 font-mono truncate flex-1">
-                      {wallet.address}
-                    </div>
-                    <button 
-                      onClick={() => copyToClipboard(wallet.address)}
-                      className="p-1 rounded hover:bg-white/10"
-                    >
-                      <Copy size={14} className={copiedAddress === wallet.address ? "text-green-400" : "text-white/60"} />
-                    </button>
-                  </div>
-                  
-                  <div className="flex h-2 rounded-full overflow-hidden bg-[#252525] w-full">
+                  <div className="flex h-2 rounded-full overflow-hidden bg-[#252525] w-full mt-3">
                     <div 
-                      className="bg-[#6c5ce7]" 
+                      className="bg-[#9289D0]" 
                       style={{ width: `${wallet.allocation.defi}%` }}
                     />
                     <div 
-                      className="bg-[#00b894]" 
+                      className="bg-[#FF8F44]" 
                       style={{ width: `${wallet.allocation.tokens}%` }}
                     />
                     <div 
-                      className="bg-[#fdcb6e]" 
+                      className="bg-[#00FFE5]" 
                       style={{ width: `${wallet.allocation.nfts}%` }}
                     />
                   </div>
                   
-                  <div className="flex text-xs mt-2 justify-between">
+                  <div className="flex text-xs mt-3 justify-between">
                     <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-[#6c5ce7] mr-1"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#9289D0] mr-1"></div>
                       <span className="text-white/60">{wallet.allocation.defi}% DeFi</span>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-[#00b894] mr-1"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#FF8F44] mr-1"></div>
                       <span className="text-white/60">{wallet.allocation.tokens}% Tokens</span>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-[#fdcb6e] mr-1"></div>
+                      <div className="w-2 h-2 rounded-full bg-[#00FFE5] mr-1"></div>
                       <span className="text-white/60">{wallet.allocation.nfts}% NFTs</span>
                     </div>
                   </div>
@@ -156,7 +140,7 @@ const Onboarding = () => {
               ))}
             </div>
             
-            <div className="relative mb-6">
+            <div className="relative mb-4">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-white/10"></div>
               </div>
@@ -165,9 +149,8 @@ const Onboarding = () => {
               </div>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div>
-                <label className="block text-sm font-medium mb-2 text-white/80">Enter your wallet address</label>
                 <input
                   type="text"
                   placeholder="0x..."
