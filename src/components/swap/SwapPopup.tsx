@@ -100,7 +100,7 @@ const SwapPopup = ({
         }}
       >
         {/* Step indicators inside the popup */}
-        <div className="pt-4 px-4 flex justify-center gap-2">
+        <div className="pt-4 px-6 flex justify-center gap-2">
           {Array.from({ length: totalSteps }).map((_, index) => (
             <div 
               key={index} 
@@ -111,7 +111,8 @@ const SwapPopup = ({
           ))}
         </div>
         
-        <div className="p-4 flex items-center">
+        {/* Nuvolari header aligned with inner card */}
+        <div className="px-6 pt-4 pb-2 flex items-center">
           <div className="flex items-center">
             <div className="flex -space-x-2 mr-3">
               <div className="w-8 h-8 rounded-full bg-[#242029] flex items-center justify-center z-10">
