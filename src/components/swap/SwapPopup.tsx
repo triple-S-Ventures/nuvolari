@@ -33,13 +33,21 @@ const SwapPopup = ({
   const [isCheckBalanceHovered, setIsCheckBalanceHovered] = useState(false);
   const [isJournalHovered, setIsJournalHovered] = useState(false);
   
-  // Use searchBarWidth directly without state to avoid any synchronization issues
-  const popupWidth = searchBarWidth && searchBarWidth > 0 ? searchBarWidth : 500;
+  // IMPORTANT: Use the exact searchBarWidth without any fallback to ensure exact match
+  // Only use fallback if searchBarWidth is literally 0 or undefined
+  const popupWidth = (!searchBarWidth || searchBarWidth === 0) ? 500 : searchBarWidth;
   
-  // Log the width being used
+  // Log the width being used for debugging
   useEffect(() => {
-    console.log('SwapPopup using width:', popupWidth, 'px (searchBarWidth:', searchBarWidth, 'px)');
-  }, [searchBarWidth, popupWidth]);
+    console.log('SwapPopup EXACT WIDTH:', popupWidth, 'px');
+    console.log('searchBarWidth received:', searchBarWidth, 'px');
+    console.log('Using fallback?', (!searchBarWidth || searchBarWidth === 0));
+    
+    // Log the actual width of the popup element after render
+    if (popupRef.current) {
+      console.log('Actual popup DOM width:', popupRef.current.offsetWidth, 'px');
+    }
+  }, [searchBarWidth, popupWidth, popupRef.current]);
   
   // Dynamic box-shadow values based on hover state for Confirm button - using gray colors like InsightCard
   const getConfirmBoxShadow = () => {

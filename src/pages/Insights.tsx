@@ -40,35 +40,40 @@ const Insights = () => {
 
   // Measure search bar width when component mounts
   useEffect(() => {
-    if (searchBarRef.current) {
-      const width = searchBarRef.current.offsetWidth;
-      console.log('Initial searchBarWidth measurement:', width);
-      setSearchBarWidth(width);
-      
-      // Update width on window resize
-      const handleResize = () => {
-        if (searchBarRef.current) {
-          const newWidth = searchBarRef.current.offsetWidth;
-          console.log('Window resize - new searchBarWidth:', newWidth);
-          setSearchBarWidth(newWidth);
+    const measureAndSetWidth = () => {
+      if (searchBarRef.current) {
+        const width = searchBarRef.current.offsetWidth;
+        console.log('MEASURED searchBarWidth:', width);
+        
+        // Only update if width is valid and different from current
+        if (width > 0 && width !== searchBarWidth) {
+          console.log('UPDATING searchBarWidth to:', width);
+          setSearchBarWidth(width);
+        } else {
+          console.log('NOT updating searchBarWidth. Current:', searchBarWidth, 'Measured:', width);
         }
-      };
-      
-      // Force a measurement after a short delay to ensure accurate width
-      setTimeout(() => {
-        if (searchBarRef.current) {
-          const delayedWidth = searchBarRef.current.offsetWidth;
-          console.log('Delayed searchBarWidth measurement:', delayedWidth);
-          if (delayedWidth > 0) {
-            setSearchBarWidth(delayedWidth);
-          }
-        }
-      }, 500);
-      
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }
-  }, []);
+      }
+    };
+    
+    // Initial measurement
+    measureAndSetWidth();
+    
+    // Update width on window resize
+    const handleResize = () => {
+      measureAndSetWidth();
+    };
+    
+    // Force a measurement after a short delay to ensure accurate width
+    const timerId = setTimeout(() => {
+      measureAndSetWidth();
+    }, 500);
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timerId);
+    };
+  }, [searchBarWidth]);
 
   const filteredInsights = filterInsights(insights, activeCategory, searchQuery);
 
