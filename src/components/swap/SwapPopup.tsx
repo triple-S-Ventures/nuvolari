@@ -497,6 +497,37 @@ const SwapPopup = ({
               </p>
             </div>
             
+            {/* Inner card for success details */}
+            <div 
+              className="rounded-xl overflow-hidden mb-6" 
+              style={{ 
+                backgroundColor: '#1B191F',
+                boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 8px rgba(0, 0, 0, 0.3)'
+              }}
+            >
+              <div className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-[#6c5ce7] flex items-center justify-center mr-3">
+                      <img src="/eth-logo.png" alt="ETH" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-white font-medium text-lg">{amount} {fromToken}</div>
+                    </div>
+                  </div>
+                  <div className="text-gray-400">to</div>
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-[#f39c12] flex items-center justify-center mr-3">
+                      <img src="/mog-logo.png" alt="MOG" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-white font-medium text-lg">{toToken === 'MOG' ? '18,195,766,163.51' : amount * 2600} {toToken}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
             {/* Buttons */}
             <div className="flex w-full justify-between gap-4">
               <button
