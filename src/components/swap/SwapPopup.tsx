@@ -26,9 +26,12 @@ const SwapPopup = ({
   const popupRef = useRef<HTMLDivElement>(null);
   const [currentStep, setCurrentStep] = useState(step);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [isConfirmHovered, setIsConfirmHovered] = useState(false);
   const [isExecuteHovered, setIsExecuteHovered] = useState(false);
   const [isEditHovered, setIsEditHovered] = useState(false);
+  const [isCheckBalanceHovered, setIsCheckBalanceHovered] = useState(false);
+  const [isJournalHovered, setIsJournalHovered] = useState(false);
   const [effectiveWidth, setEffectiveWidth] = useState(500); // Default width
   
   // Update effective width when searchBarWidth changes
@@ -86,6 +89,34 @@ const SwapPopup = ({
     `;
   };
 
+  // Dynamic box-shadow values based on hover state for Check Balance button - using gray colors like InsightCard
+  const getCheckBalanceBoxShadow = () => {
+    const topGlow = isCheckBalanceHovered ? 'rgba(180, 180, 180, 0.4)' : 'rgba(180, 180, 180, 0.25)';
+    const sideGlow = isCheckBalanceHovered ? 'rgba(180, 180, 180, 0.2)' : 'rgba(180, 180, 180, 0.1)';
+    const border = 'rgba(0, 0, 0, 0.2)';
+    
+    return `
+      0 -1px 1px ${topGlow},
+      -1px -1px 1px ${sideGlow},
+      1px -1px 1px ${sideGlow},
+      0 0 0 1px ${border}
+    `;
+  };
+
+  // Dynamic box-shadow values based on hover state for Journal button - using gray colors like InsightCard
+  const getJournalBoxShadow = () => {
+    const topGlow = isJournalHovered ? 'rgba(180, 180, 180, 0.4)' : 'rgba(180, 180, 180, 0.25)';
+    const sideGlow = isJournalHovered ? 'rgba(180, 180, 180, 0.2)' : 'rgba(180, 180, 180, 0.1)';
+    const border = 'rgba(0, 0, 0, 0.2)';
+    
+    return `
+      0 -1px 1px ${topGlow},
+      -1px -1px 1px ${sideGlow},
+      1px -1px 1px ${sideGlow},
+      0 0 0 1px ${border}
+    `;
+  };
+
   useEffect(() => {
     // Add event listener to close popup when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
@@ -115,13 +146,24 @@ const SwapPopup = ({
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      onClose();
+      setCurrentStep(3);
+      setShowSuccess(true);
     }, 2000);
   };
 
   const handleEdit = () => {
     setShowConfirmation(false);
     setCurrentStep(1);
+  };
+
+  const handleCheckBalance = () => {
+    // Handle check balance action
+    onClose();
+  };
+
+  const handleGoToJournal = () => {
+    // Handle go to journal action
+    onClose();
   };
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -156,16 +198,16 @@ const SwapPopup = ({
         {/* First popup - always rendered but positioned and styled based on state */}
         <motion.div
           key="swap-form"
-          ref={showConfirmation ? null : popupRef}
+          ref={!showConfirmation && !showSuccess ? popupRef : null}
           style={{ width: `${effectiveWidth}px` }}
           className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl absolute"
           initial={{ y: 100, opacity: 0, scale: 0.9 }}
           animate={{ 
-            y: showConfirmation ? -180 : 0, 
-            opacity: showConfirmation ? 0.6 : 1,
-            scale: showConfirmation ? 0.85 : 1,
-            filter: showConfirmation ? 'blur(2px)' : 'blur(0px)',
-            zIndex: showConfirmation ? 10 : 20
+            y: showConfirmation || showSuccess ? -180 : 0, 
+            opacity: showConfirmation || showSuccess ? 0.6 : 1,
+            scale: showConfirmation || showSuccess ? 0.85 : 1,
+            filter: showConfirmation || showSuccess ? 'blur(2px)' : 'blur(0px)',
+            zIndex: showConfirmation || showSuccess ? 10 : 20
           }}
           transition={{ 
             type: 'spring', 
@@ -224,7 +266,7 @@ const SwapPopup = ({
                       value={amount}
                       onChange={handleAmountChange}
                       className="text-4xl font-semibold text-white bg-transparent outline-none w-full"
-                      disabled={showConfirmation}
+                      disabled={showConfirmation || showSuccess}
                     />
                     <div className="flex items-center justify-between mt-3">
                       <div className="text-gray-400 text-sm">${(amount * 2600).toLocaleString()}</div>
@@ -233,7 +275,7 @@ const SwapPopup = ({
                         <button
                           onClick={handleMaxClick}
                           className="px-3 py-1 rounded-full bg-[#AC87CF]/30 text-xs text-[#AC87CF] font-medium hover:bg-[#AC87CF]/40 transition-colors"
-                          disabled={showConfirmation}
+                          disabled={showConfirmation || showSuccess}
                         >
                           MAX
                         </button>
@@ -272,7 +314,7 @@ const SwapPopup = ({
 
             <button
               onClick={handleConfirm}
-              disabled={isLoading || showConfirmation}
+              disabled={isLoading || showConfirmation || showSuccess}
               onMouseEnter={() => setIsConfirmHovered(true)}
               onMouseLeave={() => setIsConfirmHovered(false)}
               className="w-full py-3 rounded-xl bg-[#AEA1FF] text-white font-medium hover:bg-[#9A8FE5] transition-colors disabled:opacity-70"
@@ -286,15 +328,16 @@ const SwapPopup = ({
         {/* Second popup - confirmation */}
         <motion.div
           key="confirmation-popup"
-          ref={showConfirmation ? popupRef : null}
+          ref={showConfirmation && !showSuccess ? popupRef : null}
           style={{ width: `${effectiveWidth}px` }}
           className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl absolute"
           initial={{ y: 400, opacity: 0, scale: 0.9 }}
           animate={{ 
-            y: showConfirmation ? 0 : 400, 
-            opacity: showConfirmation ? 1 : 0,
-            scale: showConfirmation ? 1 : 0.9,
-            zIndex: showConfirmation ? 20 : 10
+            y: showConfirmation && !showSuccess ? 0 : showSuccess ? -180 : 400, 
+            opacity: showConfirmation ? (showSuccess ? 0.6 : 1) : 0,
+            scale: showConfirmation ? (showSuccess ? 0.85 : 1) : 0.9,
+            filter: showSuccess ? 'blur(2px)' : 'blur(0px)',
+            zIndex: showConfirmation ? (showSuccess ? 10 : 20) : 10
           }}
           transition={{ 
             type: 'spring', 
@@ -382,18 +425,95 @@ const SwapPopup = ({
                 onMouseLeave={() => setIsEditHovered(false)}
                 className="flex-1 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/15 transition-colors"
                 style={{ boxShadow: getEditBoxShadow() }}
+                disabled={showSuccess}
               >
                 Edit
               </button>
               <button
                 onClick={handleExecute}
-                disabled={isLoading}
+                disabled={isLoading || showSuccess}
                 onMouseEnter={() => setIsExecuteHovered(true)}
                 onMouseLeave={() => setIsExecuteHovered(false)}
                 className="flex-1 py-3 rounded-xl bg-[#AEA1FF] text-white font-medium hover:bg-[#9A8FE5] transition-colors disabled:opacity-70"
                 style={{ boxShadow: getExecuteBoxShadow() }}
               >
                 {isLoading ? 'Processing...' : 'Execute'}
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Third popup - success */}
+        <motion.div
+          key="success-popup"
+          ref={showSuccess ? popupRef : null}
+          style={{ width: `${effectiveWidth}px` }}
+          className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl absolute"
+          initial={{ y: 400, opacity: 0, scale: 0.9 }}
+          animate={{ 
+            y: showSuccess ? 0 : 400, 
+            opacity: showSuccess ? 1 : 0,
+            scale: showSuccess ? 1 : 0.9,
+            zIndex: showSuccess ? 20 : 10
+          }}
+          transition={{ 
+            type: 'spring', 
+            damping: 25, 
+            stiffness: 300,
+            opacity: { duration: 0.3 },
+            delay: showSuccess ? 0.1 : 0
+          }}
+        >
+          {/* Step indicators inside the popup */}
+          <div className="pt-4 px-6 flex justify-center gap-2">
+            {Array.from({ length: totalSteps }).map((_, index) => (
+              <div 
+                key={index} 
+                className={`h-2 rounded-full transition-all ${
+                  index + 1 === currentStep ? 'w-12 bg-[#AC87CF]' : index + 1 < currentStep ? 'w-3 bg-[#AC87CF]' : 'w-3 bg-white/30'
+                }`}
+              />
+            ))}
+          </div>
+          
+          {/* Nuvolari header aligned with inner card */}
+          <div className="px-6 pt-4 pb-2 flex items-center">
+            <div className="flex items-center">
+              <div className="flex -space-x-2 mr-3">
+                <div className="w-8 h-8 rounded-full bg-[#242029] flex items-center justify-center z-10">
+                  <img src="/navbar_logo.png" alt="Nuvolari" className="w-5 h-5" />
+                </div>
+              </div>
+              <span className="font-medium text-white">Nuvolari AI</span>
+            </div>
+          </div>
+
+          <div className="px-6 py-4">
+            {/* Success message */}
+            <div className="flex items-center mb-4">
+              <Check className="text-green-500 mr-2" size={20} />
+              <span className="text-white">You successfully staked $93.780 in swETH</span>
+            </div>
+            
+            {/* Buttons */}
+            <div className="flex w-full justify-between gap-4">
+              <button
+                onClick={handleCheckBalance}
+                onMouseEnter={() => setIsCheckBalanceHovered(true)}
+                onMouseLeave={() => setIsCheckBalanceHovered(false)}
+                className="flex-1 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/15 transition-colors"
+                style={{ boxShadow: getCheckBalanceBoxShadow() }}
+              >
+                Check my balance
+              </button>
+              <button
+                onClick={handleGoToJournal}
+                onMouseEnter={() => setIsJournalHovered(true)}
+                onMouseLeave={() => setIsJournalHovered(false)}
+                className="flex-1 py-3 rounded-xl bg-[#AEA1FF] text-white font-medium hover:bg-[#9A8FE5] transition-colors"
+                style={{ boxShadow: getJournalBoxShadow() }}
+              >
+                Go to Journal
               </button>
             </div>
           </div>
