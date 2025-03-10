@@ -143,11 +143,13 @@ const SwapPopup = ({
 
   const handleExecute = () => {
     setIsLoading(true);
+    console.log('Execute button clicked, showing success popup...');
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
       setCurrentStep(3);
       setShowSuccess(true);
+      console.log('Success popup should now be visible. showSuccess:', true);
     }, 2000);
   };
 
@@ -207,7 +209,7 @@ const SwapPopup = ({
             opacity: showConfirmation || showSuccess ? 0.6 : 1,
             scale: showConfirmation || showSuccess ? 0.85 : 1,
             filter: showConfirmation || showSuccess ? 'blur(2px)' : 'blur(0px)',
-            zIndex: showConfirmation || showSuccess ? 10 : 20
+            zIndex: showConfirmation || showSuccess ? 5 : 20
           }}
           transition={{ 
             type: 'spring', 
@@ -334,17 +336,17 @@ const SwapPopup = ({
           initial={{ y: 400, opacity: 0, scale: 0.9 }}
           animate={{ 
             y: showConfirmation && !showSuccess ? 0 : showSuccess ? -180 : 400, 
-            opacity: showConfirmation ? (showSuccess ? 0.6 : 1) : 0,
-            scale: showConfirmation ? (showSuccess ? 0.85 : 1) : 0.9,
+            opacity: showConfirmation && !showSuccess ? 1 : showSuccess ? 0.6 : 0,
+            scale: showConfirmation && !showSuccess ? 1 : showSuccess ? 0.85 : 0.9,
             filter: showSuccess ? 'blur(2px)' : 'blur(0px)',
-            zIndex: showConfirmation ? (showSuccess ? 10 : 20) : 10
+            zIndex: showConfirmation && !showSuccess ? 20 : 10
           }}
           transition={{ 
             type: 'spring', 
             damping: 25, 
             stiffness: 300,
             opacity: { duration: 0.3 },
-            delay: showConfirmation ? 0.1 : 0
+            delay: showConfirmation && !showSuccess ? 0.1 : 0
           }}
         >
           {/* Step indicators inside the popup */}
@@ -454,7 +456,7 @@ const SwapPopup = ({
             y: showSuccess ? 0 : 400, 
             opacity: showSuccess ? 1 : 0,
             scale: showSuccess ? 1 : 0.9,
-            zIndex: showSuccess ? 20 : 10
+            zIndex: showSuccess ? 30 : 10
           }}
           transition={{ 
             type: 'spring', 
