@@ -32,20 +32,14 @@ const SwapPopup = ({
   const [isEditHovered, setIsEditHovered] = useState(false);
   const [isCheckBalanceHovered, setIsCheckBalanceHovered] = useState(false);
   const [isJournalHovered, setIsJournalHovered] = useState(false);
-  const [effectiveWidth, setEffectiveWidth] = useState(500); // Default width
   
-  // Update effective width when searchBarWidth changes
+  // Use searchBarWidth directly without state to avoid any synchronization issues
+  const popupWidth = searchBarWidth && searchBarWidth > 0 ? searchBarWidth : 500;
+  
+  // Log the width being used
   useEffect(() => {
-    console.log('SwapPopup received searchBarWidth:', searchBarWidth);
-    // Use searchBarWidth if it's valid, otherwise use default
-    if (searchBarWidth && searchBarWidth > 0) {
-      console.log('Using searchBarWidth:', searchBarWidth);
-      setEffectiveWidth(searchBarWidth);
-    } else {
-      console.log('Using default width: 500px');
-      setEffectiveWidth(500);
-    }
-  }, [searchBarWidth]);
+    console.log('SwapPopup using width:', popupWidth, 'px (searchBarWidth:', searchBarWidth, 'px)');
+  }, [searchBarWidth, popupWidth]);
   
   // Dynamic box-shadow values based on hover state for Confirm button - using gray colors like InsightCard
   const getConfirmBoxShadow = () => {
@@ -148,6 +142,7 @@ const SwapPopup = ({
     setTimeout(() => {
       setIsLoading(false);
       setCurrentStep(3);
+      setShowConfirmation(false); // Hide confirmation popup
       setShowSuccess(true);
       console.log('Success popup should now be visible. showSuccess:', true);
     }, 2000);
@@ -201,7 +196,7 @@ const SwapPopup = ({
         <motion.div
           key="swap-form"
           ref={!showConfirmation && !showSuccess ? popupRef : null}
-          style={{ width: `${effectiveWidth}px` }}
+          style={{ width: `${popupWidth}px` }}
           className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl absolute"
           initial={{ y: 100, opacity: 0, scale: 0.9 }}
           animate={{ 
@@ -330,23 +325,23 @@ const SwapPopup = ({
         {/* Second popup - confirmation */}
         <motion.div
           key="confirmation-popup"
-          ref={showConfirmation && !showSuccess ? popupRef : null}
-          style={{ width: `${effectiveWidth}px` }}
+          ref={showConfirmation ? popupRef : null}
+          style={{ width: `${popupWidth}px` }}
           className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl absolute"
           initial={{ y: 400, opacity: 0, scale: 0.9 }}
           animate={{ 
-            y: showConfirmation && !showSuccess ? 0 : showSuccess ? -180 : 400, 
-            opacity: showConfirmation && !showSuccess ? 1 : showSuccess ? 0.6 : 0,
-            scale: showConfirmation && !showSuccess ? 1 : showSuccess ? 0.85 : 0.9,
+            y: showConfirmation ? 0 : 400, 
+            opacity: showConfirmation ? 1 : 0,
+            scale: showConfirmation ? 1 : 0.9,
             filter: showSuccess ? 'blur(2px)' : 'blur(0px)',
-            zIndex: showConfirmation && !showSuccess ? 20 : 10
+            zIndex: showConfirmation ? 20 : 10
           }}
           transition={{ 
             type: 'spring', 
             damping: 25, 
             stiffness: 300,
             opacity: { duration: 0.3 },
-            delay: showConfirmation && !showSuccess ? 0.1 : 0
+            delay: showConfirmation ? 0.1 : 0
           }}
         >
           {/* Step indicators inside the popup */}
@@ -392,7 +387,7 @@ const SwapPopup = ({
                     <img src="/eth-logo.png" alt="ETH" className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-white font-medium text-lg">5.8 ETH</div>
+                    <div className="text-white font-medium text-lg">{amount} ETH</div>
                   </div>
                 </div>
               </div>
@@ -449,7 +444,7 @@ const SwapPopup = ({
         <motion.div
           key="success-popup"
           ref={showSuccess ? popupRef : null}
-          style={{ width: `${effectiveWidth}px` }}
+          style={{ width: `${popupWidth}px` }}
           className="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl absolute"
           initial={{ y: 400, opacity: 0, scale: 0.9 }}
           animate={{ 
