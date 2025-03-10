@@ -490,9 +490,12 @@ const SwapPopup = ({
 
           <div className="px-6 py-4">
             {/* Success message */}
-            <div className="flex items-center mb-4">
-              <Check className="text-green-500 mr-2" size={20} />
-              <span className="text-white">You successfully staked $93.780 in swETH</span>
+            <div className="flex flex-col items-center justify-center mb-6 text-center">
+              <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mb-4">
+                <Check className="text-green-500" size={24} />
+              </div>
+              <h3 className="text-white text-xl font-medium mb-1">Success!</h3>
+              <p className="text-gray-400">You successfully staked $93.780 in swETH</p>
             </div>
             
             {/* Buttons */}
