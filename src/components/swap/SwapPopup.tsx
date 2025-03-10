@@ -495,7 +495,9 @@ const SwapPopup = ({
                 <Check className="text-green-500" size={24} />
               </div>
               <h3 className="text-white text-xl font-medium mb-1">Success!</h3>
-              <p className="text-gray-400">You successfully staked $93.780 in swETH</p>
+              <p className="text-gray-400">
+                You successfully swapped {amount} {fromToken} to {toToken === 'MOG' ? '18,195,766,163.51' : amount * 2600} {toToken}
+              </p>
             </div>
             
             {/* Buttons */}
